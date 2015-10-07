@@ -1,0 +1,29 @@
+Removed Pin From Net: NetName=Netata80 7seg_7 Pin=U1-1
+Removed Pin From Net: NetName=Netata80 7seg_4 Pin=U1-2
+Removed Pin From Net: NetName=Netata80 7seg_2 Pin=U1-3
+Removed Pin From Net: NetName=Netata80 7seg_6 Pin=U1-4
+Removed Pin From Net: NetName=Netata80 7seg_8 Pin=U1-5
+Removed Pin From Net: NetName=Netata80 7seg_9 Pin=U1-6
+Removed Pin From Net: NetName=Netata80 7seg_12 Pin=U1-7
+Removed Pin From Net: NetName=Netata80 7seg_11 Pin=U1-15
+Added Component: Designator=R?(6-0805_N)
+Added Component: Designator=R?(6-0805_N)
+Added Component: Designator=R?(6-0805_N)
+Added Component: Designator=R?(6-0805_N)
+Added Component: Designator=R?(6-0805_N)
+Added Component: Designator=R?(6-0805_N)
+Added Component: Designator=R?(6-0805_N)
+Added Component: Designator=R?(6-0805_N)
+Added Pin To Net: NetName=Netata80 7seg_2 Pin=R?-2
+Added Pin To Net: NetName=Netata80 7seg_4 Pin=R?-2
+Added Pin To Net: NetName=Netata80 7seg_6 Pin=R?-2
+Added Pin To Net: NetName=Netata80 7seg_7 Pin=R?-2
+Added Pin To Net: NetName=Netata80 7seg_8 Pin=R?-2
+Added Pin To Net: NetName=Netata80 7seg_9 Pin=R?-2
+Added Pin To Net: NetName=Netata80 7seg_11 Pin=R?-2
+Added Pin To Net: NetName=Netata80 7seg_12 Pin=R?-2
+Added Pin To Net: NetName=NetR?_1 Pin=R?-1
+Added Pin To Net: NetName=NetR?_1 Pin=U1-3
+Added Net: Name=NetR?_1
+Added Member To Class: ClassName=display Member=Component R? Res2
+Added Room: Name=display
