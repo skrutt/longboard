@@ -1,0 +1,13 @@
+Change Component Designator: OldDesignator=U? NewDesignator=U1
+Change Component Designator: OldDesignator=U? NewDesignator=U2
+Added Pin To Net: NetName=NetPcon_2 Pin=U1-14
+Added Pin To Net: NetName=GND Pin=U2-8
+Added Pin To Net: NetName=VCC Pin=U2-10
+Added Pin To Net: NetName=NetPcon_3 Pin=U2-11
+Added Pin To Net: NetName=NetPcon_4 Pin=U2-12
+Added Pin To Net: NetName=GND Pin=U2-13
+Added Pin To Net: NetName=VCC Pin=U2-16
+Added Pin To Net: NetName=NetU1_9 Pin=U1-9
+Added Pin To Net: NetName=NetU1_9 Pin=U2-14
+Added Net: Name=NetU1_9
+Added Member To Class: ClassName=display Member=Component U1 M74HC595M1R

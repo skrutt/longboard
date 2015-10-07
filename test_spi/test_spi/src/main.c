@@ -175,9 +175,19 @@ int main (void)
 	while (true) {
 		/* Infinite loop */
 		//if(!port_pin_get_input_level(BUTTON_0_PIN)) {
-			spi_select_slave(&spi_master_instance, &slave, true);
-			spi_write_buffer_wait(&spi_master_instance, buffer, BUF_LENGTH);
-			spi_select_slave(&spi_master_instance, &slave, false);
+// 			spi_select_slave(&spi_master_instance, &slave, true);
+// 			spi_write_buffer_wait(&spi_master_instance, buffer, BUF_LENGTH);
+// 			spi_select_slave(&spi_master_instance, &slave, false);
+			
+			for (int i = 0; i < 8; i++)
+			{
+				spi_select_slave(&spi_master_instance, &slave, true);
+				uint8_t buf;
+				buf = 1 << i;
+				spi_write_buffer_wait(&spi_master_instance, &buf, 1);
+				spi_select_slave(&spi_master_instance, &slave, false);
+				delay_ms(500);
+			}
 			
 			printf("woo!!\n\r");
 			adc_read_buffer_job(&adc_instance,adc_buffer,4);

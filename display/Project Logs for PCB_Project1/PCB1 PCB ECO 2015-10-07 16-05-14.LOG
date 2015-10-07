@@ -1,0 +1,13 @@
+Added Pin To Net: NetName=Netata80 7seg_6 Pin=ata80 7seg-6
+Added Pin To Net: NetName=Netata80 7seg_6 Pin=U1-4
+Added Net: Name=Netata80 7seg_6
+Added Pin To Net: NetName=Netata80 7seg_8 Pin=ata80 7seg-8
+Added Pin To Net: NetName=Netata80 7seg_8 Pin=U1-5
+Added Net: Name=Netata80 7seg_8
+Added Pin To Net: NetName=Netata80 7seg_9 Pin=ata80 7seg-9
+Added Pin To Net: NetName=Netata80 7seg_9 Pin=U1-6
+Added Net: Name=Netata80 7seg_9
+Added Pin To Net: NetName=Netata80 7seg_12 Pin=ata80 7seg-12
+Added Pin To Net: NetName=Netata80 7seg_12 Pin=U1-7
+Added Net: Name=Netata80 7seg_12
+Added Room: Name=display

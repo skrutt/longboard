@@ -1,0 +1,32 @@
+Added Component: Designator=ata80 7seg(7seg_foot)
+Added Component: Designator=Pcon(HDR1X5)
+Added Component: Designator=U?(SO16_N)
+Added Component: Designator=U?(SO16_N)
+Added Pin To Net: NetName=GND Pin=Pcon-1
+Added Pin To Net: NetName=GND Pin=U?-8
+Added Pin To Net: NetName=GND Pin=U?-8
+Added Pin To Net: NetName=GND Pin=U?-13
+Added Pin To Net: NetName=GND Pin=U?-13
+Added Net: Name=GND
+Added Pin To Net: NetName=NetPcon_2 Pin=Pcon-2
+Added Pin To Net: NetName=NetPcon_2 Pin=U?-14
+Added Net: Name=NetPcon_2
+Added Pin To Net: NetName=NetPcon_3 Pin=Pcon-3
+Added Pin To Net: NetName=NetPcon_3 Pin=U?-11
+Added Pin To Net: NetName=NetPcon_3 Pin=U?-11
+Added Net: Name=NetPcon_3
+Added Pin To Net: NetName=NetPcon_4 Pin=Pcon-4
+Added Pin To Net: NetName=NetPcon_4 Pin=U?-12
+Added Pin To Net: NetName=NetPcon_4 Pin=U?-12
+Added Net: Name=NetPcon_4
+Added Pin To Net: NetName=NetU?_9 Pin=U?-9
+Added Pin To Net: NetName=NetU?_9 Pin=U?-14
+Added Net: Name=NetU?_9
+Added Pin To Net: NetName=VCC Pin=Pcon-5
+Added Pin To Net: NetName=VCC Pin=U?-10
+Added Pin To Net: NetName=VCC Pin=U?-10
+Added Pin To Net: NetName=VCC Pin=U?-16
+Added Pin To Net: NetName=VCC Pin=U?-16
+Added Net: Name=VCC
+Added Class: Name=display
+Added Room: Name=display

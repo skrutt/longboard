@@ -1,0 +1,3 @@
+Removed Pin From Net: NetName=NetPcon_4 Pin=U2-12
+Added Pin To Net: NetName=NetPcon_4 Pin=U2-11
+Added Room: Name=display
