@@ -1,80 +1,86 @@
 Protel Design System Design Rule Check
-PCB File : C:\Umea\github\longboard\display\PCB1.PcbDoc
-Date     : 2015-10-07
-Time     : 21:21:23
+PCB File : H:\GitHub\longboard\display\PCB1.PcbDoc
+Date     : 2015-10-08
+Time     : 12:08:49
 
-Processing Rule : Short-Circuit Constraint (Allowed=No) (All),(All)
+Processing Rule : Net Antennae (Tolerance=0mm) (All)
 Rule Violations :0
 
-Processing Rule : Un-Routed Net Constraint ( (All) )
-   Violation between Un-Routed Net Constraint: Net GND Between Pad U2-8 (45.987,62.357mm) And Pad U2-13 (50.787,67.437mm)
-   Violation between Un-Routed Net Constraint: Net VCC Between Pad U1-16 (84.849,61.849mm) And Pad U1-10 (84.849,69.469mm)
-Rule Violations :2
+Processing Rule : Silk to Silk (Clearance=0.254mm) (All),(All)
+   Violation between Text "R3" (68.224mm,43.84mm)  Top Overlay and 
+                     Text "ata80 7seg" (62.611mm,42.164mm)  Top Overlay
+Rule Violations :1
 
-Processing Rule : Clearance Constraint (Gap=0.254mm) (All),(All)
-Rule Violations :0
+Processing Rule : Silkscreen Over Component Pads (Clearance=0.254mm) (IsPad),(All)
+   Violation between Area Fill (31.496mm,37.338mm) (103.886mm,57.658mm)  Bottom Overlay and 
+                     Pad ata80 7seg-1(61.341mm,37.338mm)  Multi-Layer
+   Violation between Area Fill (31.496mm,37.338mm) (103.886mm,57.658mm)  Bottom Overlay and 
+                     Pad ata80 7seg-2(63.881mm,37.338mm)  Multi-Layer
+   Violation between Area Fill (31.496mm,37.338mm) (103.886mm,57.658mm)  Bottom Overlay and 
+                     Pad ata80 7seg-4(68.961mm,37.338mm)  Multi-Layer
+   Violation between Area Fill (31.496mm,37.338mm) (103.886mm,57.658mm)  Bottom Overlay and 
+                     Pad ata80 7seg-3(66.421mm,37.338mm)  Multi-Layer
+   Violation between Area Fill (31.496mm,37.338mm) (103.886mm,57.658mm)  Bottom Overlay and 
+                     Pad ata80 7seg-6(74.041mm,37.338mm)  Multi-Layer
+   Violation between Area Fill (31.496mm,37.338mm) (103.886mm,57.658mm)  Bottom Overlay and 
+                     Pad ata80 7seg-5(71.501mm,37.338mm)  Multi-Layer
+   Violation between Area Fill (31.496mm,37.338mm) (103.886mm,57.658mm)  Bottom Overlay and 
+                     Pad ata80 7seg-8(71.501mm,57.658mm)  Multi-Layer
+   Violation between Area Fill (31.496mm,37.338mm) (103.886mm,57.658mm)  Bottom Overlay and 
+                     Pad ata80 7seg-7(74.041mm,57.658mm)  Multi-Layer
+   Violation between Area Fill (31.496mm,37.338mm) (103.886mm,57.658mm)  Bottom Overlay and 
+                     Pad ata80 7seg-10(66.421mm,57.658mm)  Multi-Layer
+   Violation between Area Fill (31.496mm,37.338mm) (103.886mm,57.658mm)  Bottom Overlay and 
+                     Pad ata80 7seg-9(68.961mm,57.658mm)  Multi-Layer
+   Violation between Area Fill (31.496mm,37.338mm) (103.886mm,57.658mm)  Bottom Overlay and 
+                     Pad ata80 7seg-11(63.881mm,57.658mm)  Multi-Layer
+   Violation between Area Fill (31.496mm,37.338mm) (103.886mm,57.658mm)  Bottom Overlay and 
+                     Pad ata80 7seg-12(61.341mm,57.658mm)  Multi-Layer
+   Violation between Track (184.277mm,27.851mm)(184.277mm,36.411mm)  Top Overlay and 
+                     Pad S?-2(183.007mm,29.591mm)  Multi-Layer
+   Violation between Track (184.277mm,27.851mm)(184.277mm,36.411mm)  Top Overlay and 
+                     Pad S?-3(183.007mm,34.671mm)  Multi-Layer
+   Violation between Track (179.197mm,27.851mm)(179.197mm,36.411mm)  Top Overlay and 
+                     Pad S?-4(180.467mm,34.671mm)  Multi-Layer
+   Violation between Track (179.197mm,27.851mm)(179.197mm,36.411mm)  Top Overlay and 
+                     Pad S?-1(180.467mm,29.591mm)  Multi-Layer
+   Violation between Text "ata80 7seg" (62.611mm,42.164mm)  Top Overlay and 
+                     Pad R3-1(68.961mm,42.371mm)  Top Layer
+   Violation between Text "U1" (90.094mm,56.515mm)  Top Overlay and 
+                     Pad C2-2(92.122mm,57.404mm)  Top Layer
+Rule Violations :18
 
-Processing Rule : Power Plane Connect Rule(Relief Connect )(Expansion=0.8mm) (Conductor Width=0.6mm) (Air Gap=0.254mm) (Entries=4) (All)
-Rule Violations :0
-
-Processing Rule : Width Constraint (Min=0.3mm) (Max=1mm) (Preferred=0.4mm) (All)
-Rule Violations :0
-
-Processing Rule : Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (All)
-Rule Violations :0
-
-Processing Rule : Hole Size Constraint (Min=0.025mm) (Max=2.54mm) (All)
+Processing Rule : Minimum Solder Mask Sliver (Gap=0.254mm) (All),(All)
 Rule Violations :0
 
 Processing Rule : Hole To Hole Clearance (Gap=0.254mm) (All),(All)
 Rule Violations :0
 
-Processing Rule : Minimum Solder Mask Sliver (Gap=0.254mm) (All),(All)
+Processing Rule : Hole Size Constraint (Min=0.025mm) (Max=2.54mm) (All)
 Rule Violations :0
 
-Processing Rule : Silk To Solder Mask (Clearance=0.254mm) (IsPad),(All)
-   Violation between Track (71.628mm,71.628mm)(71.628mm,74.168mm)  Top Overlay and 
-                     Pad Pcon-1(70.358mm,72.898mm)  Multi-Layer
-   Violation between Track (58.928mm,71.628mm)(71.628mm,71.628mm)  Top Overlay and 
-                     Pad Pcon-1(70.358mm,72.898mm)  Multi-Layer
-   Violation between Track (58.928mm,74.168mm)(71.628mm,74.168mm)  Top Overlay and 
-                     Pad Pcon-1(70.358mm,72.898mm)  Multi-Layer
-   Violation between Track (58.928mm,71.628mm)(71.628mm,71.628mm)  Top Overlay and 
-                     Pad Pcon-2(67.818mm,72.898mm)  Multi-Layer
-   Violation between Track (58.928mm,74.168mm)(71.628mm,74.168mm)  Top Overlay and 
-                     Pad Pcon-2(67.818mm,72.898mm)  Multi-Layer
-   Violation between Track (58.928mm,71.628mm)(71.628mm,71.628mm)  Top Overlay and 
-                     Pad Pcon-3(65.278mm,72.898mm)  Multi-Layer
-   Violation between Track (58.928mm,74.168mm)(71.628mm,74.168mm)  Top Overlay and 
-                     Pad Pcon-3(65.278mm,72.898mm)  Multi-Layer
-   Violation between Track (58.928mm,71.628mm)(71.628mm,71.628mm)  Top Overlay and 
-                     Pad Pcon-4(62.738mm,72.898mm)  Multi-Layer
-   Violation between Track (58.928mm,74.168mm)(71.628mm,74.168mm)  Top Overlay and 
-                     Pad Pcon-4(62.738mm,72.898mm)  Multi-Layer
-   Violation between Track (58.928mm,71.628mm)(58.928mm,74.168mm)  Top Overlay and 
-                     Pad Pcon-5(60.198mm,72.898mm)  Multi-Layer
-   Violation between Track (58.928mm,71.628mm)(71.628mm,71.628mm)  Top Overlay and 
-                     Pad Pcon-5(60.198mm,72.898mm)  Multi-Layer
-   Violation between Track (58.928mm,74.168mm)(71.628mm,74.168mm)  Top Overlay and 
-                     Pad Pcon-5(60.198mm,72.898mm)  Multi-Layer
-   Violation between Text "ata80 7seg" (58.077mm,60.033mm)  Top Overlay and 
-                     Pad R6-2(69.516mm,60.96mm)  Top Layer
-   Violation between Text "ata80 7seg" (58.077mm,60.033mm)  Top Overlay and 
-                     Pad R6-1(72.216mm,60.96mm)  Top Layer
-   Violation between Text "ata80 7seg" (58.077mm,60.033mm)  Top Overlay and 
-                     Pad R1-2(61.468mm,60.753mm)  Top Layer
-Rule Violations :15
+Processing Rule : Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (All)
+Rule Violations :0
 
-Processing Rule : Silk to Silk (Clearance=0.254mm) (All),(All)
-   Violation between Text "ata80 7seg" (58.077mm,60.033mm)  Top Overlay and 
-                     Track (70.466mm,60.21mm)(71.266mm,60.21mm)  Top Overlay
-   Violation between Text "ata80 7seg" (58.077mm,60.033mm)  Top Overlay and 
-                     Track (62.218mm,61.703mm)(62.218mm,62.503mm)  Top Overlay
-Rule Violations :2
+Processing Rule : Width Constraint (Min=0.3mm) (Max=1mm) (Preferred=0.4mm) (All)
+Rule Violations :0
 
-Processing Rule : Net Antennae (Tolerance=0mm) (All)
+Processing Rule : Power Plane Connect Rule(Relief Connect )(Expansion=0.8mm) (Conductor Width=0.6mm) (Air Gap=0.254mm) (Entries=4) (All)
+Rule Violations :0
+
+Processing Rule : Clearance Constraint (Gap=0.254mm) (All),(All)
+Rule Violations :0
+
+Processing Rule : Un-Routed Net Constraint ( (All) )
+   Violation between Un-Routed Net Constraint: Net VCC Between Track on layer Top Layer (92.202,57.404mm) And Track on layer Top Layer (94.958,61.633mm)
+   Violation between Un-Routed Net Constraint: Net GND Between Pad U2-8 (41.415,46.482mm) And Pad U2-13 (46.215,51.562mm)
+   Violation between Un-Routed Net Constraint: Net GND Between Pad Pcon-1 (72.644,61.468mm) And Pad C2-1 (94.822,57.404mm)
+   Violation between Un-Routed Net Constraint: Net GND Between Track on layer Top Layer (52.498,51.308mm) And Pad Pcon-1 (72.644,61.468mm)
+Rule Violations :4
+
+Processing Rule : Short-Circuit Constraint (Allowed=No) (All),(All)
 Rule Violations :0
 
 
-Violations Detected : 19
-Time Elapsed        : 00:00:01
+Violations Detected : 23
+Time Elapsed        : 00:00:00

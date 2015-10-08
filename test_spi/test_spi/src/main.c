@@ -40,7 +40,7 @@ static uint8_t buffer[BUF_LENGTH] = {
 
 //GPIO pin to use as Slave Select.
 #define SLAVE_SELECT_PIN EXT1_PIN_SPI_SS_0
-#define LED_SYS PIN_PA02
+#define LED_SYS PIN_PA17
 
 struct usart_module usart_instance;
 #define LED_usart PIN_PA16
@@ -116,6 +116,9 @@ void adc_complete_callback(const struct adc_module *const module)
 	adc_avg = avg;
 	
 	//do something with the average
+	
+	//Restart reading
+	adc_read_buffer_job(&adc_instance,adc_buffer,4);
 }
 
 void configure_adc(void)
@@ -136,6 +139,17 @@ void configure_adc(void)
 	
 	adc_register_callback(&adc_instance, adc_complete_callback, ADC_CALLBACK_READ_BUFFER);
 	adc_enable_callback(&adc_instance, ADC_CALLBACK_READ_BUFFER);
+}
+
+//Convert number to hex
+uint8_t convert_to_7_seg(uint8_t num)
+{
+	
+	
+	const unsigned char DISPLAY1 [10] = {0x3F,0x06,0x5B,0x4F,0x66,0x6D,0x7D,0x07,0x7F,0x67};
+		
+	return DISPLAY1[num];
+	
 }
 
 int main (void)
@@ -170,27 +184,42 @@ int main (void)
 	
 	configure_spi_master();
 	
+	//Start reading
+	adc_read_buffer_job(&adc_instance,adc_buffer,4);
 	
 	
 	while (true) {
 		/* Infinite loop */
-		//if(!port_pin_get_input_level(BUTTON_0_PIN)) {
-// 			spi_select_slave(&spi_master_instance, &slave, true);
-// 			spi_write_buffer_wait(&spi_master_instance, buffer, BUF_LENGTH);
-// 			spi_select_slave(&spi_master_instance, &slave, false);
+
 			
-			for (int i = 0; i < 8; i++)
+			for (int i = 0; i < 11; i++)
 			{
-				spi_select_slave(&spi_master_instance, &slave, true);
-				uint8_t buf;
-				buf = 1 << i;
-				spi_write_buffer_wait(&spi_master_instance, &buf, 1);
-				spi_select_slave(&spi_master_instance, &slave, false);
+				
+				uint8_t buf[2];
+				buf[1] = convert_to_7_seg(i);
+				if (i == 10)
+				{
+					buf[1] = 128;	//Decimal dot
+				}
+				//spi_write_buffer_wait(&spi_master_instance, &buf, 1);
+				for (int j = 1;j < 16;j<<=1)
+				{
+					spi_select_slave(&spi_master_instance, &slave, true);
+				
+					buf[0] = j;
+					spi_write_buffer_wait(&spi_master_instance, &buf, 2);
+					
+					spi_select_slave(&spi_master_instance, &slave, false);
+					delay_ms(20);
+				}
+				//spi_write_buffer_wait(&spi_master_instance, &buf, 1);
+				
+				
 				delay_ms(500);
 			}
 			
 			printf("woo!!\n\r");
-			adc_read_buffer_job(&adc_instance,adc_buffer,4);
+			
 			
 			port_pin_set_output_level(LED_SYS, true);
 			delay_ms(100);
@@ -199,8 +228,6 @@ int main (void)
 			
 			port_pin_set_output_level(LED_SYS, false);
 			delay_ms(100);
-			
-		//}
 	}
 	
 }

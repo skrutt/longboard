@@ -1,0 +1,10 @@
+Removed Pin From Net: NetName=DATA Pin=T1-1
+Removed Pin From Net: NetName=DATA Pin=T1-1
+Added Component: Designator=R11(C1206)
+Added Pin To Net: NetName=DATA Pin=R11-1
+Added Pin To Net: NetName=NetR11_2 Pin=R11-2
+Added Pin To Net: NetName=NetR11_2 Pin=T1-1
+Added Pin To Net: NetName=NetR11_2 Pin=T1-1
+Added Pin To Net: NetName=NetR11_2 Pin=T1-1
+Added Pin To Net: NetName=NetR11_2 Pin=T1-1
+Added Net: Name=NetR11_2

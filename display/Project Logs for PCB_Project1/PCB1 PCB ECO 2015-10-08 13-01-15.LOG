@@ -1,0 +1,16 @@
+Removed Member From Class: ClassName=display Member=S?
+Added Component: Designator=*(pcb_sw)
+Added Pin To Net: NetName=GND Pin=*-2
+Added Pin To Net: NetName=GND Pin=*-2
+Added Pin To Net: NetName=GND Pin=*-2
+Added Pin To Net: NetName=GND Pin=*-2
+Added Pin To Net: NetName=Net*_1 Pin=*-1
+Added Pin To Net: NetName=Net*_1 Pin=*-1
+Added Pin To Net: NetName=Net*_1 Pin=*-1
+Added Pin To Net: NetName=Net*_1 Pin=*-1
+Added Pin To Net: NetName=Net*_1 Pin=Pcon-2
+Added Pin To Net: NetName=Net*_1 Pin=U1-14
+Added Net: Name=Net*_1
+Added Member To Class: ClassName=display Member=Component * tact_sw
+Added Member To Class: ClassName=display Member=Component ata80 7seg
+Added Room: Name=display

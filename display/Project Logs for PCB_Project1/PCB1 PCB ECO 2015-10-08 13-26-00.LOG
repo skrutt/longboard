@@ -1,0 +1,24 @@
+Added Component: Designator=R9(C1206)
+Added Component: Designator=R10(C1206)
+Added Component: Designator=R11(C1206)
+Change Net Name : Old Net Name=NetPcon_2 New Net Name=DATA
+Change Net Name : Old Net Name=NetPcon_3 New Net Name=FLAG
+Change Net Name : Old Net Name=NetPcon_4 New Net Name=SHIFT_C
+Added Pin To Net: NetName=B Pin=R9-2
+Added Pin To Net: NetName=B Pin=U2-1
+Added Net: Name=B
+Added Pin To Net: NetName=C Pin=R10-2
+Added Pin To Net: NetName=C Pin=U2-2
+Added Net: Name=C
+Added Pin To Net: NetName=D Pin=R11-2
+Added Pin To Net: NetName=D Pin=U2-3
+Added Net: Name=D
+Added Pin To Net: NetName=NetR9_1 Pin=R9-1
+Added Net: Name=NetR9_1
+Added Pin To Net: NetName=NetR10_1 Pin=R10-1
+Added Net: Name=NetR10_1
+Added Pin To Net: NetName=NetR11_1 Pin=R11-1
+Added Net: Name=NetR11_1
+Added Member To Class: ClassName=display Member=Component R9 Res2
+Added Member To Class: ClassName=display Member=Component R10 Res2
+Added Member To Class: ClassName=display Member=Component R11 Res2

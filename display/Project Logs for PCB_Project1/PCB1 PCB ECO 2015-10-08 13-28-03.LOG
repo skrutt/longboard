@@ -1,0 +1,6 @@
+Added Component: Designator=RGB*(SMD_RGB)
+Added Pin To Net: NetName=NetR10_1 Pin=RGB*-1
+Added Pin To Net: NetName=NetR11_1 Pin=RGB*-2
+Added Pin To Net: NetName=VCC Pin=RGB*-3
+Added Pin To Net: NetName=NetR9_1 Pin=RGB*-4
+Added Member To Class: ClassName=display Member=Component RGB* RGB_SMD
