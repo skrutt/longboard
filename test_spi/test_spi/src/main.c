@@ -32,18 +32,15 @@
 //Number of entries in the sample buffer.
 #define BUF_LENGTH 20
 
-//A sample buffer to send via SPI.
-static uint8_t buffer[BUF_LENGTH] = {
-	0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09,
-	0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13
-};
 
 //GPIO pin to use as Slave Select.
 #define SLAVE_SELECT_PIN EXT1_PIN_SPI_SS_0
 #define LED_SYS PIN_PA17
+#define LED_ADC PIN_PA18
 
-struct usart_module usart_instance;
 #define LED_usart PIN_PA16
+struct usart_module usart_instance;
+
 
 
 //A globally available software device instance struct to store the SPI driver state while it is in use.
@@ -51,6 +48,11 @@ struct spi_module spi_master_instance;
 
 //A globally available peripheral slave software device instance struct.
 struct spi_slave_inst slave;
+
+static void spi_master_write_done(struct spi_module *const module)
+{
+		spi_select_slave(&spi_master_instance, &slave, false);
+}
 
 static void configure_spi_master(void)
 {
@@ -78,18 +80,25 @@ static void configure_spi_master(void)
 	
 	spi_init(&spi_master_instance, SERCOM0, &config_spi_master);
 	spi_enable(&spi_master_instance);
+	
+	spi_register_callback(&spi_master_instance, spi_master_write_done, SPI_CALLBACK_BUFFER_TRANSMITTED);
+	spi_enable_callback(&spi_master_instance, SPI_CALLBACK_BUFFER_TRANSMITTED);
 }
 
 static void init_uart0(void)
 {
 	struct usart_config uart_settings;
 	usart_get_config_defaults(&uart_settings);
+	
+	//Set clock to 8M
+	uart_settings.generator_source = GCLK_GENERATOR_3;
+	
 	uart_settings.mux_setting = USART_RX_1_TX_2_XCK_3;
 	uart_settings.pinmux_pad0 = PINMUX_PA24C_SERCOM3_PAD2; // Tx
 	uart_settings.pinmux_pad1 = PINMUX_PA23C_SERCOM3_PAD1; // Rx
 	uart_settings.pinmux_pad2 = PINMUX_UNUSED;
 	uart_settings.pinmux_pad3 = PINMUX_UNUSED;
-	uart_settings.baudrate = 9600;
+	uart_settings.baudrate = 11500;
 	while (usart_init(&usart_instance, SERCOM3, &uart_settings) != STATUS_OK){}
 	
 	stdio_serial_init(&usart_instance, SERCOM3, &uart_settings);
@@ -102,7 +111,7 @@ uint16_t adc_buffer[4];
 
 uint16_t adc_avg = 0;
 
-void adc_complete_callback(const struct adc_module *const module)
+static void adc_complete_callback(struct adc_module *const module)
 {
 	//compute the average
 	uint32_t avg = 0;
@@ -121,13 +130,13 @@ void adc_complete_callback(const struct adc_module *const module)
 	adc_read_buffer_job(&adc_instance,adc_buffer,4);
 }
 
-void configure_adc(void)
+static void configure_adc(void)
 {
 	struct adc_config config_adc;
 	adc_get_config_defaults(&config_adc);
 	
 	config_adc.gain_factor = ADC_GAIN_FACTOR_1X;
-	config_adc.clock_prescaler = ADC_CLOCK_PRESCALER_DIV8;
+	config_adc.clock_prescaler = ADC_CLOCK_PRESCALER_DIV512;
 	//Select reference
 	config_adc.reference = ADC_REFCTRL_REFSEL_AREFA;
 	config_adc.positive_input = ADC_POSITIVE_INPUT_PIN0;
@@ -142,14 +151,128 @@ void configure_adc(void)
 }
 
 //Convert number to hex
-uint8_t convert_to_7_seg(uint8_t num)
+static uint8_t convert_to_7_seg(uint8_t num)
 {
-	
-	
 	const unsigned char DISPLAY1 [10] = {0x3F,0x06,0x5B,0x4F,0x66,0x6D,0x7D,0x07,0x7F,0x67};
-		
-	return DISPLAY1[num];
 	
+	return DISPLAY1[num%10];
+	
+}
+
+//Timer
+// #define PWM_MODULE EXT1_PWM_MODULE
+// #define PWM_OUT_PIN EXT1_PWM_0_PIN
+// #define PWM_OUT_MUX EXT1_PWM_0_MUX
+//Module to config timer
+struct tc_module tc_instance;
+//Number on the display
+float sseg_num = 0.1;
+volatile uint8_t	sseg_brightness;
+//Actual data on display
+uint8_t sseg_num_num[4];
+
+static void set_seg_disp_num(float num)
+{
+	if (num < 0)
+	{
+		num =-num;
+	}
+	if (num > 999.99)
+	{
+		sseg_num_num[0] = convert_to_7_seg((int)num/1000%10);
+		sseg_num_num[1] = convert_to_7_seg((int)num/100%10);
+		sseg_num_num[2] = convert_to_7_seg((int)num/10%10);
+		sseg_num_num[3] = convert_to_7_seg((int)num%10) + 128;
+	}else 	if (num > 99.99)
+	{
+		sseg_num_num[0] = convert_to_7_seg((int)num/100%10);
+		sseg_num_num[1] = convert_to_7_seg((int)num/10%10);
+		sseg_num_num[2] = convert_to_7_seg((int)num%10) + 128;
+		sseg_num_num[3] = convert_to_7_seg((num - (int)num)*10);
+	}else if (num > 9.999)
+	{
+		sseg_num_num[0] = convert_to_7_seg((int)num/10%10);
+		sseg_num_num[1] = convert_to_7_seg((int)num%10) + 128;
+		sseg_num_num[2] = convert_to_7_seg((num - (int)num)*10);
+		sseg_num_num[3] = convert_to_7_seg((num * 10 - (int)(num* 10))*10);
+	}else
+	{
+		sseg_num_num[0] = convert_to_7_seg((int)num) + 128;
+		sseg_num_num[1] = convert_to_7_seg((num - (int)num)*10);
+		sseg_num_num[2] = convert_to_7_seg((num * 10 - (int)(num* 10))*10);
+		sseg_num_num[3] = convert_to_7_seg((num * 100 - (int)(num* 100))*10);
+	}
+
+}
+
+static void configure_tc(uint8_t period);
+static void configure_tc_callbacks(void);
+//Copy-paste the following callback function code to your user application:
+static void tc_callback_update_display(struct tc_module *const module_inst)
+{
+	//tc_disable(TC3);
+	//tc_reset(TC3);
+	//tc_start_counter(TC3);
+	port_pin_toggle_output_level(LED_usart);
+	
+	static uint8_t bcm_cycle = 16;
+	static uint8_t active_num = 0;
+	static uint8_t buf[2];
+	
+	active_num ++;
+	if (active_num >= 4)
+	{
+		active_num = 0;
+		//all segs done, go to next level
+		bcm_cycle = bcm_cycle << 1;
+		//reset
+		if (bcm_cycle == 0)
+		{
+			bcm_cycle = 8;
+		}
+		tc_set_top_value(&tc_instance, bcm_cycle);
+	}
+	
+	
+	//Get the proper number
+	buf[1] = sseg_num_num[active_num];
+
+	
+	spi_select_slave(&spi_master_instance, &slave, true);
+	
+	if(sseg_brightness & bcm_cycle)
+	{
+		buf[0] = ~(1 << (7 - active_num));
+	}else{
+		buf[0] = 0xFF;
+	}
+	
+	spi_write_buffer_job(&spi_master_instance, buf, 2);
+	
+}
+//Copy-paste the following setup code to your user application:
+static void configure_tc(uint8_t period)
+{
+	struct tc_config config_tc;
+	tc_get_config_defaults(&config_tc);
+	config_tc.counter_size = TC_COUNTER_SIZE_8BIT;
+	config_tc.clock_prescaler = TC_CLOCK_PRESCALER_DIV64;
+	//config_tc.wave_generation = TC_WAVE;
+	config_tc.counter_8_bit.compare_capture_channel[0] = period;
+	config_tc.counter_8_bit.period = period;
+	config_tc.counter_8_bit.value = 0x00;	
+	
+	config_tc.pwm_channel[0].enabled = false;
+// 	config_tc.pwm_channel[0].pin_out = PWM_OUT_PIN;
+// 	config_tc.pwm_channel[0].pin_mux = PWM_OUT_MUX;
+	tc_init(&tc_instance, TC3, &config_tc);
+	tc_enable(&tc_instance);
+}
+//Register in callback
+static void configure_tc_callbacks(void)
+{
+	tc_register_callback(	&tc_instance,	tc_callback_update_display, TC_CALLBACK_OVERFLOW);
+	tc_enable_callback(&tc_instance, TC_CALLBACK_OVERFLOW);
 }
 
 int main (void)
@@ -167,6 +290,11 @@ int main (void)
 	pinconf.direction = PORT_PIN_DIR_OUTPUT;
 	port_pin_set_config(LED_SYS, &pinconf);
 	
+	//led_usart
+	port_pin_set_config(LED_usart, &pinconf);
+	//led_adc
+	port_pin_set_config(LED_ADC, &pinconf);
+	
 	/* Configure analog pins */
 	struct system_pinmux_config config;
 	system_pinmux_get_config_defaults(&config);
@@ -177,6 +305,9 @@ int main (void)
 	
 	system_pinmux_pin_set_config(PIN_PA03, &config);
 
+//Timer set up
+	configure_tc(0xff);
+	configure_tc_callbacks();
 	
 	
 	configure_adc();
@@ -191,43 +322,22 @@ int main (void)
 	while (true) {
 		/* Infinite loop */
 
+			float adc_v = (float)adc_avg/UINT16_MAX*3.28;
+
+			sseg_num+=sseg_num/1000;
+			sseg_brightness ++;
+			set_seg_disp_num(sseg_brightness);
 			
-			for (int i = 0; i < 11; i++)
-			{
-				
-				uint8_t buf[2];
-				buf[1] = convert_to_7_seg(i);
-				if (i == 10)
-				{
-					buf[1] = 128;	//Decimal dot
-				}
-				//spi_write_buffer_wait(&spi_master_instance, &buf, 1);
-				for (int j = 1;j < 16;j<<=1)
-				{
-					spi_select_slave(&spi_master_instance, &slave, true);
-				
-					buf[0] = j;
-					spi_write_buffer_wait(&spi_master_instance, &buf, 2);
-					
-					spi_select_slave(&spi_master_instance, &slave, false);
-					delay_ms(20);
-				}
-				//spi_write_buffer_wait(&spi_master_instance, &buf, 1);
-				
-				
-				delay_ms(500);
-			}
-			
-			printf("woo!!\n\r");
-			
+
+		
+			printf("woo!! disp at %f\n\r", sseg_num);
 			
 			port_pin_set_output_level(LED_SYS, true);
-			delay_ms(100);
 			
-			printf("Read adc value is %f\n\r", (float)adc_avg/UINT16_MAX*3.3);
+			printf("adc %.3f\n\r", adc_v);
+			printf("\n\r");
+			
 			
 			port_pin_set_output_level(LED_SYS, false);
-			delay_ms(100);
 	}
-	
 }

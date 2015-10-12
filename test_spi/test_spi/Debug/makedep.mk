@@ -36,6 +36,10 @@ src\ASF\sam0\drivers\system\pinmux\pinmux.c
 
 src\ASF\sam0\drivers\system\system.c
 
+src\ASF\sam0\drivers\tc\tc.c
+
+src\ASF\sam0\drivers\tc\tc_interrupt.c
+
 src\ASF\sam0\utils\cmsis\samd21\source\gcc\startup_samd21.c
 
 src\ASF\sam0\utils\cmsis\samd21\source\system_samd21.c
