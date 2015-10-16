@@ -109,25 +109,114 @@ struct adc_module adc_instance;
 
 uint16_t adc_buffer[4];
 
-uint16_t adc_avg = 0;
+uint16_t adc_val[2];
+
+//Struct for gforce in space
+typedef struct
+{
+	float x,y,z;
+} gforce_t;
+
+//Struct for raw values from accelerometer
+typedef struct
+{
+	uint16_t x,y,z;
+} accelerometer_raw_t;
+
+typedef struct  
+{
+	 accelerometer_raw_t raw_values;		//values read from adc
+	 gforce_t	scaled_gforce;					//ready to use gforce
+	 float x_zero_g_point, y_zero_g_point, z_zero_g_point;	//calibration value, idle point
+	 float x_volt_per_one_g, y_volt_per_one_g, z_volt_per_one_g; //Calibration value, one g gives this response on output
+	 
+} ADXL_335_t;
+
+
+
+ ADXL_335_t accelerometer;
+// gforce_t	curr_gforce;
+ #define ADC_MAX UINT16_MAX
+ #define VCC 3.3
+
+//Convert from adc to real world
+static float	adc_to_g_force(uint16_t val)
+{
+	//lets see, what to do here
+	//Output from each axis is 0,1 - 2,8V
+	
+	//Compensate!
+	//val = val - (0.1/VCC * ADC_MAX);
+	
+	//Convert to voltage
+	float volt = (float)val/ADC_MAX * VCC;
+	
+	//convert adc to percentage, center around zero, boost +-0.5 to +-1
+	//float percent = ((float)val/(2.8/VCC * ADC_MAX) - 0.5) * 2.0;
+	
+	//0g is at approx 1/2 VCC
+	volt -= VCC/2;
+	
+	
+	// and we have max 3,6 g +/-(typical)
+	
+	//There is somewhere between 0.3 and 0.306 V per G
+	return  volt /(VCC/9.5);
+}
 
 static void adc_complete_callback(struct adc_module *const module)
 {
 	//compute the average
-	uint32_t avg = 0;
-	for(uint8_t i=0;i<4;i++)
-	{
-		avg += adc_buffer[i];
-	}
-	
-	avg >>= 2;
-	
-	adc_avg = avg;
+// 	uint32_t avg = 0;
+// 	for(uint8_t i=0;i<4;i++)
+// 	{
+// 		avg += adc_buffer[i];
+// 	}
+// 	
+// 	avg >>= 2;
+// 	
+// 	adc_val = avg;
 	
 	//do something with the average
+	static const uint8_t num_channels = 3;
+	static uint8_t curr_channel = 0;
+	static const enum adc_positive_input inputs[3] = {ADC_POSITIVE_INPUT_PIN0, ADC_POSITIVE_INPUT_PIN4, ADC_POSITIVE_INPUT_PIN5 };
+		
+	
+	//Handle new value
+	switch(curr_channel)
+	{
+		case 0:		//Z
+			accelerometer.raw_values.z = adc_val;
+			//curr_gforce.z	= adc_to_g_force(adc_val[1]);
+			break;
+		case 1:		//y
+			accelerometer.raw_values.y = adc_val;
+			//curr_gforce.y	= adc_to_g_force(adc_val[1]);
+			break;
+		case 2:		//x
+			accelerometer.raw_values.x = adc_val;
+			//curr_gforce.x	= adc_to_g_force(adc_val[1]);
+			break;
+		//Add more channels here
+		default:
+		break;
+		//oops
+	}
+	
 	
 	//Restart reading
-	adc_read_buffer_job(&adc_instance,adc_buffer,4);
+	curr_channel++;
+	if (curr_channel == num_channels)
+	{
+		curr_channel = 0;
+	}
+	
+	adc_set_positive_input(&adc_instance, inputs[curr_channel]);
+	
+	adc_read_buffer_job(&adc_instance , &adc_val, 1);
+	
+	
 }
 
 static void configure_adc(void)
@@ -148,6 +237,18 @@ static void configure_adc(void)
 	
 	adc_register_callback(&adc_instance, adc_complete_callback, ADC_CALLBACK_READ_BUFFER);
 	adc_enable_callback(&adc_instance, ADC_CALLBACK_READ_BUFFER);
+	
+	/* Configure the rest of the analog pins */
+	struct system_pinmux_config config;
+	system_pinmux_get_config_defaults(&config);
+	
+	/* Analog functions are all on MUX setting B */
+	config.input_pull   = SYSTEM_PINMUX_PIN_PULL_NONE;
+	config.mux_position = MUX_PA04B_ADC_AIN4;
+	
+	system_pinmux_pin_set_config(PIN_PA04, &config);
+	config.mux_position = MUX_PA05B_ADC_AIN5;
+	system_pinmux_pin_set_config(PIN_PA05, &config);
 }
 
 //Convert number to hex
@@ -158,6 +259,11 @@ static uint8_t convert_to_7_seg(uint8_t num)
 	return DISPLAY1[num%10];
 	
 }
+//Struct for led levels
+typedef struct {
+	uint8_t red_set, green_set, blue_set;
+	} RGB_LED_t;
+
 
 //Timer
 // #define PWM_MODULE EXT1_PWM_MODULE
@@ -167,9 +273,15 @@ static uint8_t convert_to_7_seg(uint8_t num)
 struct tc_module tc_instance;
 //Number on the display
 float sseg_num = 0.1;
-volatile uint8_t	sseg_brightness;
+volatile uint8_t	sseg_brightness = 255;
 //Actual data on display
 uint8_t sseg_num_num[4];
+
+RGB_LED_t	sseg_leds;
+#define RED_LED_BIT 4
+#define GREEN_LED_BIT 2
+#define BLUE_LED_BIT 8
+
 
 static void set_seg_disp_num(float num)
 {
@@ -210,9 +322,6 @@ static void configure_tc_callbacks(void);
 //Copy-paste the following callback function code to your user application:
 static void tc_callback_update_display(struct tc_module *const module_inst)
 {
-	//tc_disable(TC3);
-	//tc_reset(TC3);
-	//tc_start_counter(TC3);
 	port_pin_toggle_output_level(LED_usart);
 	
 	static uint8_t bcm_cycle = 16;
@@ -228,26 +337,43 @@ static void tc_callback_update_display(struct tc_module *const module_inst)
 		//reset
 		if (bcm_cycle == 0)
 		{
-			bcm_cycle = 8;
+			bcm_cycle = 16;
 		}
 		tc_set_top_value(&tc_instance, bcm_cycle);
 	}
 	
+	// 	//Get the proper number
+ 	buf[0] = (sseg_num_num[active_num] & 0xf0);	//high 7seg nibble + rgb
 	
-	//Get the proper number
-	buf[1] = sseg_num_num[active_num];
-
-	
-	spi_select_slave(&spi_master_instance, &slave, true);
-	
-	if(sseg_brightness & bcm_cycle)
+	//Light led for each bcm level
+	if(!(sseg_leds.red_set & bcm_cycle))
 	{
-		buf[0] = ~(1 << (7 - active_num));
-	}else{
-		buf[0] = 0xFF;
+		buf[0] += RED_LED_BIT;
 	}
+	if(!(sseg_leds.green_set & bcm_cycle))
+	{
+		buf[0] += GREEN_LED_BIT;
+	}
+	if(!(sseg_leds.blue_set & bcm_cycle))
+	{
+		buf[0] += BLUE_LED_BIT;
+	}
+
+	 
+ 	buf[1] = (sseg_num_num[active_num] & 0x0f) ;	//U1!!!!!!!!!!!!!!!!!!	//low 7seg nibble	&& segment select is at high nibble
+	 
+ 	spi_select_slave(&spi_master_instance, &slave, true);
+
+ 	if(sseg_brightness & bcm_cycle)
+ 	{
+ 		buf[1] +=  (~(1 << (7 - active_num)) & 0xf0);
+		 
+ 	}else{
+ 		buf[1] += 0xF0;
+ 	}
 	
 	spi_write_buffer_job(&spi_master_instance, buf, 2);
+	
 	
 }
 //Copy-paste the following setup code to your user application:
@@ -273,6 +399,24 @@ static void configure_tc_callbacks(void)
 {
 	tc_register_callback(	&tc_instance,	tc_callback_update_display, TC_CALLBACK_OVERFLOW);
 	tc_enable_callback(&tc_instance, TC_CALLBACK_OVERFLOW);
+}
+
+//Generic template for calibrating accelerometer
+void calibrate_accelerometer(accelerometer calibrate_me)
+{
+	//Give shout out
+	printf("Hello and welcome to the generic acccelerometer calibration routine!\n\r");
+	
+	//Get values for first axis, also tell user what to do
+	//Usint uart for now
+	//X
+	printf("We will begin with the X axis, please place the sensor flat with X\n\r");	
+	
+	//Y
+	
+	//Z
+	
+	
 }
 
 int main (void)
@@ -319,22 +463,48 @@ int main (void)
 	adc_read_buffer_job(&adc_instance,adc_buffer,4);
 	
 	
+	
+	
 	while (true) {
 		/* Infinite loop */
 
-			float adc_v = (float)adc_avg/UINT16_MAX*3.28;
+			float adc_v = (float)adc_val[1]/UINT16_MAX*3.28 - 1.5;
+			
+			//float adc_now = (float)adc_val/UINT16_MAX*3.28;
+			
 
 			sseg_num+=sseg_num/1000;
-			sseg_brightness ++;
-			set_seg_disp_num(sseg_brightness);
+			
+			set_seg_disp_num(curr_gforce.z);
+			
+			static uint8_t led_ramp = 4, led_inc = 0;
+			
+			if (led_inc)
+			{
+				led_ramp = led_ramp << 1;
+			}else{
+				led_ramp = led_ramp >> 1 ;
+			}
+			
+			
+			if ((led_ramp <= 1) || (led_ramp >= 128))
+			{
+				led_inc ^= 0xFF;
+			}
+			
+			
+			sseg_leds.blue_set = led_ramp;
+			sseg_leds.red_set = led_ramp;
+			sseg_leds.green_set = 0;
+			
 			
 
 		
-			printf("woo!! disp at %f\n\r", sseg_num);
+			//printf("woo!! disp at %f\n\r", sseg_num);
 			
 			port_pin_set_output_level(LED_SYS, true);
 			
-			printf("adc %.3f\n\r", adc_v);
+			printf("adc %.3f X: %.3f Y: %.3f Z: %.3f", adc_v, curr_gforce.x, curr_gforce.y, curr_gforce.z);
 			printf("\n\r");
 			
 			
