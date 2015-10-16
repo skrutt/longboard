@@ -2,11 +2,15 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
+src\spi_sseg.c
+
 src\ASF\common2\services\delay\sam0\systick_counter.c
 
 src\ASF\sam0\drivers\adc\adc_sam_d_r\adc.c
 
 src\ASF\sam0\drivers\adc\adc_sam_d_r\adc_callback.c
+
+src\ASF\sam0\drivers\nvm\nvm.c
 
 src\ASF\sam0\drivers\port\port.c
 
@@ -39,6 +43,8 @@ src\ASF\sam0\drivers\system\system.c
 src\ASF\sam0\drivers\tc\tc.c
 
 src\ASF\sam0\drivers\tc\tc_interrupt.c
+
+src\ASF\sam0\services\eeprom\emulator\eeprom.c
 
 src\ASF\sam0\utils\cmsis\samd21\source\gcc\startup_samd21.c
 

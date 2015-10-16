@@ -109,7 +109,9 @@ src/ASF/common2/boards/user_board/init.d \
  ../src/ASF/common2/boards/user_board/user_board.h \
  ../src/config/conf_board.h ../src/ASF/common2/services/delay/delay.h \
  ../src/ASF/common2/services/delay/sam0/systick_counter.h \
- ../src/ASF/common/boards/board.h ../src/ASF/sam0/drivers/port/port.h \
+ ../src/ASF/sam0/services/eeprom/emulator/eeprom.h \
+ ../src/ASF/common/boards/board.h ../src/ASF/sam0/drivers/nvm/nvm.h \
+ ../src/ASF/sam0/drivers/port/port.h \
  ../src/ASF/sam0/drivers/sercom/sercom.h \
  ../src/ASF/sam0/drivers/sercom/sercom_pinout.h \
  ../src/ASF/sam0/drivers/sercom/sercom_interrupt.h \
@@ -355,7 +357,11 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu
 
 ../src/ASF/common2/services/delay/sam0/systick_counter.h:
 
+../src/ASF/sam0/services/eeprom/emulator/eeprom.h:
+
 ../src/ASF/common/boards/board.h:
+
+../src/ASF/sam0/drivers/nvm/nvm.h:
 
 ../src/ASF/sam0/drivers/port/port.h:
 
