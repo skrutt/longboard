@@ -2,7 +2,13 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
+src\ADC_subsystem.c
+
+src\button_lib.c
+
 src\spi_sseg.c
+
+src\timer_subsystem.c
 
 src\ASF\common2\services\delay\sam0\systick_counter.c
 

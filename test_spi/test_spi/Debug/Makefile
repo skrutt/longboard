@@ -117,7 +117,10 @@ SUBDIRS :=  \
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
+../src/ADC_subsystem.c \
+../src/button_lib.c \
 ../src/spi_sseg.c \
+../src/timer_subsystem.c \
 ../src/ASF/common2/services/delay/sam0/systick_counter.c \
 ../src/ASF/sam0/drivers/adc/adc_sam_d_r/adc.c \
 ../src/ASF/sam0/drivers/adc/adc_sam_d_r/adc_callback.c \
@@ -154,7 +157,10 @@ ASM_SRCS +=
 
 
 OBJS +=  \
+src/ADC_subsystem.o \
+src/button_lib.o \
 src/spi_sseg.o \
+src/timer_subsystem.o \
 src/ASF/common2/services/delay/sam0/systick_counter.o \
 src/ASF/sam0/drivers/adc/adc_sam_d_r/adc.o \
 src/ASF/sam0/drivers/adc/adc_sam_d_r/adc_callback.o \
@@ -184,7 +190,10 @@ src/ASF/sam0/utils/syscalls/gcc/syscalls.o \
 src/main.o
 
 OBJS_AS_ARGS +=  \
+src/ADC_subsystem.o \
+src/button_lib.o \
 src/spi_sseg.o \
+src/timer_subsystem.o \
 src/ASF/common2/services/delay/sam0/systick_counter.o \
 src/ASF/sam0/drivers/adc/adc_sam_d_r/adc.o \
 src/ASF/sam0/drivers/adc/adc_sam_d_r/adc_callback.o \
@@ -214,7 +223,10 @@ src/ASF/sam0/utils/syscalls/gcc/syscalls.o \
 src/main.o
 
 C_DEPS +=  \
+src/ADC_subsystem.d \
+src/button_lib.d \
 src/spi_sseg.d \
+src/timer_subsystem.d \
 src/ASF/common2/services/delay/sam0/systick_counter.d \
 src/ASF/sam0/drivers/adc/adc_sam_d_r/adc.d \
 src/ASF/sam0/drivers/adc/adc_sam_d_r/adc_callback.d \
@@ -244,7 +256,10 @@ src/ASF/sam0/utils/syscalls/gcc/syscalls.d \
 src/main.d
 
 C_DEPS_AS_ARGS +=  \
+src/ADC_subsystem.d \
+src/button_lib.d \
 src/spi_sseg.d \
+src/timer_subsystem.d \
 src/ASF/common2/services/delay/sam0/systick_counter.d \
 src/ASF/sam0/drivers/adc/adc_sam_d_r/adc.d \
 src/ASF/sam0/drivers/adc/adc_sam_d_r/adc_callback.d \
@@ -288,6 +303,12 @@ LINKER_SCRIPT_DEP+=  \
 
 
 # AVR32/GNU C Compiler
+
+
+
+
+
+
 
 
 

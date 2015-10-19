@@ -628,10 +628,28 @@
     <Folder Include="src\config\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\ADC_subsystem.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ADC_subsystem.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\button_lib.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\button_lib.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\spi_sseg.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\spi_sseg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\timer_subsystem.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\timer_subsystem.h">
       <SubType>compile</SubType>
     </Compile>
     <None Include="src\ASF\common2\services\delay\delay.h">

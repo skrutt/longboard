@@ -5,18 +5,158 @@
  *  Author: peol0071
  */ 
 #include <asf.h>
+#include "spi_sseg.h"
+#include "timer_subsystem.h"
+
+//Number on the display
+float sseg_num;// = 0.1;
+volatile uint8_t	sseg_brightness;// = 255;
+//Actual data on display
+uint8_t sseg_num_num[4];
+
+RGB_LED_t	sseg_leds;
+
+#define RED_LED_BIT 4
+#define GREEN_LED_BIT 2
+#define BLUE_LED_BIT 8
 
 
-//GPIO pin to use as Slave Select.
-#define SLAVE_SELECT_PIN	PIN_PA09
+ void set_disp_led_color(LED_COLORS choice)
+{
+	sseg_leds.red_set = 0;
+	sseg_leds.green_set = 0;
+	sseg_leds.blue_set = 0;
+	
+	switch(choice)
+	{
+		case LED_RED:
+		sseg_leds.red_set = 255;
+		break;
+		case LED_GREEN:
+		sseg_leds.green_set = 255;
+		break;
+		case LED_BLUE:
+		sseg_leds.blue_set = 255;
+		break;
+		case LED_PURPLE:
+		sseg_leds.red_set = 255;
+		sseg_leds.blue_set = 255;
+		break;
+		case LED_YELLOW:
+		sseg_leds.green_set = 255;
+		sseg_leds.red_set = 255;
+		break;
+		case LED_WHITE:
+		sseg_leds.green_set = 111;
+		sseg_leds.red_set = 111;
+		sseg_leds.blue_set = 111;
+		break;
+	}
+}
+ void set_disp_led(RGB_LED_t values)
+ {
+	sseg_leds = values;
+ }
 
-//A globally available software device instance struct to store the SPI driver state while it is in use.
-struct spi_module spi_master_instance;
+ //Convert number to hex
+ static uint8_t convert_to_7_seg(uint8_t num)
+ {
+	static const unsigned char DISPLAY1 [10] = {0x3F,0x06,0x5B,0x4F,0x66,0x6D,0x7D,0x07,0x7F,0x67};
+	 
+	 return DISPLAY1[num%10];
+ }
+ 
+ void set_seg_disp_num(float num)
+ {
+	 if (num < 0)
+	 {
+		 num =-num;
+	 }
+	 if (num > 999.99)
+	 {
+		 sseg_num_num[0] = convert_to_7_seg((int)num/1000%10);
+		 sseg_num_num[1] = convert_to_7_seg((int)num/100%10);
+		 sseg_num_num[2] = convert_to_7_seg((int)num/10%10);
+		 sseg_num_num[3] = convert_to_7_seg((int)num%10) + 128;
+	 }else 	if (num > 99.99)
+	 {
+		 sseg_num_num[0] = convert_to_7_seg((int)num/100%10);
+		 sseg_num_num[1] = convert_to_7_seg((int)num/10%10);
+		 sseg_num_num[2] = convert_to_7_seg((int)num%10) + 128;
+		 sseg_num_num[3] = convert_to_7_seg((num - (int)num)*10);
+	 }else if (num > 9.999)
+	 {
+		 sseg_num_num[0] = convert_to_7_seg((int)num/10%10);
+		 sseg_num_num[1] = convert_to_7_seg((int)num%10) + 128;
+		 sseg_num_num[2] = convert_to_7_seg((num - (int)num)*10);
+		 sseg_num_num[3] = convert_to_7_seg((num * 10 - (int)(num* 10))*10);
+	 }else
+	 {
+		 sseg_num_num[0] = convert_to_7_seg((int)num) + 128;
+		 sseg_num_num[1] = convert_to_7_seg((num - (int)num)*10);
+		 sseg_num_num[2] = convert_to_7_seg((num * 10 - (int)(num* 10))*10);
+		 sseg_num_num[3] = convert_to_7_seg((num * 100 - (int)(num* 100))*10);
+	 }
 
-//A globally available peripheral slave software device instance struct.
-struct spi_slave_inst slave;
+ }
 
-static void spi_master_write_done(struct spi_module *const module)
+//Redraw display and handle leds
+void sseg_update_display(void)
+{
+//	port_pin_toggle_output_level(LED_usart);
+
+	static uint8_t bcm_cycle = 16;
+	static uint8_t active_num = 0;
+	static uint8_t buf[2];
+
+	active_num ++;
+	if (active_num >= 4)
+	{
+		active_num = 0;
+		//all segs done, go to next level
+		bcm_cycle = bcm_cycle << 1;
+		//reset
+		if (bcm_cycle == 0)
+		{
+			bcm_cycle = 16;
+		}
+		tc_set_top_value(&display_timer_instance, bcm_cycle);
+	}
+
+	// 	//Get the proper number
+	buf[0] = (sseg_num_num[active_num] & 0xf0);	//high 7seg nibble + rgb
+
+	//Light led for each bcm level
+	if(!(sseg_leds.red_set & bcm_cycle))
+	{
+		buf[0] += RED_LED_BIT;
+	}
+	if(!(sseg_leds.green_set & bcm_cycle))
+	{
+		buf[0] += GREEN_LED_BIT;
+	}
+	if(!(sseg_leds.blue_set & bcm_cycle))
+	{
+		buf[0] += BLUE_LED_BIT;
+	}
+
+	buf[1] = (sseg_num_num[active_num] & 0x0f) ;	//U1!!!!!!!!!!!!!!!!!!	//low 7seg nibble	&& segment select is at high nibble
+
+	spi_select_slave(&spi_master_instance, &slave, true);
+
+	if(sseg_brightness & bcm_cycle)
+	{
+		buf[1] +=  (~(1 << (7 - active_num)) & 0xf0);
+	
+		}else{
+		buf[1] += 0xF0;
+	}
+
+	spi_write_buffer_job(&spi_master_instance, buf, 2);
+
+}
+
+ void spi_master_write_done(struct spi_module *const module)
 {
 	spi_select_slave(&spi_master_instance, &slave, false);
 	//configure datapin for reading button
@@ -33,7 +173,7 @@ static void spi_master_write_done(struct spi_module *const module)
 	system_pinmux_pin_set_config(PIN_PA10, &config);
 }
 
-static void configure_spi_master(void)
+ void configure_spi_master(void)
 {
 	struct spi_config config_spi_master;
 	struct spi_slave_inst_config slave_dev_config;

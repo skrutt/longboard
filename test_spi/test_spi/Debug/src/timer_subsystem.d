@@ -1,5 +1,6 @@
-src/main.d src/main.o: ../src/main.c ../src/asf.h \
- ../src/ASF/sam0/drivers/adc/adc.h ../src/ASF/sam0/utils/compiler.h \
+src/timer_subsystem.d src/timer_subsystem.o: ../src/timer_subsystem.c \
+ ../src/asf.h ../src/ASF/sam0/drivers/adc/adc.h \
+ ../src/ASF/sam0/utils/compiler.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu-toolchain\lib\gcc\arm-none-eabi\4.8.4\include\stddef.h \
  ../src/ASF/common/utils/parts.h ../src/ASF/sam0/utils/status_codes.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu-toolchain\lib\gcc\arm-none-eabi\4.8.4\include\stdint.h \
@@ -129,10 +130,7 @@ src/main.d src/main.o: ../src/main.c ../src/asf.h \
  ../src/ASF/common/services/serial/sam0_usart/usart_serial.h \
  ../src/ASF/sam0/drivers/tc/tc.h \
  ../src/ASF/sam0/drivers/tc/tc_interrupt.h \
- ../src/ASF/sam0/drivers/tc/tc.h \
- c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu-toolchain\arm-none-eabi\include\math.h \
- ../src/spi_sseg.h ../src/ADC_subsystem.h ../src/timer_subsystem.h \
- ../src/button_lib.h
+ ../src/ASF/sam0/drivers/tc/tc.h ../src/timer_subsystem.h
 
 ../src/asf.h:
 
@@ -406,12 +404,4 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu
 
 ../src/ASF/sam0/drivers/tc/tc.h:
 
-c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu-toolchain\arm-none-eabi\include\math.h:
-
-../src/spi_sseg.h:
-
-../src/ADC_subsystem.h:
-
 ../src/timer_subsystem.h:
-
-../src/button_lib.h:
