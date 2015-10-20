@@ -26,7 +26,7 @@ bool button_read_button(button_lib_t * read_me)
 }
 
 //Wait for button on display to be pressed
-void wait_for_button_press(button_lib_t * read_me)
+void wait_for_button_press(const button_lib_t * read_me)
 {
 	while (!button_read_button(read_me));
 }

@@ -1,5 +1,6 @@
-src/main.d src/main.o: ../src/main.c ../src/asf.h \
- ../src/ASF/sam0/drivers/adc/adc.h ../src/ASF/sam0/utils/compiler.h \
+src/longboard.d src/longboard.o: ../src/longboard.c ../src/longboard.h \
+ ../src/asf.h ../src/ASF/sam0/drivers/adc/adc.h \
+ ../src/ASF/sam0/utils/compiler.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu-toolchain\lib\gcc\arm-none-eabi\4.8.4\include\stddef.h \
  ../src/ASF/common/utils/parts.h ../src/ASF/sam0/utils/status_codes.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu-toolchain\lib\gcc\arm-none-eabi\4.8.4\include\stdint.h \
@@ -129,12 +130,14 @@ src/main.d src/main.o: ../src/main.c ../src/asf.h \
  ../src/ASF/common/services/serial/sam0_usart/usart_serial.h \
  ../src/ASF/sam0/drivers/tc/tc.h \
  ../src/ASF/sam0/drivers/tc/tc_interrupt.h \
- ../src/ASF/sam0/drivers/tc/tc.h ../src/spi_sseg.h ../src/ADC_subsystem.h \
- ../src/timer_subsystem.h ../src/button_lib.h ../src/accelerometer_lib.h \
- ../src/asf.h ../src/ASF/thirdparty/CMSIS/Include/arm_math.h \
- ../src/ASF/thirdparty/CMSIS/Include/core_cm0plus.h \
+ ../src/ASF/sam0/drivers/tc/tc.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu-toolchain\arm-none-eabi\include\math.h \
- ../src/uart_service.h ../src/platform.h ../src/longboard.h
+ ../src/spi_sseg.h ../src/ADC_subsystem.h ../src/timer_subsystem.h \
+ ../src/button_lib.h ../src/accelerometer_lib.h ../src/asf.h \
+ ../src/ASF/thirdparty/CMSIS/Include/arm_math.h \
+ ../src/ASF/thirdparty/CMSIS/Include/core_cm0plus.h
+
+../src/longboard.h:
 
 ../src/asf.h:
 
@@ -408,6 +411,8 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu
 
 ../src/ASF/sam0/drivers/tc/tc.h:
 
+c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu-toolchain\arm-none-eabi\include\math.h:
+
 ../src/spi_sseg.h:
 
 ../src/ADC_subsystem.h:
@@ -423,11 +428,3 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu
 ../src/ASF/thirdparty/CMSIS/Include/arm_math.h:
 
 ../src/ASF/thirdparty/CMSIS/Include/core_cm0plus.h:
-
-c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu-toolchain\arm-none-eabi\include\math.h:
-
-../src/uart_service.h:
-
-../src/platform.h:
-
-../src/longboard.h:

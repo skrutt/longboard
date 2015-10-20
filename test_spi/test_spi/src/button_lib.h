@@ -14,7 +14,7 @@
 typedef struct {
 	volatile bool pressed;		//Is pressed?
 	volatile bool read;			//Have we read that it's pressed?
-	const uint8_t gpio_pin;		//Where is it?
+	uint8_t gpio_pin;		//Where is it?
 	uint16_t button_debounce;	//Arbitrary number for debounce, depends on update freq
 	uint16_t scroll_holdoff;	//Arbitrary number for scrolling list(long press)
 	volatile uint16_t scroll_speed;	//Arbitrary number for scrolling freq
@@ -27,7 +27,7 @@ typedef struct {
 //(Active_low, debounce 20, no scroll, NO PIN so you have to set up
 void button_get_defaults(button_lib_t * make_me_normal);
 //Wait for button on display to be pressed
- void wait_for_button_press(button_lib_t * read_me);
+ void wait_for_button_press(const button_lib_t * read_me);
 
 //Read and handle buttonpress
  bool button_read_button(button_lib_t * read_me);

@@ -20,6 +20,8 @@ RGB_LED_t	sseg_leds;
 #define GREEN_LED_BIT 2
 #define BLUE_LED_BIT 8
 
+#define BCM_MIN_STEP 16
+
 
  void set_disp_led_color(LED_COLORS choice)
 {
@@ -97,8 +99,19 @@ RGB_LED_t	sseg_leds;
 		 sseg_num_num[2] = convert_to_7_seg((num * 10 - (int)(num* 10))*10);
 		 sseg_num_num[3] = convert_to_7_seg((num * 100 - (int)(num* 100))*10);
 	 }
+	 //Failsafe for brightness, always turn display on at least the lowest brightness
+	 if (sseg_brightness < BCM_MIN_STEP)
+	 {
+		 sseg_brightness = BCM_MIN_STEP;
+	 }
 
  }
+
+//Set screen brightness
+void sseg_set_display_brightness(uint8_t level)
+{
+	sseg_brightness = level;
+}
 
 //Redraw display and handle leds
 void sseg_update_display(void)
@@ -118,7 +131,7 @@ void sseg_update_display(void)
 		//reset
 		if (bcm_cycle == 0)
 		{
-			bcm_cycle = 16;
+			bcm_cycle = BCM_MIN_STEP;
 		}
 		tc_set_top_value(&display_timer_instance, bcm_cycle);
 	}
@@ -148,7 +161,7 @@ void sseg_update_display(void)
 	{
 		buf[1] +=  (~(1 << (7 - active_num)) & 0xf0);
 	
-		}else{
+	}else{
 		buf[1] += 0xF0;
 	}
 
@@ -170,7 +183,7 @@ void sseg_update_display(void)
 	config.input_pull   = SYSTEM_PINMUX_PIN_PULL_UP;
 	config.mux_position = SYSTEM_PINMUX_GPIO;
 	
-	system_pinmux_pin_set_config(PIN_PA10, &config);
+	system_pinmux_pin_set_config(PIN_PA10, &config);	//Todo, set this to read from struct
 }
 
  void configure_spi_master(void)

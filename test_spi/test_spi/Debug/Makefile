@@ -117,8 +117,10 @@ SUBDIRS :=  \
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
+../src/accelerometer_lib.c \
 ../src/ADC_subsystem.c \
 ../src/button_lib.c \
+../src/longboard.c \
 ../src/spi_sseg.c \
 ../src/timer_subsystem.c \
 ../src/ASF/common2/services/delay/sam0/systick_counter.c \
@@ -157,8 +159,10 @@ ASM_SRCS +=
 
 
 OBJS +=  \
+src/accelerometer_lib.o \
 src/ADC_subsystem.o \
 src/button_lib.o \
+src/longboard.o \
 src/spi_sseg.o \
 src/timer_subsystem.o \
 src/ASF/common2/services/delay/sam0/systick_counter.o \
@@ -190,8 +194,10 @@ src/ASF/sam0/utils/syscalls/gcc/syscalls.o \
 src/main.o
 
 OBJS_AS_ARGS +=  \
+src/accelerometer_lib.o \
 src/ADC_subsystem.o \
 src/button_lib.o \
+src/longboard.o \
 src/spi_sseg.o \
 src/timer_subsystem.o \
 src/ASF/common2/services/delay/sam0/systick_counter.o \
@@ -223,8 +229,10 @@ src/ASF/sam0/utils/syscalls/gcc/syscalls.o \
 src/main.o
 
 C_DEPS +=  \
+src/accelerometer_lib.d \
 src/ADC_subsystem.d \
 src/button_lib.d \
+src/longboard.d \
 src/spi_sseg.d \
 src/timer_subsystem.d \
 src/ASF/common2/services/delay/sam0/systick_counter.d \
@@ -256,8 +264,10 @@ src/ASF/sam0/utils/syscalls/gcc/syscalls.d \
 src/main.d
 
 C_DEPS_AS_ARGS +=  \
+src/accelerometer_lib.d \
 src/ADC_subsystem.d \
 src/button_lib.d \
+src/longboard.d \
 src/spi_sseg.d \
 src/timer_subsystem.d \
 src/ASF/common2/services/delay/sam0/systick_counter.d \
@@ -303,6 +313,10 @@ LINKER_SCRIPT_DEP+=  \
 
 
 # AVR32/GNU C Compiler
+
+
+
+
 
 
 

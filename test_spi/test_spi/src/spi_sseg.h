@@ -33,6 +33,8 @@ struct spi_slave_inst slave;
  
  //Main draw loop
 void sseg_update_display(void);
+//Set screen brightness
+void sseg_set_display_brightness(uint8_t level);
 
 //Update display content
  void set_seg_disp_num(float num);

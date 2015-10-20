@@ -628,6 +628,12 @@
     <Folder Include="src\config\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\accelerometer_lib.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\accelerometer_lib.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\ADC_subsystem.c">
       <SubType>compile</SubType>
     </Compile>
@@ -640,6 +646,15 @@
     <Compile Include="src\button_lib.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\longboard.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\longboard.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\platform.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\spi_sseg.c">
       <SubType>compile</SubType>
     </Compile>
@@ -650,6 +665,9 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\timer_subsystem.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\uart_service.h">
       <SubType>compile</SubType>
     </Compile>
     <None Include="src\ASF\common2\services\delay\delay.h">

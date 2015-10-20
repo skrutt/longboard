@@ -2,9 +2,13 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
+src\accelerometer_lib.c
+
 src\ADC_subsystem.c
 
 src\button_lib.c
+
+src\longboard.c
 
 src\spi_sseg.c
 
