@@ -15,23 +15,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   5 .comment      0000005b  00000000  00000000  000180d8  2**0
                   CONTENTS, READONLY
-  6 .debug_info   00059ab2  00000000  00000000  00018133  2**0
+  6 .debug_info   0005604c  00000000  00000000  00018133  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00006d33  00000000  00000000  00071be5  2**0
+  7 .debug_abbrev 00006aae  00000000  00000000  0006e17f  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_loc    00009936  00000000  00000000  00078918  2**0
+  8 .debug_loc    00009936  00000000  00000000  00074c2d  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_aranges 000009f8  00000000  00000000  0008224e  2**0
+  9 .debug_aranges 000009e0  00000000  00000000  0007e563  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_ranges 00000b40  00000000  00000000  00082c46  2**0
+ 10 .debug_ranges 00000b40  00000000  00000000  0007ef43  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_macro  00020b7a  00000000  00000000  00083786  2**0
+ 11 .debug_macro  00020466  00000000  00000000  0007fa83  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_line   0001e1d6  00000000  00000000  000a4300  2**0
+ 12 .debug_line   0001d1e1  00000000  00000000  0009fee9  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_str    0008db10  00000000  00000000  000c24d6  2**0
+ 13 .debug_str    0008dafe  00000000  00000000  000bd0ca  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_frame  00002ab4  00000000  00000000  0014ffe8  2**2
+ 14 .debug_frame  00002ab4  00000000  00000000  0014abc8  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -2645,12 +2645,12 @@ void SIM808_response_gps_data(volatile uint8_t success, volatile char *cmd) {
 //	printf("\talarm!\r\n\r\nklockan är %02d:%02d:%02d %04d-%02d-%02d \n\r", test.hour, test.minute, test.second, test.year, test.month, test.day);
 }
      cba:	bd38      	pop	{r3, r4, r5, pc}
-     cbc:	2000247c 	.word	0x2000247c
+     cbc:	20002444 	.word	0x20002444
      cc0:	200000d0 	.word	0x200000d0
      cc4:	00000921 	.word	0x00000921
      cc8:	00008359 	.word	0x00008359
      ccc:	00000859 	.word	0x00000859
-     cd0:	20002490 	.word	0x20002490
+     cd0:	20002458 	.word	0x20002458
 
 00000cd4 <configure_rtc_calendar>:
 
@@ -2760,7 +2760,7 @@ static inline void system_interrupt_enable(
 }
      d34:	b006      	add	sp, #24
      d36:	bd10      	pop	{r4, pc}
-     d38:	2000247c 	.word	0x2000247c
+     d38:	20002444 	.word	0x20002444
      d3c:	40001400 	.word	0x40001400
      d40:	0000088d 	.word	0x0000088d
      d44:	e000e100 	.word	0xe000e100
@@ -2790,8 +2790,8 @@ static inline void system_interrupt_enable(
      d60:	4798      	blx	r3
 }
      d62:	bd10      	pop	{r4, pc}
-     d64:	20002490 	.word	0x20002490
-     d68:	2000247c 	.word	0x2000247c
+     d64:	20002458 	.word	0x20002458
+     d68:	20002444 	.word	0x20002444
      d6c:	00000c85 	.word	0x00000c85
      d70:	00000949 	.word	0x00000949
      d74:	00000969 	.word	0x00000969
@@ -2871,7 +2871,7 @@ static inline void rtc_calendar_get_time_defaults(
      dc0:	000007df 	.word	0x000007df
      dc4:	00000cd5 	.word	0x00000cd5
      dc8:	00000d49 	.word	0x00000d49
-     dcc:	2000247c 	.word	0x2000247c
+     dcc:	20002444 	.word	0x20002444
      dd0:	00000841 	.word	0x00000841
      dd4:	00000859 	.word	0x00000859
 
@@ -5071,7 +5071,7 @@ void configure_tc_bg(uint8_t period)
 }
     1890:	b00e      	add	sp, #56	; 0x38
     1892:	bd10      	pop	{r4, pc}
-    1894:	20002460 	.word	0x20002460
+    1894:	20002478 	.word	0x20002478
     1898:	42002c00 	.word	0x42002c00
     189c:	000032ed 	.word	0x000032ed
 
@@ -5154,7 +5154,7 @@ static inline void system_interrupt_enable(
 }
     18e4:	bd10      	pop	{r4, pc}
     18e6:	46c0      	nop			; (mov r8, r8)
-    18e8:	20002460 	.word	0x20002460
+    18e8:	20002478 	.word	0x20002478
     18ec:	00003561 	.word	0x00003561
     18f0:	000032b5 	.word	0x000032b5
     18f4:	0000b520 	.word	0x0000b520
@@ -30155,7 +30155,7 @@ int main (void)
     b500:	00001512 00001522 0000152a 00001534     ...."...*...4...
     b510:	0000153e                                >...
 
-0000b514 <DISPLAY1.13870>:
+0000b514 <DISPLAY1.16710>:
     b514:	4f5b063f 077d6d66 0000677f              ?.[Ofm}..g..
 
 0000b520 <tc_interrupt_vectors.13799>:

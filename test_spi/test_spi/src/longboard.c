@@ -4,15 +4,17 @@
  * Created: 2015-10-20 13:49:29
  *  Author: petter
  */ 
-#include "longboard.h"
+#include "platform.h"
 
 #ifdef LONGBOARD
+
+#include "longboard.h"
 
 //Init all longboard specifics
 void init_platform(void)
 {
 		button_get_defaults(&spi_btn);
-		spi_btn.gpio_pin = PIN_PA10;
+		spi_btn.gpio_pin = PIN_PA17;
 		
 		//setup outputs
 		struct port_config pinconf;
@@ -21,7 +23,7 @@ void init_platform(void)
 		pinconf.direction = PORT_PIN_DIR_OUTPUT;
 		
 		port_pin_set_config(LED_SYS, &pinconf);		//led_sys
-		port_pin_set_config(LED_RTC, &pinconf);	//led_usart
+		port_pin_set_config(LED_RTC, &pinconf);		//led_usart
 		port_pin_set_config(LED_ADC, &pinconf);		//led_adc
 		
 		
@@ -45,7 +47,7 @@ void background_service_platform(void)
 		
 		config.mux_position = MUX_PA10C_SERCOM0_PAD2;
 		
-		system_pinmux_pin_set_config(PIN_PA10, &config);
+		system_pinmux_pin_set_config(spi_btn.gpio_pin, &config);
 		
 		sseg_update_display();
 }

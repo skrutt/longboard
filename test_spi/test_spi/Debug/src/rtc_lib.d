@@ -148,9 +148,8 @@ src/rtc_lib.d src/rtc_lib.o: ../src/rtc_lib.c ../src/rtc_lib.h \
  ../src/ASF/sam0/drivers/tc/tc_interrupt.h \
  ../src/ASF/sam0/drivers/tc/tc.h ../src/longboard.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu-toolchain\arm-none-eabi\include\math.h \
- ../src/platform.h ../src/bike.h ../src/button_lib.h ../src/spi_sseg.h \
- ../src/ADC_subsystem.h ../src/timer_subsystem.h \
- ../src/accelerometer_lib.h ../src/asf.h \
+ ../src/spi_sseg.h ../src/ADC_subsystem.h ../src/timer_subsystem.h \
+ ../src/button_lib.h ../src/accelerometer_lib.h ../src/asf.h \
  ../src/ASF/thirdparty/CMSIS/Include/arm_math.h \
  ../src/ASF/thirdparty/CMSIS/Include/core_cm0plus.h
 
@@ -468,17 +467,13 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu
 
 c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu-toolchain\arm-none-eabi\include\math.h:
 
-../src/platform.h:
-
-../src/bike.h:
-
-../src/button_lib.h:
-
 ../src/spi_sseg.h:
 
 ../src/ADC_subsystem.h:
 
 ../src/timer_subsystem.h:
+
+../src/button_lib.h:
 
 ../src/accelerometer_lib.h:
 

@@ -11,7 +11,7 @@
 
 
 //GPIO pin to use as Slave Select.
-#define SLAVE_SELECT_PIN	PIN_PA09
+#define SLAVE_SELECT_PIN	PIN_PA17
 typedef enum {LED_GREEN, LED_RED,LED_BLUE,LED_PURPLE,LED_YELLOW, LED_WHITE} LED_COLORS;
 
 

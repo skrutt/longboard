@@ -7,6 +7,7 @@
 #include <asf.h>
 #include "spi_sseg.h"
 #include "timer_subsystem.h"
+#include "longboard.h"
 
 //Number on the display
 float sseg_num;// = 0.1;
@@ -183,7 +184,7 @@ void sseg_update_display(void)
 	config.input_pull   = SYSTEM_PINMUX_PIN_PULL_UP;
 	config.mux_position = SYSTEM_PINMUX_GPIO;
 	
-	system_pinmux_pin_set_config(PIN_PA10, &config);	//Todo, set this to read from struct
+	system_pinmux_pin_set_config(spi_btn.gpio_pin, &config);	//Todo, set this to read from struct
 }
 
  void configure_spi_master(void)
@@ -194,23 +195,27 @@ void sseg_update_display(void)
 	/* Configure and initialize software device instance of peripheral slave */
 	spi_slave_inst_get_config_defaults(&slave_dev_config);
 	slave_dev_config.ss_pin = SLAVE_SELECT_PIN;
+	slave_dev_config.ss_pin = 18;
+	
 	spi_attach_slave(&slave, &slave_dev_config);
 	
 	/* Configure, initialize and enable SERCOM SPI module */
 	spi_get_config_defaults(&config_spi_master);
 	
-	config_spi_master.mux_setting = SPI_SIGNAL_MUX_SETTING_E;
+	config_spi_master.mux_setting = SPI_SIGNAL_MUX_SETTING_I;
 	
 	/* Configure pad 0 for data in */
 	config_spi_master.pinmux_pad0 = PINMUX_UNUSED;
 	/* Configure pad 1 as unused */
-	config_spi_master.pinmux_pad1 = PINMUX_UNUSED;
+	//config_spi_master.pinmux_pad1 = PINMUX_PA17C_SERCOM1_PAD1;
+	config_spi_master.pinmux_pad1 = PINMUX_PA17C_SERCOM1_PAD1;	
 	/* Configure pad 2 for data out */
-	config_spi_master.pinmux_pad2 = PINMUX_PA10C_SERCOM0_PAD2;
+	//config_spi_master.pinmux_pad2 = PINMUX_PA18C_SERCOM1_PAD2;
+	config_spi_master.pinmux_pad2 = PINMUX_UNUSED;	
 	/* Configure pad 3 for SCK */
-	config_spi_master.pinmux_pad3 = PINMUX_PA11C_SERCOM0_PAD3;
+	config_spi_master.pinmux_pad3 = PINMUX_PA19C_SERCOM1_PAD3;
 	
-	spi_init(&spi_master_instance, SERCOM0, &config_spi_master);
+	spi_init(&spi_master_instance, SERCOM1, &config_spi_master);
 	spi_enable(&spi_master_instance);
 	
 	spi_register_callback(&spi_master_instance, spi_master_write_done, SPI_CALLBACK_BUFFER_TRANSMITTED);
