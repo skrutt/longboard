@@ -15,7 +15,7 @@
 #ifdef LONGBOARD
 	#include "longboard.h"
 #else
-	#include "other_platform.h"	
+	#include "bike.h"	
 #endif
 
 

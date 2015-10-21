@@ -21,6 +21,10 @@
 #include "accelerometer_lib.h"
 #include "uart_service.h"
 #include "rtc_lib.h"
+#include "globals.h"
+#include "response_actions.h"
+#include "sim808_uart.h"
+#include "gprs_transfer_packages.h"
 
 //Include glue file
 #include "platform.h"
