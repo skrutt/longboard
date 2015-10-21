@@ -111,6 +111,9 @@ src/accelerometer_lib.d src/accelerometer_lib.o: \
  ../src/ASF/sam0/services/eeprom/emulator/eeprom.h \
  ../src/ASF/common/boards/board.h ../src/ASF/sam0/drivers/nvm/nvm.h \
  ../src/ASF/sam0/drivers/port/port.h \
+ ../src/ASF/sam0/drivers/rtc/rtc_calendar.h ../src/config/conf_clocks.h \
+ ../src/ASF/sam0/drivers/rtc/rtc_calendar_interrupt.h \
+ ../src/ASF/sam0/drivers/rtc/rtc_calendar.h \
  ../src/ASF/sam0/drivers/sercom/sercom.h \
  ../src/ASF/sam0/drivers/sercom/sercom_pinout.h \
  ../src/ASF/sam0/drivers/sercom/sercom_interrupt.h \
@@ -370,6 +373,14 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu
 ../src/ASF/sam0/drivers/nvm/nvm.h:
 
 ../src/ASF/sam0/drivers/port/port.h:
+
+../src/ASF/sam0/drivers/rtc/rtc_calendar.h:
+
+../src/config/conf_clocks.h:
+
+../src/ASF/sam0/drivers/rtc/rtc_calendar_interrupt.h:
+
+../src/ASF/sam0/drivers/rtc/rtc_calendar.h:
 
 ../src/ASF/sam0/drivers/sercom/sercom.h:
 

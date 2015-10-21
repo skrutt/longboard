@@ -19,7 +19,7 @@ void init_platform(void)
 		pinconf.direction = PORT_PIN_DIR_OUTPUT;
 		
 		port_pin_set_config(LED_SYS, &pinconf);		//led_sys
-		port_pin_set_config(LED_usart, &pinconf);	//led_usart
+		port_pin_set_config(LED_RTC, &pinconf);	//led_usart
 		port_pin_set_config(LED_ADC, &pinconf);		//led_adc
 		
 		
@@ -27,7 +27,7 @@ void init_platform(void)
 		configure_spi_master();
 		
 		//Set high brightness for now
-		sseg_set_display_brightness(16);
+		sseg_set_display_brightness(255);
 		
 }
 

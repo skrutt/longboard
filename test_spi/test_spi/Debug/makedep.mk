@@ -6,9 +6,15 @@ src\accelerometer_lib.c
 
 src\ADC_subsystem.c
 
+src\ASF\sam0\drivers\rtc\rtc_calendar.c
+
+src\ASF\sam0\drivers\rtc\rtc_calendar_interrupt.c
+
 src\button_lib.c
 
 src\longboard.c
+
+src\rtc_lib.c
 
 src\spi_sseg.c
 

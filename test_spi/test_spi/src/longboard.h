@@ -21,7 +21,7 @@
 
 
 //longboard defines
-button_lib_t spi_btn;
+static button_lib_t spi_btn;
 
 static button_lib_t *adxl_calibrate_button_platform = &spi_btn;
 
@@ -29,7 +29,7 @@ static button_lib_t *adxl_calibrate_button_platform = &spi_btn;
 #define LED_ADC				PIN_PA18
 #define PIEZO_PIN			PIN_PA17
 
-#define LED_usart			PIN_PA16
+#define LED_RTC			PIN_PA16
 
 
 //Init all longboard specifics
