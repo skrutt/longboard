@@ -109,6 +109,16 @@ src/rtc_lib.d src/rtc_lib.o: ../src/rtc_lib.c ../src/rtc_lib.h \
  ../src/config/conf_board.h ../src/ASF/common2/services/delay/delay.h \
  ../src/ASF/common2/services/delay/sam0/systick_counter.h \
  ../src/ASF/sam0/services/eeprom/emulator/eeprom.h \
+ ../src/ASF/common2/services/gfx_mono/gfx_mono_menu.h \
+ ../src/config/conf_menu.h \
+ ../src/ASF/common2/services/gfx_mono/gfx_mono.h \
+ ../src/ASF/common2/services/gfx_mono/gfx_mono_null.h \
+ ../src/ASF/common2/services/gfx_mono/gfx_mono_framebuffer.h \
+ ../src/ASF/common2/services/gfx_mono/gfx_mono_generic.h \
+ ../src/menu_link.h ../src/ASF/common2/services/gfx_mono/gfx_mono.h \
+ ../src/ASF/common2/services/gfx_mono/sysfont.h \
+ ../src/config/conf_sysfont.h \
+ ../src/ASF/common2/services/gfx_mono/gfx_mono_text.h \
  ../src/ASF/common/boards/board.h ../src/ASF/sam0/drivers/nvm/nvm.h \
  ../src/ASF/sam0/drivers/port/port.h \
  ../src/ASF/sam0/drivers/rtc/rtc_calendar.h ../src/config/conf_clocks.h \
@@ -128,6 +138,9 @@ src/rtc_lib.d src/rtc_lib.o: ../src/rtc_lib.c ../src/rtc_lib.h \
  ../src/ASF/sam0/drivers/sercom/usart/usart.h \
  ../src/ASF/sam0/drivers/sercom/usart/usart_interrupt.h \
  ../src/ASF/sam0/drivers/sercom/usart/usart.h \
+ ../src/ASF/common2/components/display/ssd1306/ssd1306.h \
+ ../src/ASF/common2/services/gfx_mono/gfx_mono_null.h \
+ ../src/config/conf_ssd1306.h \
  ../src/ASF/sam0/utils/stdio/stdio_serial/stdio_serial.h \
  ../src/ASF/common/services/serial/serial.h \
  ../src/ASF/common/services/serial/sam0_usart/usart_serial.h \
@@ -135,8 +148,9 @@ src/rtc_lib.d src/rtc_lib.o: ../src/rtc_lib.c ../src/rtc_lib.h \
  ../src/ASF/sam0/drivers/tc/tc_interrupt.h \
  ../src/ASF/sam0/drivers/tc/tc.h ../src/longboard.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu-toolchain\arm-none-eabi\include\math.h \
- ../src/spi_sseg.h ../src/ADC_subsystem.h ../src/timer_subsystem.h \
- ../src/button_lib.h ../src/accelerometer_lib.h ../src/asf.h \
+ ../src/platform.h ../src/bike.h ../src/button_lib.h ../src/spi_sseg.h \
+ ../src/ADC_subsystem.h ../src/timer_subsystem.h \
+ ../src/accelerometer_lib.h ../src/asf.h \
  ../src/ASF/thirdparty/CMSIS/Include/arm_math.h \
  ../src/ASF/thirdparty/CMSIS/Include/core_cm0plus.h
 
@@ -368,6 +382,28 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu
 
 ../src/ASF/sam0/services/eeprom/emulator/eeprom.h:
 
+../src/ASF/common2/services/gfx_mono/gfx_mono_menu.h:
+
+../src/config/conf_menu.h:
+
+../src/ASF/common2/services/gfx_mono/gfx_mono.h:
+
+../src/ASF/common2/services/gfx_mono/gfx_mono_null.h:
+
+../src/ASF/common2/services/gfx_mono/gfx_mono_framebuffer.h:
+
+../src/ASF/common2/services/gfx_mono/gfx_mono_generic.h:
+
+../src/menu_link.h:
+
+../src/ASF/common2/services/gfx_mono/gfx_mono.h:
+
+../src/ASF/common2/services/gfx_mono/sysfont.h:
+
+../src/config/conf_sysfont.h:
+
+../src/ASF/common2/services/gfx_mono/gfx_mono_text.h:
+
 ../src/ASF/common/boards/board.h:
 
 ../src/ASF/sam0/drivers/nvm/nvm.h:
@@ -410,6 +446,12 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu
 
 ../src/ASF/sam0/drivers/sercom/usart/usart.h:
 
+../src/ASF/common2/components/display/ssd1306/ssd1306.h:
+
+../src/ASF/common2/services/gfx_mono/gfx_mono_null.h:
+
+../src/config/conf_ssd1306.h:
+
 ../src/ASF/sam0/utils/stdio/stdio_serial/stdio_serial.h:
 
 ../src/ASF/common/services/serial/serial.h:
@@ -426,13 +468,17 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu
 
 c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu-toolchain\arm-none-eabi\include\math.h:
 
+../src/platform.h:
+
+../src/bike.h:
+
+../src/button_lib.h:
+
 ../src/spi_sseg.h:
 
 ../src/ADC_subsystem.h:
 
 ../src/timer_subsystem.h:
-
-../src/button_lib.h:
 
 ../src/accelerometer_lib.h:
 

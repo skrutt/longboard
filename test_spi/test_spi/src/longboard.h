@@ -12,6 +12,7 @@
 
 #include <asf.h>
 #include <math.h>
+#include "platform.h"
 #include "spi_sseg.h"
 #include "ADC_subsystem.h"
 #include "timer_subsystem.h"
@@ -21,9 +22,8 @@
 
 
 //longboard defines
-static button_lib_t spi_btn;
-
-static button_lib_t *adxl_calibrate_button_platform = &spi_btn;
+//static button_lib_t spi_btn;
+//static button_lib_t *adxl_calibrate_button_platform = &spi_btn;
 
 #define LED_SYS				PIN_PA17
 #define LED_ADC				PIN_PA18

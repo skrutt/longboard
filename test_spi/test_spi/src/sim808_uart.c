@@ -6,10 +6,22 @@
  */ 
 
 #include "sim808_uart.h"
+#include "platform.h"
 
 void sim808_init() {
-	
 	uint8_t success;
+	
+	//Setup GSM key pin
+	port_get_config_defaults(&pin_cfg);
+	pin_cfg.direction = PORT_PIN_DIR_OUTPUT;
+	port_pin_set_config(SIM808_RESET_PIN, &pin_cfg);
+	port_pin_set_output_level(SIM808_RESET_PIN, true);
+	
+	init_SIM808_uart();
+	init_sim808_usart_callbacks();
+	sim808_init_commands();
+	
+	system_interrupt_enable_global();
 	
 	usart_register_callback(&SIM808_usart, usart_read_callback, USART_CALLBACK_BUFFER_RECEIVED);
 	usart_read_buffer_job(&SIM808_usart, (uint8_t *)incoming_byte, MAX_RX_BUFFER_LENGTH);
@@ -20,11 +32,10 @@ void sim808_init() {
 		//Enable the module if turned off:
 		delay_ms(400);
 		port_pin_set_output_level(SIM808_RESET_PIN, false);
-		delay_ms(4000);
+		delay_ms(6000);
 		port_pin_set_output_level(SIM808_RESET_PIN, true);		
 	}
 
-	
 	do {
 		usart_disable_callback(&SIM808_usart, USART_CALLBACK_BUFFER_RECEIVED);
 		success = 1;
@@ -40,7 +51,6 @@ void sim808_init() {
 	
 	uint8_t connection = 1;
 	do {
-		sim808_init_gprs();
 		sim808_init_http();
 		connection = sim808_connect();	
 	} while(connection == 0);
@@ -64,12 +74,22 @@ void sim808_reset() {
 
 void sim808_init_http() {
 	volatile uint8_t result = 0;
+	uint8_t fail_counter = 0;
 	result = 1;
 	command cmd;
 	cmd.expected_response = "OK";
 	cmd.callback_enabled = 0;
 	
 	do {
+		cmd.cmd = "AT+SAPBR=3,1,\"CONTYPE\",\"GPRS\"";
+		sim808_send_command(cmd);
+		sim808_parse_response_wait(SIM808_RECEIVE_DELAY_NORMAL);
+		delay_ms(400);
+		
+		cmd.cmd = "AT+SAPBR=3,1,\"APN\",\"online.telia.se\"";
+		sim808_send_command(cmd);
+		sim808_parse_response_wait(SIM808_RECEIVE_DELAY_NORMAL);
+		delay_ms(400);
 			
 		cmd.cmd = "AT+HTTPINIT";
 		sim808_send_command(cmd);
@@ -92,26 +112,15 @@ void sim808_init_http() {
 		if(!sim808_parse_response_wait(SIM808_RECEIVE_DELAY_LONG)) result = 0;
 		
 		if(result == 0) {
+			if(fail_counter >= 3) {		//Could not connect to the network.
+				sim808_fail_to_connect_platform();
+			}
+			
 			result = 1;
+			fail_counter++;
 			sim808_reset();			
 		}
 	} while(result == 0);
-}
-
-void sim808_init_gprs() {
-	command cmd;
-	cmd.expected_response = "OK";
-	cmd.callback_enabled = 0;
-
-	cmd.cmd = "AT+SAPBR=3,1,\"CONTYPE\",\"GPRS\"";
-	sim808_send_command(cmd);
-	sim808_parse_response_wait(SIM808_RECEIVE_DELAY_NORMAL);
-	delay_ms(400);
-				
-	cmd.cmd = "AT+SAPBR=3,1,\"APN\",\"online.telia.se\"";
-	sim808_send_command(cmd);
-	sim808_parse_response_wait(SIM808_RECEIVE_DELAY_NORMAL);
-	delay_ms(400);			
 }
 
 uint8_t sim808_connect() {

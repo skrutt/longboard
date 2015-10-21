@@ -69,6 +69,15 @@
 // From module: EEPROM Emulator Service
 #include <eeprom.h>
 
+// From module: GFX Monochrome - Menu System
+#include <gfx_mono_menu.h>
+
+// From module: GFX Monochrome - Monochrome Graphic Library
+#include <gfx_mono.h>
+
+// From module: GFX Monochrome - System Font
+#include <sysfont.h>
+
 // From module: Generic board support
 #include <board.h>
 
@@ -99,6 +108,9 @@
 // From module: SERCOM USART - Serial Communications (Callback APIs)
 #include <usart.h>
 #include <usart_interrupt.h>
+
+// From module: SSD1306 OLED controller
+#include <ssd1306.h>
 
 // From module: SYSTEM - Clock Management for SAMD21
 #include <clock.h>

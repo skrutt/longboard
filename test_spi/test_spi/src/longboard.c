@@ -6,6 +6,8 @@
  */ 
 #include "longboard.h"
 
+#ifdef LONGBOARD
+
 //Init all longboard specifics
 void init_platform(void)
 {
@@ -111,3 +113,5 @@ void main_platform(void)
 
 	port_pin_set_output_level(LED_SYS, false);
 }
+
+#endif

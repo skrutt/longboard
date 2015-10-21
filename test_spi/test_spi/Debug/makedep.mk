@@ -6,15 +6,49 @@ src\accelerometer_lib.c
 
 src\ADC_subsystem.c
 
+src\ASF\common2\components\display\ssd1306\ssd1306.c
+
+src\ASF\common2\services\gfx_mono\gfx_mono_framebuffer.c
+
+src\ASF\common2\services\gfx_mono\gfx_mono_generic.c
+
+src\ASF\common2\services\gfx_mono\gfx_mono_menu.c
+
+src\ASF\common2\services\gfx_mono\gfx_mono_null.c
+
+src\ASF\common2\services\gfx_mono\gfx_mono_text.c
+
+src\ASF\common2\services\gfx_mono\sysfont.c
+
+src\views.c
+
 src\ASF\sam0\drivers\rtc\rtc_calendar.c
 
 src\ASF\sam0\drivers\rtc\rtc_calendar_interrupt.c
 
+src\bike.c
+
 src\button_lib.c
+
+src\gprs_transfer_packages.c
+
+src\gps_utils.c
+
+src\json_converter.c
 
 src\longboard.c
 
+src\menus.c
+
+src\menu_buttons.c
+
+src\response_actions.c
+
 src\rtc_lib.c
+
+src\sim808_uart.c
+
+src\spi_display.c
 
 src\spi_sseg.c
 

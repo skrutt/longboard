@@ -7,6 +7,27 @@
 
 #include "bike.h"
 
+void sim808_fail_to_connect_platform() {
+	//TODO: Write message to display
+	volatile uint8_t result = 0;
+}
+
+void main_platform() {
+	
+}
+
+void init_platform() {
+	
+}
+
+void background_service_platform() {
+	
+}
+
+void dummy() {
+	
+}
+
 /*
 void system_init() {
 	delay_init();

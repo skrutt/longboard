@@ -10,9 +10,19 @@
 #define BIKE_H_
 
 #include <asf.h>
+#include "button_lib.h"
+
+void dummy(void);
+
+#define		wait_for_x_msg_platform()	dummy();
+#define 	wait_for_y_msg_platform()	dummy();
+#define 	wait_for_z_msg_platform()	dummy();
 
 void system_init(void);
-
+void sim808_fail_to_connect_platform(void);
+void main_platform(void);
+void init_platform(void);
+void background_service_platform(void);
 
 
 #endif /* BIKE_H_ */

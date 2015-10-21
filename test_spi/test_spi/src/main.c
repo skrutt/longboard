@@ -38,7 +38,7 @@ static void tc_callback_bg_service(struct tc_module *const module_inst)
 static void tc_callback_logger_service(void)
 {
 	/* Do something on RTC alarm match here */
-	port_pin_toggle_output_level(LED_RTC);
+	//port_pin_toggle_output_level(LED_RTC);
 }
 
 
@@ -47,7 +47,6 @@ int main (void)
 	//Start and set up system
 	system_init();
 	delay_init();
-	init_uart0();
 	
 	//Timer set up
 	configure_tc();
@@ -56,6 +55,8 @@ int main (void)
 	//Set up adc
 	void (*adc_callbacks[6])(uint16_t) = {update_adxl_gforce_z, update_adxl_gforce_y, update_adxl_gforce_x};
 	configure_adc(3, adc_callbacks);
+	
+	sim808_init();
 	
 	//setup for platform
 	init_platform();

@@ -18,10 +18,11 @@
 
 #include <asf.h>
 #include "response_actions.h"
+#include "platform.h"
 
 #define MAX_RX_BUFFER_LENGTH	1
 #define COMMAND_BUFFER_SIZE		128
-#define SIM808_RESET_PIN		PIN_PA06
+#define SIM808_RESET_PIN		PIN_PA27
 
 #define SIM808_RECEIVE_DELAY_NORMAL		500
 #define SIM808_RECEIVE_DELAY_LONG		2000
@@ -44,7 +45,7 @@ typedef struct {
 	const char *cmd;
 	const char *expected_response;
 	uint8_t callback_enabled;
-	void (*response_cb)(uint8_t, char*);
+	void (*response_cb)(volatile uint8_t, volatile char*);
 } command;
 
 command last_command;
@@ -66,8 +67,6 @@ void sim808_init_commands(void);
 uint8_t sim808_connect(void);
 void sim808_reset(void);
 
-
-void sim808_init_gprs(void);
 void init_SIM808_uart(void);
 void sim808_send_command(command);
 uint8_t sim808_parse_response_wait(uint16_t);
