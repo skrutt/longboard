@@ -5,6 +5,11 @@
  *  Author: jiut0001
  */ 
 
+#include "platform.h"
+
+#ifndef LONGBOARD
+
+
 #include "bike.h"
 
 void sim808_fail_to_connect_platform() {
@@ -165,3 +170,5 @@ if(btn_nav_select.active) {
 	
 }
 */
+
+#endif

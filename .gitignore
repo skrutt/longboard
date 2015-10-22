@@ -44,3 +44,5 @@ Temporary Items
 .hex
 .elf
 .o
+*.o
+*.d

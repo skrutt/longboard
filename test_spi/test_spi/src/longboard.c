@@ -9,11 +9,19 @@
 #ifdef LONGBOARD
 
 #include "longboard.h"
+#include <asf.h>
+
+void sim808_fail_to_connect_platform() {
+	//TODO: Write message to display
+	volatile uint8_t result = 0;
+}
+
 
 //Init all longboard specifics
 void init_platform(void)
 {
-		button_init(&spi_btn, PIN_PA17);
+		button_init(&spi_btn,PIN_PA19);
+		//spi_btn.gpio_pin = PIN_PA19;
 		
 		//setup outputs
 		struct port_config pinconf;
@@ -21,9 +29,9 @@ void init_platform(void)
 		port_get_config_defaults(&pinconf);
 		pinconf.direction = PORT_PIN_DIR_OUTPUT;
 		
-		port_pin_set_config(LED_SYS, &pinconf);		//led_sys
-		port_pin_set_config(LED_RTC, &pinconf);		//led_usart
-		port_pin_set_config(LED_ADC, &pinconf);		//led_adc
+	//	port_pin_set_config(LED_SYS, &pinconf);		//led_sys
+	//	port_pin_set_config(LED_RTC, &pinconf);		//led_usart
+	//	port_pin_set_config(LED_ADC, &pinconf);		//led_adc
 		
 		
 		//Config spi_sseg
@@ -44,7 +52,7 @@ void background_service_platform(void)
 		struct system_pinmux_config config;
 		system_pinmux_get_config_defaults(&config);
 		
-		config.mux_position = MUX_PA10C_SERCOM0_PAD2;
+		config.mux_position = MUX_PA19C_SERCOM1_PAD3;
 		
 		system_pinmux_pin_set_config(spi_btn.gpio_pin, &config);
 		
@@ -107,12 +115,12 @@ void main_platform(void)
 	}
 	set_disp_led(blink);
 
-	port_pin_set_output_level(LED_SYS, true);
+	//port_pin_set_output_level(LED_SYS, true);
 
-	printf("X: %.3f Y: %.3f Z: %.3f", accelerometer.scaled_gforce.x, accelerometer.scaled_gforce.y, accelerometer.scaled_gforce.z);
-	printf("\n\r");
+	//printf("X: %.3f Y: %.3f Z: %.3f", accelerometer.scaled_gforce.x, accelerometer.scaled_gforce.y, accelerometer.scaled_gforce.z);
+	//printf("\n\r");
 
-	port_pin_set_output_level(LED_SYS, false);
+	//port_pin_set_output_level(LED_SYS, false);
 }
 
 #endif

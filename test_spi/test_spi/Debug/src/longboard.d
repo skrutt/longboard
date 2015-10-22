@@ -1,5 +1,5 @@
 src/longboard.d src/longboard.o: ../src/longboard.c ../src/platform.h \
- ../src/bike.h ../src/asf.h ../src/ASF/sam0/drivers/adc/adc.h \
+ ../src/button_lib.h ../src/asf.h ../src/ASF/sam0/drivers/adc/adc.h \
  ../src/ASF/sam0/utils/compiler.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu-toolchain\lib\gcc\arm-none-eabi\4.8.4\include\stddef.h \
  ../src/ASF/common/utils/parts.h ../src/ASF/sam0/utils/status_codes.h \
@@ -146,13 +146,16 @@ src/longboard.d src/longboard.o: ../src/longboard.c ../src/platform.h \
  ../src/ASF/common/services/serial/sam0_usart/usart_serial.h \
  ../src/ASF/sam0/drivers/tc/tc.h \
  ../src/ASF/sam0/drivers/tc/tc_interrupt.h \
- ../src/ASF/sam0/drivers/tc/tc.h ../src/button_lib.h ../src/sim808_uart.h \
- ../src/response_actions.h ../src/globals.h ../src/gps_utils.h \
- ../src/gprs_transfer_packages.h
+ ../src/ASF/sam0/drivers/tc/tc.h ../src/longboard.h ../src/asf.h \
+ ../src/spi_sseg.h ../src/ADC_subsystem.h ../src/timer_subsystem.h \
+ ../src/accelerometer_lib.h \
+ ../src/ASF/thirdparty/CMSIS/Include/arm_math.h \
+ ../src/ASF/thirdparty/CMSIS/Include/core_cm0plus.h \
+ c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu-toolchain\arm-none-eabi\include\math.h
 
 ../src/platform.h:
 
-../src/bike.h:
+../src/button_lib.h:
 
 ../src/asf.h:
 
@@ -462,14 +465,20 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu
 
 ../src/ASF/sam0/drivers/tc/tc.h:
 
-../src/button_lib.h:
+../src/longboard.h:
 
-../src/sim808_uart.h:
+../src/asf.h:
 
-../src/response_actions.h:
+../src/spi_sseg.h:
 
-../src/globals.h:
+../src/ADC_subsystem.h:
 
-../src/gps_utils.h:
+../src/timer_subsystem.h:
 
-../src/gprs_transfer_packages.h:
+../src/accelerometer_lib.h:
+
+../src/ASF/thirdparty/CMSIS/Include/arm_math.h:
+
+../src/ASF/thirdparty/CMSIS/Include/core_cm0plus.h:
+
+c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu-toolchain\arm-none-eabi\include\math.h:

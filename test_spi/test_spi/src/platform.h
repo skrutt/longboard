@@ -10,6 +10,11 @@
 #ifndef PLATFORM_H_
 #define PLATFORM_H_
 
+#include "button_lib.h"
+
+
+#define LONGBOARD
+
 #ifdef LONGBOARD
 	#include "longboard.h"
 	volatile button_lib_t spi_btn;

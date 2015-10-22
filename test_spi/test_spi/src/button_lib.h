@@ -9,6 +9,8 @@
 #ifndef BUTTON_LIB_H_
 #define BUTTON_LIB_H_
 
+#include "asf.h"
+
 //Button on display state
 typedef struct {
 	volatile bool pressed;		//Is pressed?

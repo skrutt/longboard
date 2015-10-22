@@ -145,7 +145,7 @@ src/button_lib.d src/button_lib.o: ../src/button_lib.c ../src/asf.h \
  ../src/ASF/common/services/serial/sam0_usart/usart_serial.h \
  ../src/ASF/sam0/drivers/tc/tc.h \
  ../src/ASF/sam0/drivers/tc/tc_interrupt.h \
- ../src/ASF/sam0/drivers/tc/tc.h ../src/button_lib.h
+ ../src/ASF/sam0/drivers/tc/tc.h ../src/button_lib.h ../src/asf.h
 
 ../src/asf.h:
 
@@ -456,3 +456,5 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu
 ../src/ASF/sam0/drivers/tc/tc.h:
 
 ../src/button_lib.h:
+
+../src/asf.h:

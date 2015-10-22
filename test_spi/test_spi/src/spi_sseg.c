@@ -8,6 +8,7 @@
 #include "spi_sseg.h"
 #include "timer_subsystem.h"
 #include "longboard.h"
+#include "platform.h"
 
 //Number on the display
 float sseg_num;// = 0.1;

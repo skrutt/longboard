@@ -4,14 +4,17 @@
  * Created: 2015-10-20 13:47:31
  *  Author: petter
  */ 
-
-//To contain all code only relevant for longboard
-
 #ifndef LONGBOARD_H_
 #define LONGBOARD_H_
+//To contain all code only relevant for longboard
+#include "platform.h"
+
+#ifdef LONGBOARD
+
+
 
 #include <asf.h>
-#include <math.h>
+//#include <math.h>
 #include "spi_sseg.h"
 #include "ADC_subsystem.h"
 #include "timer_subsystem.h"
@@ -21,15 +24,15 @@
 
 
 //longboard defines
-static button_lib_t spi_btn;
+// volatile button_lib_t spi_btn;
+// 
+// static button_lib_t *adxl_calibrate_button_platform = &spi_btn;
 
-static button_lib_t *adxl_calibrate_button_platform = &spi_btn;
+//#define LED_SYS				PIN_PA17
+//#define LED_ADC				PIN_PA18
+//#define PIEZO_PIN			PIN_PA17
 
-#define LED_SYS				PIN_PA17
-#define LED_ADC				PIN_PA18
-#define PIEZO_PIN			PIN_PA17
-
-#define LED_RTC			PIN_PA16
+//#define LED_RTC				20
 
 
 //Init all longboard specifics
@@ -45,5 +48,9 @@ void background_service_platform(void);
 #define 	wait_for_y_msg_platform()	set_disp_led_color(LED_YELLOW);
 #define 	wait_for_z_msg_platform()	set_disp_led_color(LED_RED);
 
+//TODO: Cleanup, and msg
+void sim808_fail_to_connect_platform(void );
 
+
+#endif 
 #endif /* LONGBOARD_H_ */
