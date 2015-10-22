@@ -1,3 +1,5 @@
+./test_spi/test_spi/Debug/*
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
