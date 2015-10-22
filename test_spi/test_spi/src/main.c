@@ -39,6 +39,10 @@ static void tc_callback_bg_service(struct tc_module *const module_inst)
 //Callback for updating display on platform
 static void tc_callback_logger_service(void)
 {
+	if(gps_logging_enabled) {
+		sim808_send_command(CMD_GET_GPS_DATA);
+	}
+	
 	/* Do something on RTC alarm match here */
 	//port_pin_toggle_output_level(LED_RTC);
 }
@@ -58,13 +62,13 @@ int main (void)
 	void (*adc_callbacks[6])(uint16_t) = {update_adxl_gforce_z, update_adxl_gforce_y, update_adxl_gforce_x};
 	configure_adc(3, adc_callbacks);
 	
-	//sim808_init();
+	sim808_init();
 	
 	//setup for platform
  	init_platform();
 	
 	//Wait some for button read and then calibrate adxl
-	init_adxl_calibration(adxl_calibrate_button_platform);
+	//init_adxl_calibration(adxl_calibrate_button_platform);
 	
 	//Start rtc for logging interval
 	rtc_simple_configuration(1, tc_callback_logger_service);
@@ -74,7 +78,7 @@ int main (void)
 		/* Infinite loop */
 
 			//Update floats from accelerometer
-			recalculate_accelerometer_values();
+			//recalculate_accelerometer_values();
 			
 			//Run platform specifics
 			main_platform();

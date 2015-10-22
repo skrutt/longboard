@@ -6,8 +6,51 @@
  */ 
 #include "response_actions.h"
 
-void SIM808_response_gprs_set_post_data(volatile uint8_t success, volatile char *cmd) {
-	last_command.expected_response = "OK";
+void SIM808_response_gprs_send_post_request(volatile uint8_t success, volatile char *cmd) {
+	if(success == 1) {
+		sim808_send_command(CMD_GPRS_POST_REQ);	
+		volatile uint8_t res = sim808_parse_response_wait(SIM808_RECEIVE_DELAY_NORMAL); //Perhaps make asynchronous
+		last_command.callback_enabled = 1;
+		last_command.expected_response = "+HTTPACTION";
+	}
+}
+
+void SIM808_response_gprs_post(volatile uint8_t success, volatile char *cmd) {
+	if(success) {
+		if(strcmp(last_command.expected_response, "OK") == 0) {
+			last_command.expected_response = "+HTTPACTION";
+		}
+		else {	
+			
+			// Enable gps communication if transfer complete.
+			if(gprs_log_buf.temp_tail == gprs_log_buf.head) {	
+				gps_logging_enabled = 1;	
+			}
+			
+			volatile uint8_t len = strlen(cmd);
+			char *errorCodeString = cmd+15;		// Beginning of error code
+			*(errorCodeString+3) = '\0';		// Close string after error code
+			
+			// Bättre att jämföra strängvärdet prestandamässigt?
+			uint16_t errorCode = atoi(errorCodeString);	
+			
+			//SKA VARA 200
+			if(errorCode == 400) {
+				//Success
+				gprs_log_buf.tail = gprs_log_buf.temp_tail;
+				
+				//Continue sending remaining packages if any
+				if(gprs_log_buf.temp_tail != gprs_log_buf.head) {
+					gprs_send_data_log();
+				}
+				
+			}
+			else {
+				//Fail
+				 gprs_log_buf.temp_tail = gprs_log_buf.tail;
+			}
+		}
+	}
 }
 
 void SIM808_response_gprs_get(volatile uint8_t success, volatile char *cmd) {
@@ -98,7 +141,9 @@ void SIM808_response_gps_data(volatile uint8_t success, volatile char *cmd) {
 		comma = strchr (position, ',');
 	}
 	
-	if(gps_data.status == 'A') {
+	//Commented for debug only
+	//if(gps_data.status == 'A') {
 		gps_utils_raw_data_to_send_buffer(&gprs_log_buf);
-	}
+		gps_counter++;
+	//}
 }

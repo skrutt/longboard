@@ -65,6 +65,7 @@ typedef struct {
 position_info device;
 
 GPS_GPRMC gps_data;
+uint8_t gps_logging_enabled;
 
 
 #endif /* GLOBALS_H_ */

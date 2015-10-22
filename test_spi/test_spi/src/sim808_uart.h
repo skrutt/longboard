@@ -39,7 +39,7 @@ typedef struct {
 	volatile uint8_t available;
 } command_buffer;
 
-command_buffer SIM808_buf;
+volatile command_buffer SIM808_buf;
 
 typedef struct {
 	const char *cmd;
@@ -60,6 +60,7 @@ command CMD_GET_GPS_DATA;
 command CMD_GET_GPS_FIX;
 
 command CMD_GPRS_GET_REQ;
+command CMD_GPRS_POST_REQ;
 
 void sim808_init(void);
 void sim808_init_http(void);

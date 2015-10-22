@@ -18,9 +18,15 @@ void sim808_fail_to_connect_platform() {
 }
 
 void main_platform() {
-	sim808_send_command(CMD_GET_GPS_DATA);
-	sim808_parse_response_wait(SIM808_RECEIVE_DELAY_NORMAL);
-	delay_ms(2000);
+	
+	if(SIM808_buf.available == 1) {
+		sim808_parse_response();	
+	}
+	
+	if(gps_counter >= 45) {
+		gps_counter = 0;
+		gprs_send_data_log();	
+	}
 }
 
 void init_platform() {

@@ -154,7 +154,7 @@ src/main.d src/main.o: ../src/main.c ../src/asf.h \
  ../src/uart_service.h ../src/rtc_lib.h ../src/globals.h \
  ../src/response_actions.h ../src/gps_utils.h \
  ../src/gprs_transfer_packages.h ../src/sim808_uart.h ../src/platform.h \
- ../src/longboard.h
+ ../src/bike.h
 
 ../src/asf.h:
 
@@ -498,4 +498,4 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu
 
 ../src/platform.h:
 
-../src/longboard.h:
+../src/bike.h:

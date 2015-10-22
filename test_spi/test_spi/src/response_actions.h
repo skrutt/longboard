@@ -14,7 +14,8 @@
 #include "gps_utils.h"
 #include "sim808_uart.h"
 
-void SIM808_response_gprs_set_post_data(volatile uint8_t, volatile char*);
+void SIM808_response_gprs_send_post_request(volatile uint8_t, volatile char*);
+void SIM808_response_gprs_post(volatile uint8_t, volatile char*);
 void SIM808_response_gprs_get(volatile uint8_t, volatile char*);
 void SIM808_response_gps_data(volatile uint8_t, volatile char*);
 

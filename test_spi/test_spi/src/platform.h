@@ -13,7 +13,7 @@
 #include "button_lib.h"
 
 
-#define LONGBOARD
+//#define LONGBOARD
 
 #ifdef LONGBOARD
 	#include "longboard.h"

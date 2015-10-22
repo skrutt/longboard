@@ -25,5 +25,8 @@ void main_platform(void);
 void init_platform(void);
 void background_service_platform(void);
 
+//DEBUG ONLY:
+uint8_t gps_counter;
+
 
 #endif /* BIKE_H_ */

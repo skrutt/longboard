@@ -10,6 +10,7 @@
 
 void sim808_init() {
 	uint8_t success;
+	gps_logging_enabled = 1;
 	
 	//Setup GSM key pin
 	port_get_config_defaults(&pin_cfg);
@@ -75,12 +76,14 @@ void sim808_reset() {
 void sim808_init_http() {
 	volatile uint8_t result = 0;
 	uint8_t fail_counter = 0;
-	result = 1;
 	command cmd;
 	cmd.expected_response = "OK";
 	cmd.callback_enabled = 0;
 	
+	gprs_send_buf_init(&gprs_log_buf);
+	
 	do {
+		result = 1;
 		cmd.cmd = "AT+SAPBR=3,1,\"CONTYPE\",\"GPRS\"";
 		sim808_send_command(cmd);
 		sim808_parse_response_wait(SIM808_RECEIVE_DELAY_NORMAL);
@@ -103,7 +106,7 @@ void sim808_init_http() {
 		sim808_send_command(cmd);
 		if(!sim808_parse_response_wait(SIM808_RECEIVE_DELAY_LONG)) result = 0;
 	
-		cmd.cmd = "AT+HTTPPARA=\"URL\",\"http://tripcomputer.azurewebsites.net/api/test/1\"";
+		cmd.cmd = "AT+HTTPPARA=\"URL\",\"http://tripcomputer.azurewebsites.net/api/datalog\"";
 		sim808_send_command(cmd);
 		if(!sim808_parse_response_wait(SIM808_RECEIVE_DELAY_LONG)) result = 0;
 	
@@ -114,9 +117,8 @@ void sim808_init_http() {
 		if(result == 0) {
 			if(fail_counter >= 3) {		//Could not connect to the network.
 				sim808_fail_to_connect_platform();
-			}
-			
-			result = 1;
+				fail_counter = 0;
+			}		
 			fail_counter++;
 			sim808_reset();			
 		}
@@ -224,7 +226,7 @@ void init_SIM808_uart(void) {
 	uart_settings.pinmux_pad1 = PINMUX_PA09C_SERCOM0_PAD1; // Rx
 	uart_settings.pinmux_pad2 = PINMUX_UNUSED;
 	uart_settings.pinmux_pad3 = PINMUX_UNUSED;
-	uart_settings.baudrate = 9600;
+	uart_settings.baudrate = 115200;
 	while (usart_init(&SIM808_usart, SERCOM0, &uart_settings) != STATUS_OK){}
 	
 	stdio_serial_init(&SIM808_usart, SERCOM0, &uart_settings);
@@ -269,6 +271,11 @@ void sim808_init_commands() {
 	CMD_GPRS_GET_REQ.callback_enabled = 1;
 	CMD_GPRS_GET_REQ.expected_response = "OK";
 	CMD_GPRS_GET_REQ.response_cb = &SIM808_response_gprs_get;
+	
+	CMD_GPRS_POST_REQ.cmd = "AT+HTTPACTION=1";
+	CMD_GPRS_POST_REQ.callback_enabled = 0;
+	CMD_GPRS_POST_REQ.expected_response = "OK";
+	CMD_GPRS_POST_REQ.response_cb = &SIM808_response_gprs_post;
 	
 	CMD_AT.cmd = "AT";
 	CMD_AT.callback_enabled = 0;
