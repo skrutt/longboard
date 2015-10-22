@@ -9,6 +9,8 @@
 #ifndef SPI_SSEG_H_
 #define SPI_SSEG_H_
 
+#include "button_lib.h"
+
 
 //GPIO pin to use as Slave Select.
 #define SLAVE_SELECT_PIN	PIN_PA17
@@ -27,7 +29,7 @@ struct spi_module spi_master_instance;
 struct spi_slave_inst slave;
 
  void spi_master_write_done(struct spi_module *const module);
- void configure_spi_master(void);
+ void configure_spi_master(button_lib_t * set_sseg_disp_btn);
  void set_disp_led_color(LED_COLORS choice);
  void set_disp_led(RGB_LED_t values);
  

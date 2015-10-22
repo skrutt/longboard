@@ -35,7 +35,7 @@ void init_platform(void)
 		
 		
 		//Config spi_sseg
-		configure_spi_master();
+		configure_spi_master(&spi_btn);
 		
 		//Set high brightness for now
 		sseg_set_display_brightness(255);

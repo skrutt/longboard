@@ -8,7 +8,6 @@
 #include "spi_sseg.h"
 #include "timer_subsystem.h"
 #include "longboard.h"
-#include "platform.h"
 
 //Number on the display
 float sseg_num;// = 0.1;
@@ -17,6 +16,7 @@ volatile uint8_t	sseg_brightness;// = 255;
 uint8_t sseg_num_num[4];
 
 RGB_LED_t	sseg_leds;
+button_lib_t * sseg_disp_btn;
 
 #define RED_LED_BIT 4
 #define GREEN_LED_BIT 2
@@ -185,11 +185,13 @@ void sseg_update_display(void)
 	config.input_pull   = SYSTEM_PINMUX_PIN_PULL_UP;
 	config.mux_position = SYSTEM_PINMUX_GPIO;
 	
-	system_pinmux_pin_set_config(spi_btn.gpio_pin, &config);	//Todo, set this to read from struct
+	system_pinmux_pin_set_config(sseg_disp_btn->gpio_pin, &config);	//Todo, set this to read from struct
 }
 
- void configure_spi_master(void)
+ void configure_spi_master(button_lib_t * set_sseg_disp_btn)
 {
+	sseg_disp_btn =  set_sseg_disp_btn;
+	
 	struct spi_config config_spi_master;
 	struct spi_slave_inst_config slave_dev_config;
 	

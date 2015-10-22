@@ -24,9 +24,6 @@
 
 
 //longboard defines
-// volatile button_lib_t spi_btn;
-// 
-// static button_lib_t *adxl_calibrate_button_platform = &spi_btn;
 
 //#define LED_SYS				PIN_PA17
 //#define LED_ADC				PIN_PA18
