@@ -1,5 +1,5 @@
-test_spi/test_spi/Debug/*
-test_spi\test_spi\Debug\*
+test_spi/test_spi/Debug/*.*
+test_spi\test_spi\Debug\*.*
 
 
 # Windows image file caches
@@ -49,3 +49,6 @@ Temporary Items
 *.o
 *.d
 *.hex
+test_spi/test_spi/Debug/test_spi.lss
+*.map
+test_spi/test_spi/Debug/test_spi.lss
