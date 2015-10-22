@@ -29,7 +29,7 @@ void recalculate_accelerometer_values(void)
  void calibrate_accelerometer(ADXL_335_t *calibrate_me, const button_lib_t *wait_button)
 {
 	//Give shout out
-	printf("\n\rHello and welcome to the generic acccelerometer calibration routine!\n\r");
+	//printf("\n\rHello and welcome to the generic acccelerometer calibration routine!\n\r");
 	
 	//Update sseg for headless calibration
 	set_seg_disp_num(9999);
@@ -40,7 +40,7 @@ void recalculate_accelerometer_values(void)
 	//Get values for first axis, also tell user what to do
 	//Using uart for now
 	//X
-	printf("We will begin with the X axis, please place the sensor flat with X pointing up.\n\r");	
+	//printf("We will begin with the X axis, please place the sensor flat with X pointing up.\n\r");	
 	
 	//set_disp_led_color(LED_GREEN);
 	wait_for_x_msg_platform();
@@ -55,7 +55,7 @@ void recalculate_accelerometer_values(void)
 	
 	
 	//Y
-	printf("Now please place the sensor flat with y pointing up.\n\r");
+	//printf("Now please place the sensor flat with y pointing up.\n\r");
 	
 	//set_disp_led_color(LED_YELLOW);	
 	wait_for_y_msg_platform();
@@ -69,7 +69,7 @@ void recalculate_accelerometer_values(void)
 	y_one_g = adc_to_volt(calibrate_me->raw_values.y);
 		
 	//Z
-	printf("And lastly please place the sensor flat with Z pointing up.\n\r");
+	//printf("And lastly please place the sensor flat with Z pointing up.\n\r");
 	
 //	set_disp_led_color(LED_RED);	
 	wait_for_z_msg_platform();
@@ -101,10 +101,10 @@ void recalculate_accelerometer_values(void)
 	eeprom_emulator_commit_page_buffer();
 	
 	//Done!
-	printf("Sensor calibrated! X 0G: %.3f 1G: %.3f  Y 0G: %.3f 1G: %.3f  Z 0G: %.3f 1G: %.3f \n\r",
-	calibrate_me->x_zero_g_point, calibrate_me->x_volt_per_one_g,
-	calibrate_me->y_zero_g_point, calibrate_me->y_volt_per_one_g, 
-	calibrate_me->z_zero_g_point, calibrate_me->z_volt_per_one_g);
+	//printf("Sensor calibrated! X 0G: %.3f 1G: %.3f  Y 0G: %.3f 1G: %.3f  Z 0G: %.3f 1G: %.3f \n\r",
+	//calibrate_me->x_zero_g_point, calibrate_me->x_volt_per_one_g,
+	//calibrate_me->y_zero_g_point, calibrate_me->y_volt_per_one_g, 
+	//calibrate_me->z_zero_g_point, calibrate_me->z_volt_per_one_g);
 	 
 // 	set_disp_led_color(LED_WHITE);
 // 	wait_for_button_press(wait_button);
@@ -144,10 +144,10 @@ void recalculate_accelerometer_values(void)
 		if ((is_calibrated == 0b10101010) && !button_read_button(calibrate_button))
 		{
 			accelerometer = saved_calibration;
-			printf("Sensor calibrated with saved values! Press button during start to recalibrate! X 0G: %.3f 1G: %.3f  Y 0G: %.3f 1G: %.3f  Z 0G: %.3f 1G: %.3f \n\r",
-			saved_calibration.x_zero_g_point, saved_calibration.x_volt_per_one_g,
-			saved_calibration.y_zero_g_point, saved_calibration.y_volt_per_one_g,
-			saved_calibration.z_zero_g_point, saved_calibration.z_volt_per_one_g);
+			//printf("Sensor calibrated with saved values! Press button during start to recalibrate! X 0G: %.3f 1G: %.3f  Y 0G: %.3f 1G: %.3f  Z 0G: %.3f 1G: %.3f \n\r",
+			//saved_calibration.x_zero_g_point, saved_calibration.x_volt_per_one_g,
+			//saved_calibration.y_zero_g_point, saved_calibration.y_volt_per_one_g,
+			//saved_calibration.z_zero_g_point, saved_calibration.z_volt_per_one_g);
 			set_disp_led_color(LED_WHITE);
 		}else{
 			calibrate_accelerometer(&accelerometer, calibrate_button);

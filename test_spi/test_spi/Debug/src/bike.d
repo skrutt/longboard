@@ -145,7 +145,9 @@ src/bike.d src/bike.o: ../src/bike.c ../src/bike.h ../src/asf.h \
  ../src/ASF/common/services/serial/sam0_usart/usart_serial.h \
  ../src/ASF/sam0/drivers/tc/tc.h \
  ../src/ASF/sam0/drivers/tc/tc_interrupt.h \
- ../src/ASF/sam0/drivers/tc/tc.h ../src/button_lib.h
+ ../src/ASF/sam0/drivers/tc/tc.h ../src/button_lib.h ../src/sim808_uart.h \
+ ../src/response_actions.h ../src/globals.h ../src/gps_utils.h \
+ ../src/gprs_transfer_packages.h ../src/platform.h
 
 ../src/bike.h:
 
@@ -458,3 +460,15 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu
 ../src/ASF/sam0/drivers/tc/tc.h:
 
 ../src/button_lib.h:
+
+../src/sim808_uart.h:
+
+../src/response_actions.h:
+
+../src/globals.h:
+
+../src/gps_utils.h:
+
+../src/gprs_transfer_packages.h:
+
+../src/platform.h:

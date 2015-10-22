@@ -29,11 +29,13 @@
 //Include glue file
 #include "platform.h"
 
+
 //Callback for updating display on platform
 static void tc_callback_bg_service(struct tc_module *const module_inst)
 {
 	background_service_platform();
 }
+
 //Callback for updating display on platform
 static void tc_callback_logger_service(void)
 {
@@ -59,7 +61,7 @@ int main (void)
 	sim808_init();
 	
 	//setup for platform
-	init_platform();
+ 	init_platform();
 	
 	//Wait some for button read and then calibrate adxl
 	init_adxl_calibration(adxl_calibrate_button_platform);

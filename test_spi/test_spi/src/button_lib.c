@@ -7,11 +7,23 @@
 #include <asf.h>
 #include "button_lib.h"
 
-void button_get_defaults(button_lib_t * make_me_normal)
+void button_init(button_lib_t * make_me_normal, uint8_t pin)
 {
+	struct system_pinmux_config config;
+	system_pinmux_get_config_defaults(&config);
+	
+	config.direction   = SYSTEM_PINMUX_PIN_DIR_INPUT;
+	config.input_pull   = SYSTEM_PINMUX_PIN_PULL_UP;
+	config.mux_position = SYSTEM_PINMUX_GPIO;
+	
+	
+	make_me_normal->gpio_pin = pin;
+	system_pinmux_pin_set_config(make_me_normal->gpio_pin, &config);	//Todo, set this to read from struct
+
 	make_me_normal->active_high = false;
 	make_me_normal->button_debounce = false;
 	
+
 }
 
 //Read and handle buttonpress

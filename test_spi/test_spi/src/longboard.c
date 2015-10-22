@@ -13,8 +13,7 @@
 //Init all longboard specifics
 void init_platform(void)
 {
-		button_get_defaults(&spi_btn);
-		spi_btn.gpio_pin = PIN_PA17;
+		button_init(&spi_btn, PIN_PA17);
 		
 		//setup outputs
 		struct port_config pinconf;

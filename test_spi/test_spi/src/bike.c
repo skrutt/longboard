@@ -13,15 +13,18 @@ void sim808_fail_to_connect_platform() {
 }
 
 void main_platform() {
-	
+	sim808_send_command(CMD_GET_GPS_DATA);
+	sim808_parse_response_wait(SIM808_RECEIVE_DELAY_NORMAL);
+	delay_ms(2000);
 }
 
 void init_platform() {
+	button_init(&select_btn, PIN_PA14);
 	
 }
 
 void background_service_platform() {
-	
+	button_handler(&select_btn);
 }
 
 void dummy() {

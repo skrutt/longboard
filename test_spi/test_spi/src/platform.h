@@ -12,12 +12,12 @@
 
 #ifdef LONGBOARD
 	#include "longboard.h"
-	static button_lib_t spi_btn;
+	volatile button_lib_t spi_btn;
 	static button_lib_t *adxl_calibrate_button_platform = &spi_btn;
 #else
 	#include "bike.h"	
-	static button_lib_t btn;
-	static button_lib_t *adxl_calibrate_button_platform = &btn;
+	volatile button_lib_t select_btn;
+	static button_lib_t *adxl_calibrate_button_platform = &select_btn;
 #endif
 
 #endif /* PLATFORM_H_ */

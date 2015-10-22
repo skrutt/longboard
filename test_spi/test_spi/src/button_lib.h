@@ -9,7 +9,6 @@
 #ifndef BUTTON_LIB_H_
 #define BUTTON_LIB_H_
 
-
 //Button on display state
 typedef struct {
 	volatile bool pressed;		//Is pressed?
@@ -25,7 +24,7 @@ typedef struct {
 
 //Fetch defaults for button
 //(Active_low, debounce 20, no scroll, NO PIN so you have to set up
-void button_get_defaults(button_lib_t * make_me_normal);
+void button_init(button_lib_t * make_me_normal, const uint8_t);
 //Wait for button on display to be pressed
  void wait_for_button_press(const button_lib_t * read_me);
 
