@@ -910,7 +910,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x52 src/ASF/common2/components/display/ssd1306/ssd1306.o
  .debug_macro   0x00000000       0xe2 src/ASF/common2/components/display/ssd1306/ssd1306.o
  .debug_line    0x00000000      0xe9e src/ASF/common2/components/display/ssd1306/ssd1306.o
- .debug_str     0x00000000    0x7e4cc src/ASF/common2/components/display/ssd1306/ssd1306.o
+ .debug_str     0x00000000    0x7e4ce src/ASF/common2/components/display/ssd1306/ssd1306.o
  .comment       0x00000000       0x5c src/ASF/common2/components/display/ssd1306/ssd1306.o
  .ARM.attributes
                 0x00000000       0x32 src/ASF/common2/components/display/ssd1306/ssd1306.o
@@ -1141,7 +1141,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x88 src/ASF/common2/services/gfx_mono/gfx_mono_framebuffer.o
  .debug_macro   0x00000000       0x7b src/ASF/common2/services/gfx_mono/gfx_mono_framebuffer.o
  .debug_line    0x00000000      0x927 src/ASF/common2/services/gfx_mono/gfx_mono_framebuffer.o
- .debug_str     0x00000000    0x7a40b src/ASF/common2/services/gfx_mono/gfx_mono_framebuffer.o
+ .debug_str     0x00000000    0x7a40d src/ASF/common2/services/gfx_mono/gfx_mono_framebuffer.o
  .comment       0x00000000       0x5c src/ASF/common2/services/gfx_mono/gfx_mono_framebuffer.o
  .ARM.attributes
                 0x00000000       0x32 src/ASF/common2/services/gfx_mono/gfx_mono_framebuffer.o
@@ -1369,7 +1369,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x88 src/ASF/common2/services/gfx_mono/gfx_mono_generic.o
  .debug_macro   0x00000000       0x7b src/ASF/common2/services/gfx_mono/gfx_mono_generic.o
  .debug_line    0x00000000      0xa02 src/ASF/common2/services/gfx_mono/gfx_mono_generic.o
- .debug_str     0x00000000    0x7a4fe src/ASF/common2/services/gfx_mono/gfx_mono_generic.o
+ .debug_str     0x00000000    0x7a500 src/ASF/common2/services/gfx_mono/gfx_mono_generic.o
  .comment       0x00000000       0x5c src/ASF/common2/services/gfx_mono/gfx_mono_generic.o
  .ARM.attributes
                 0x00000000       0x32 src/ASF/common2/services/gfx_mono/gfx_mono_generic.o
@@ -1601,7 +1601,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x10 src/ASF/common2/services/gfx_mono/gfx_mono_menu.o
  .debug_macro   0x00000000       0x16 src/ASF/common2/services/gfx_mono/gfx_mono_menu.o
  .debug_line    0x00000000      0x92a src/ASF/common2/services/gfx_mono/gfx_mono_menu.o
- .debug_str     0x00000000    0x7ee84 src/ASF/common2/services/gfx_mono/gfx_mono_menu.o
+ .debug_str     0x00000000    0x7ee86 src/ASF/common2/services/gfx_mono/gfx_mono_menu.o
  .comment       0x00000000       0x5c src/ASF/common2/services/gfx_mono/gfx_mono_menu.o
  .ARM.attributes
                 0x00000000       0x32 src/ASF/common2/services/gfx_mono/gfx_mono_menu.o
@@ -1815,7 +1815,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x7b src/ASF/common2/services/gfx_mono/gfx_mono_null.o
  .debug_macro   0x00000000       0x88 src/ASF/common2/services/gfx_mono/gfx_mono_null.o
  .debug_line    0x00000000      0x862 src/ASF/common2/services/gfx_mono/gfx_mono_null.o
- .debug_str     0x00000000    0x7a26c src/ASF/common2/services/gfx_mono/gfx_mono_null.o
+ .debug_str     0x00000000    0x7a26e src/ASF/common2/services/gfx_mono/gfx_mono_null.o
  .comment       0x00000000       0x5c src/ASF/common2/services/gfx_mono/gfx_mono_null.o
  .ARM.attributes
                 0x00000000       0x32 src/ASF/common2/services/gfx_mono/gfx_mono_null.o
@@ -2091,7 +2091,7 @@ Discarded input sections
  .debug_macro   0x00000000       0xe2 src/ASF/common2/services/gfx_mono/gfx_mono_text.o
  .debug_macro   0x00000000       0x42 src/ASF/common2/services/gfx_mono/gfx_mono_text.o
  .debug_line    0x00000000     0x1074 src/ASF/common2/services/gfx_mono/gfx_mono_text.o
- .debug_str     0x00000000    0x83450 src/ASF/common2/services/gfx_mono/gfx_mono_text.o
+ .debug_str     0x00000000    0x83452 src/ASF/common2/services/gfx_mono/gfx_mono_text.o
  .comment       0x00000000       0x5c src/ASF/common2/services/gfx_mono/gfx_mono_text.o
  .ARM.attributes
                 0x00000000       0x32 src/ASF/common2/services/gfx_mono/gfx_mono_text.o
@@ -2308,7 +2308,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x88 src/ASF/common2/services/gfx_mono/sysfont.o
  .debug_macro   0x00000000       0x7b src/ASF/common2/services/gfx_mono/sysfont.o
  .debug_line    0x00000000      0x897 src/ASF/common2/services/gfx_mono/sysfont.o
- .debug_str     0x00000000    0x7ead8 src/ASF/common2/services/gfx_mono/sysfont.o
+ .debug_str     0x00000000    0x7eada src/ASF/common2/services/gfx_mono/sysfont.o
  .comment       0x00000000       0x5c src/ASF/common2/services/gfx_mono/sysfont.o
  .ARM.attributes
                 0x00000000       0x32 src/ASF/common2/services/gfx_mono/sysfont.o
@@ -2577,7 +2577,7 @@ Discarded input sections
  .debug_macro   0x00000000       0xe2 src/views.o
  .debug_macro   0x00000000       0x42 src/views.o
  .debug_line    0x00000000      0xff7 src/views.o
- .debug_str     0x00000000    0x83801 src/views.o
+ .debug_str     0x00000000    0x83803 src/views.o
  .comment       0x00000000       0x5c src/views.o
  .ARM.attributes
                 0x00000000       0x32 src/views.o
@@ -3262,7 +3262,7 @@ Discarded input sections
  .debug_macro   0x00000000       0xe4 src/bike.o
  .debug_macro   0x00000000       0x16 src/bike.o
  .debug_line    0x00000000     0x102f src/bike.o
- .debug_str     0x00000000    0x8570a src/bike.o
+ .debug_str     0x00000000    0x8570c src/bike.o
  .comment       0x00000000       0x5c src/bike.o
  .ARM.attributes
                 0x00000000       0x32 src/bike.o
@@ -3806,7 +3806,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x16 src/gprs_transfer_packages.o
  .debug_macro   0x00000000       0x2e src/gprs_transfer_packages.o
  .debug_line    0x00000000     0x1158 src/gprs_transfer_packages.o
- .debug_str     0x00000000    0x85d76 src/gprs_transfer_packages.o
+ .debug_str     0x00000000    0x85d78 src/gprs_transfer_packages.o
  .comment       0x00000000       0x5c src/gprs_transfer_packages.o
  .ARM.attributes
                 0x00000000       0x32 src/gprs_transfer_packages.o
@@ -4093,7 +4093,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x16 src/gps_utils.o
  .debug_macro   0x00000000       0x2e src/gps_utils.o
  .debug_line    0x00000000     0x10be src/gps_utils.o
- .debug_str     0x00000000    0x85cd2 src/gps_utils.o
+ .debug_str     0x00000000    0x85cd4 src/gps_utils.o
  .comment       0x00000000       0x5c src/gps_utils.o
  .ARM.attributes
                 0x00000000       0x32 src/gps_utils.o
@@ -4109,7 +4109,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x1b src/json_converter.o
  .debug_macro   0x00000000      0x84a src/json_converter.o
  .debug_line    0x00000000       0x4c src/json_converter.o
- .debug_str     0x00000000     0x23e9 src/json_converter.o
+ .debug_str     0x00000000     0x23eb src/json_converter.o
  .comment       0x00000000       0x5c src/json_converter.o
  .ARM.attributes
                 0x00000000       0x32 src/json_converter.o
@@ -4642,7 +4642,7 @@ Discarded input sections
  .debug_macro   0x00000000       0xe2 src/menus.o
  .debug_macro   0x00000000       0x42 src/menus.o
  .debug_line    0x00000000      0xfce src/menus.o
- .debug_str     0x00000000    0x8333c src/menus.o
+ .debug_str     0x00000000    0x8333e src/menus.o
  .comment       0x00000000       0x5c src/menus.o
  .ARM.attributes
                 0x00000000       0x32 src/menus.o
@@ -4918,7 +4918,7 @@ Discarded input sections
  .debug_macro   0x00000000       0xe2 src/menu_buttons.o
  .debug_macro   0x00000000       0x42 src/menu_buttons.o
  .debug_line    0x00000000     0x10b6 src/menu_buttons.o
- .debug_str     0x00000000    0x84423 src/menu_buttons.o
+ .debug_str     0x00000000    0x84425 src/menu_buttons.o
  .comment       0x00000000       0x5c src/menu_buttons.o
  .ARM.attributes
                 0x00000000       0x32 src/menu_buttons.o
@@ -5211,7 +5211,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x16 src/response_actions.o
  .debug_macro   0x00000000       0x2e src/response_actions.o
  .debug_line    0x00000000     0x1104 src/response_actions.o
- .debug_str     0x00000000    0x85ce7 src/response_actions.o
+ .debug_str     0x00000000    0x85ce9 src/response_actions.o
  .comment       0x00000000       0x5c src/response_actions.o
  .ARM.attributes
                 0x00000000       0x32 src/response_actions.o
@@ -5789,7 +5789,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x16 src/sim808_uart.o
  .debug_macro   0x00000000       0x2e src/sim808_uart.o
  .debug_line    0x00000000     0x1367 src/sim808_uart.o
- .debug_str     0x00000000    0x86ab0 src/sim808_uart.o
+ .debug_str     0x00000000    0x86ab2 src/sim808_uart.o
  .comment       0x00000000       0x5c src/sim808_uart.o
  .ARM.attributes
                 0x00000000       0x32 src/sim808_uart.o
@@ -6055,7 +6055,7 @@ Discarded input sections
  .debug_macro   0x00000000       0xe2 src/spi_display.o
  .debug_macro   0x00000000       0x42 src/spi_display.o
  .debug_line    0x00000000      0xfc6 src/spi_display.o
- .debug_str     0x00000000    0x831e1 src/spi_display.o
+ .debug_str     0x00000000    0x831e3 src/spi_display.o
  .comment       0x00000000       0x5c src/spi_display.o
  .ARM.attributes
                 0x00000000       0x32 src/spi_display.o
@@ -9113,7 +9113,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x10 src/ASF/sam0/drivers/sercom/usart/usart.o
  .debug_macro   0x00000000       0x51 src/ASF/sam0/drivers/sercom/usart/usart.o
  .debug_line    0x00000000      0xc6f src/ASF/sam0/drivers/sercom/usart/usart.o
- .debug_str     0x00000000    0x7bac0 src/ASF/sam0/drivers/sercom/usart/usart.o
+ .debug_str     0x00000000    0x7bac2 src/ASF/sam0/drivers/sercom/usart/usart.o
  .comment       0x00000000       0x5c src/ASF/sam0/drivers/sercom/usart/usart.o
  .ARM.attributes
                 0x00000000       0x32 src/ASF/sam0/drivers/sercom/usart/usart.o
@@ -9353,7 +9353,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x10 src/ASF/sam0/drivers/sercom/usart/usart_interrupt.o
  .debug_macro   0x00000000       0x51 src/ASF/sam0/drivers/sercom/usart/usart_interrupt.o
  .debug_line    0x00000000      0xbfd src/ASF/sam0/drivers/sercom/usart/usart_interrupt.o
- .debug_str     0x00000000    0x7add1 src/ASF/sam0/drivers/sercom/usart/usart_interrupt.o
+ .debug_str     0x00000000    0x7add3 src/ASF/sam0/drivers/sercom/usart/usart_interrupt.o
  .comment       0x00000000       0x5c src/ASF/sam0/drivers/sercom/usart/usart_interrupt.o
  .ARM.attributes
                 0x00000000       0x32 src/ASF/sam0/drivers/sercom/usart/usart_interrupt.o
@@ -9995,7 +9995,7 @@ Discarded input sections
  .debug_macro   0x00000000      0x3df src/ASF/sam0/drivers/system/interrupt/system_interrupt.o
  .debug_macro   0x00000000       0x2e src/ASF/sam0/drivers/system/interrupt/system_interrupt.o
  .debug_line    0x00000000      0x916 src/ASF/sam0/drivers/system/interrupt/system_interrupt.o
- .debug_str     0x00000000    0x7a1cb src/ASF/sam0/drivers/system/interrupt/system_interrupt.o
+ .debug_str     0x00000000    0x7a1cd src/ASF/sam0/drivers/system/interrupt/system_interrupt.o
  .comment       0x00000000       0x5c src/ASF/sam0/drivers/system/interrupt/system_interrupt.o
  .ARM.attributes
                 0x00000000       0x32 src/ASF/sam0/drivers/system/interrupt/system_interrupt.o
@@ -11293,7 +11293,7 @@ Discarded input sections
  .debug_macro   0x00000000      0xf7d src/ASF/sam0/utils/cmsis/samd21/source/system_samd21.o
  .debug_macro   0x00000000       0x51 src/ASF/sam0/utils/cmsis/samd21/source/system_samd21.o
  .debug_line    0x00000000      0x5f5 src/ASF/sam0/utils/cmsis/samd21/source/system_samd21.o
- .debug_str     0x00000000    0x6649f src/ASF/sam0/utils/cmsis/samd21/source/system_samd21.o
+ .debug_str     0x00000000    0x664a1 src/ASF/sam0/utils/cmsis/samd21/source/system_samd21.o
  .comment       0x00000000       0x5c src/ASF/sam0/utils/cmsis/samd21/source/system_samd21.o
  .ARM.attributes
                 0x00000000       0x32 src/ASF/sam0/utils/cmsis/samd21/source/system_samd21.o
@@ -11500,7 +11500,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x3f src/ASF/sam0/utils/stdio/read.o
  .debug_macro   0x00000000      0x3df src/ASF/sam0/utils/stdio/read.o
  .debug_line    0x00000000      0x81a src/ASF/sam0/utils/stdio/read.o
- .debug_str     0x00000000    0x7988a src/ASF/sam0/utils/stdio/read.o
+ .debug_str     0x00000000    0x7988c src/ASF/sam0/utils/stdio/read.o
  .comment       0x00000000       0x5c src/ASF/sam0/utils/stdio/read.o
  .ARM.attributes
                 0x00000000       0x32 src/ASF/sam0/utils/stdio/read.o
@@ -11708,7 +11708,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x3f src/ASF/sam0/utils/stdio/write.o
  .debug_macro   0x00000000      0x3df src/ASF/sam0/utils/stdio/write.o
  .debug_line    0x00000000      0x810 src/ASF/sam0/utils/stdio/write.o
- .debug_str     0x00000000    0x7988c src/ASF/sam0/utils/stdio/write.o
+ .debug_str     0x00000000    0x7988e src/ASF/sam0/utils/stdio/write.o
  .comment       0x00000000       0x5c src/ASF/sam0/utils/stdio/write.o
  .ARM.attributes
                 0x00000000       0x32 src/ASF/sam0/utils/stdio/write.o
@@ -14090,67 +14090,67 @@ OUTPUT(test_spi.elf elf32-littlearm)
  .debug_line    0x000160db      0x39d src/ASF/sam0/utils/syscalls/gcc/syscalls.o
  .debug_line    0x00016478     0x112e src/main.o
 
-.debug_str      0x00000000    0x8d1e5
- .debug_str     0x00000000    0x84e17 src/accelerometer_lib.o
-                              0x8585d (size before relaxing)
- .debug_str     0x00084e17      0xfd6 src/ADC_subsystem.o
-                              0x849c7 (size before relaxing)
- .debug_str     0x00085ded      0xb60 src/ASF/sam0/drivers/rtc/rtc_calendar.o
-                              0x7c081 (size before relaxing)
- .debug_str     0x0008694d       0xe7 src/ASF/sam0/drivers/rtc/rtc_calendar_interrupt.o
-                              0x7b3c8 (size before relaxing)
- .debug_str     0x00086a34      0x25e src/button_lib.o
-                              0x834ef (size before relaxing)
- .debug_str     0x00086c92      0x177 src/longboard.o
-                              0x858e4 (size before relaxing)
- .debug_str     0x00086e09      0x12b src/rtc_lib.o
-                              0x862e5 (size before relaxing)
- .debug_str     0x00086f34      0x5c4 src/spi_sseg.o
-                              0x8653e (size before relaxing)
- .debug_str     0x000874f8      0x452 src/timer_subsystem.o
-                              0x83f3d (size before relaxing)
- .debug_str     0x0008794a       0x9f src/ASF/common2/services/delay/sam0/systick_counter.o
-                              0x79a7c (size before relaxing)
- .debug_str     0x000879e9      0x511 src/ASF/sam0/drivers/adc/adc_sam_d_r/adc.o
-                              0x7b7bf (size before relaxing)
- .debug_str     0x00087efa       0xfd src/ASF/sam0/drivers/adc/adc_sam_d_r/adc_callback.o
-                              0x7a5ad (size before relaxing)
- .debug_str     0x00087ff7      0xc4f src/ASF/sam0/drivers/nvm/nvm.o
-                              0x7beb9 (size before relaxing)
- .debug_str     0x00088c46       0x53 src/ASF/sam0/drivers/port/port.o
-                              0x79c92 (size before relaxing)
- .debug_str     0x00088c99      0x39d src/ASF/sam0/drivers/sercom/sercom.o
-                              0x7ada6 (size before relaxing)
- .debug_str     0x00089036      0x530 src/ASF/sam0/drivers/sercom/spi/spi.o
-                              0x7cf98 (size before relaxing)
- .debug_str     0x00089566      0x159 src/ASF/sam0/drivers/sercom/spi/spi_interrupt.o
-                              0x7bf9b (size before relaxing)
- .debug_str     0x000896bf      0x189 src/ASF/sam0/drivers/sercom/sercom_interrupt.o
-                              0x7abb9 (size before relaxing)
- .debug_str     0x00089848       0x3e src/ASF/common2/boards/user_board/init.o
-                              0x831ac (size before relaxing)
- .debug_str     0x00089886       0x94 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
-                              0x798dd (size before relaxing)
- .debug_str     0x0008991a     0x1263 src/ASF/sam0/drivers/system/clock/clock_samd21_r21_da/clock.o
-                              0x7ca1a (size before relaxing)
- .debug_str     0x0008ab7d      0x27d src/ASF/sam0/drivers/system/clock/clock_samd21_r21_da/gclk.o
-                              0x7a55c (size before relaxing)
- .debug_str     0x0008adfa      0x130 src/ASF/sam0/drivers/system/pinmux/pinmux.o
-                              0x79cd4 (size before relaxing)
- .debug_str     0x0008af2a       0x47 src/ASF/sam0/drivers/system/system.o
-                              0x79962 (size before relaxing)
- .debug_str     0x0008af71      0x227 src/ASF/sam0/drivers/tc/tc.o
-                              0x7ad77 (size before relaxing)
- .debug_str     0x0008b198       0xe5 src/ASF/sam0/drivers/tc/tc_interrupt.o
-                              0x7a4c8 (size before relaxing)
- .debug_str     0x0008b27d      0x443 src/ASF/sam0/services/eeprom/emulator/eeprom.o
-                              0x7b4f0 (size before relaxing)
- .debug_str     0x0008b6c0      0xee1 src/ASF/sam0/utils/cmsis/samd21/source/gcc/startup_samd21.o
-                              0x675d5 (size before relaxing)
- .debug_str     0x0008c5a1      0x734 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
-                               0x4e62 (size before relaxing)
- .debug_str     0x0008ccd5      0x510 src/main.o
-                              0x86114 (size before relaxing)
+.debug_str      0x00000000    0x8d1e7
+ .debug_str     0x00000000    0x84e19 src/accelerometer_lib.o
+                              0x8585f (size before relaxing)
+ .debug_str     0x00084e19      0xfd6 src/ADC_subsystem.o
+                              0x849c9 (size before relaxing)
+ .debug_str     0x00085def      0xb60 src/ASF/sam0/drivers/rtc/rtc_calendar.o
+                              0x7c083 (size before relaxing)
+ .debug_str     0x0008694f       0xe7 src/ASF/sam0/drivers/rtc/rtc_calendar_interrupt.o
+                              0x7b3ca (size before relaxing)
+ .debug_str     0x00086a36      0x25e src/button_lib.o
+                              0x834f1 (size before relaxing)
+ .debug_str     0x00086c94      0x177 src/longboard.o
+                              0x858e6 (size before relaxing)
+ .debug_str     0x00086e0b      0x12b src/rtc_lib.o
+                              0x862e7 (size before relaxing)
+ .debug_str     0x00086f36      0x5c4 src/spi_sseg.o
+                              0x86540 (size before relaxing)
+ .debug_str     0x000874fa      0x452 src/timer_subsystem.o
+                              0x83f3f (size before relaxing)
+ .debug_str     0x0008794c       0x9f src/ASF/common2/services/delay/sam0/systick_counter.o
+                              0x79a7e (size before relaxing)
+ .debug_str     0x000879eb      0x511 src/ASF/sam0/drivers/adc/adc_sam_d_r/adc.o
+                              0x7b7c1 (size before relaxing)
+ .debug_str     0x00087efc       0xfd src/ASF/sam0/drivers/adc/adc_sam_d_r/adc_callback.o
+                              0x7a5af (size before relaxing)
+ .debug_str     0x00087ff9      0xc4f src/ASF/sam0/drivers/nvm/nvm.o
+                              0x7bebb (size before relaxing)
+ .debug_str     0x00088c48       0x53 src/ASF/sam0/drivers/port/port.o
+                              0x79c94 (size before relaxing)
+ .debug_str     0x00088c9b      0x39d src/ASF/sam0/drivers/sercom/sercom.o
+                              0x7ada8 (size before relaxing)
+ .debug_str     0x00089038      0x530 src/ASF/sam0/drivers/sercom/spi/spi.o
+                              0x7cf9a (size before relaxing)
+ .debug_str     0x00089568      0x159 src/ASF/sam0/drivers/sercom/spi/spi_interrupt.o
+                              0x7bf9d (size before relaxing)
+ .debug_str     0x000896c1      0x189 src/ASF/sam0/drivers/sercom/sercom_interrupt.o
+                              0x7abbb (size before relaxing)
+ .debug_str     0x0008984a       0x3e src/ASF/common2/boards/user_board/init.o
+                              0x831ae (size before relaxing)
+ .debug_str     0x00089888       0x94 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
+                              0x798df (size before relaxing)
+ .debug_str     0x0008991c     0x1263 src/ASF/sam0/drivers/system/clock/clock_samd21_r21_da/clock.o
+                              0x7ca1c (size before relaxing)
+ .debug_str     0x0008ab7f      0x27d src/ASF/sam0/drivers/system/clock/clock_samd21_r21_da/gclk.o
+                              0x7a55e (size before relaxing)
+ .debug_str     0x0008adfc      0x130 src/ASF/sam0/drivers/system/pinmux/pinmux.o
+                              0x79cd6 (size before relaxing)
+ .debug_str     0x0008af2c       0x47 src/ASF/sam0/drivers/system/system.o
+                              0x79964 (size before relaxing)
+ .debug_str     0x0008af73      0x227 src/ASF/sam0/drivers/tc/tc.o
+                              0x7ad79 (size before relaxing)
+ .debug_str     0x0008b19a       0xe5 src/ASF/sam0/drivers/tc/tc_interrupt.o
+                              0x7a4ca (size before relaxing)
+ .debug_str     0x0008b27f      0x443 src/ASF/sam0/services/eeprom/emulator/eeprom.o
+                              0x7b4f2 (size before relaxing)
+ .debug_str     0x0008b6c2      0xee1 src/ASF/sam0/utils/cmsis/samd21/source/gcc/startup_samd21.o
+                              0x675d7 (size before relaxing)
+ .debug_str     0x0008c5a3      0x734 src/ASF/sam0/utils/syscalls/gcc/syscalls.o
+                               0x4e64 (size before relaxing)
+ .debug_str     0x0008ccd7      0x510 src/main.o
+                              0x86116 (size before relaxing)
 
 .debug_frame    0x00000000     0x1ffc
  .debug_frame   0x00000000       0xbc src/accelerometer_lib.o
