@@ -11,6 +11,7 @@
 
 #include <asf.h>
 #include "globals.h"
+#include "spi_display.h"
 
 typedef struct {
 	uint8_t active;
@@ -23,6 +24,7 @@ void display_view(menu_link);
 void refresh_view(void);
 
 void draw_speed_view(void);
+void draw_no_gps_view(void);
 
 current_view cur_view;
 

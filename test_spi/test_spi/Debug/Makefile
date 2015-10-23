@@ -135,6 +135,7 @@ C_SRCS +=  \
 ../src/ASF/common2/services/gfx_mono/gfx_mono_null.c \
 ../src/ASF/common2/services/gfx_mono/gfx_mono_text.c \
 ../src/ASF/common2/services/gfx_mono/sysfont.c \
+../src/cadence_sensor.c \
 ../src/views.c \
 ../src/ASF/sam0/drivers/rtc/rtc_calendar.c \
 ../src/ASF/sam0/drivers/rtc/rtc_calendar_interrupt.c \
@@ -197,6 +198,7 @@ src/ASF/common2/services/gfx_mono/gfx_mono_menu.o \
 src/ASF/common2/services/gfx_mono/gfx_mono_null.o \
 src/ASF/common2/services/gfx_mono/gfx_mono_text.o \
 src/ASF/common2/services/gfx_mono/sysfont.o \
+src/cadence_sensor.o \
 src/views.o \
 src/ASF/sam0/drivers/rtc/rtc_calendar.o \
 src/ASF/sam0/drivers/rtc/rtc_calendar_interrupt.o \
@@ -252,6 +254,7 @@ src/ASF/common2/services/gfx_mono/gfx_mono_menu.o \
 src/ASF/common2/services/gfx_mono/gfx_mono_null.o \
 src/ASF/common2/services/gfx_mono/gfx_mono_text.o \
 src/ASF/common2/services/gfx_mono/sysfont.o \
+src/cadence_sensor.o \
 src/views.o \
 src/ASF/sam0/drivers/rtc/rtc_calendar.o \
 src/ASF/sam0/drivers/rtc/rtc_calendar_interrupt.o \
@@ -307,6 +310,7 @@ src/ASF/common2/services/gfx_mono/gfx_mono_menu.d \
 src/ASF/common2/services/gfx_mono/gfx_mono_null.d \
 src/ASF/common2/services/gfx_mono/gfx_mono_text.d \
 src/ASF/common2/services/gfx_mono/sysfont.d \
+src/cadence_sensor.d \
 src/views.d \
 src/ASF/sam0/drivers/rtc/rtc_calendar.d \
 src/ASF/sam0/drivers/rtc/rtc_calendar_interrupt.d \
@@ -362,6 +366,7 @@ src/ASF/common2/services/gfx_mono/gfx_mono_menu.d \
 src/ASF/common2/services/gfx_mono/gfx_mono_null.d \
 src/ASF/common2/services/gfx_mono/gfx_mono_text.d \
 src/ASF/common2/services/gfx_mono/sysfont.d \
+src/cadence_sensor.d \
 src/views.d \
 src/ASF/sam0/drivers/rtc/rtc_calendar.d \
 src/ASF/sam0/drivers/rtc/rtc_calendar_interrupt.d \
@@ -422,6 +427,8 @@ LINKER_SCRIPT_DEP+=  \
 
 
 # AVR32/GNU C Compiler
+
+
 
 
 

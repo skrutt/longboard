@@ -147,7 +147,7 @@ src/gps_utils.d src/gps_utils.o: ../src/gps_utils.c ../src/gps_utils.h \
  ../src/ASF/sam0/drivers/tc/tc_interrupt.h \
  ../src/ASF/sam0/drivers/tc/tc.h ../src/sim808_uart.h \
  ../src/response_actions.h ../src/platform.h ../src/button_lib.h \
- ../src/asf.h ../src/bike.h
+ ../src/asf.h ../src/bike.h ../src/menus.h ../src/menu_link.h
 
 ../src/gps_utils.h:
 
@@ -474,3 +474,7 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu
 ../src/asf.h:
 
 ../src/bike.h:
+
+../src/menus.h:
+
+../src/menu_link.h:

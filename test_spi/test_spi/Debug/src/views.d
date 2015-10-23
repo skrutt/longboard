@@ -146,7 +146,7 @@ src/views.d src/views.o: ../src/views.c ../src/menus.h ../src/asf.h \
  ../src/ASF/sam0/drivers/tc/tc.h \
  ../src/ASF/sam0/drivers/tc/tc_interrupt.h \
  ../src/ASF/sam0/drivers/tc/tc.h ../src/menu_link.h ../src/views.h \
- ../src/globals.h
+ ../src/globals.h ../src/spi_display.h
 
 ../src/menus.h:
 
@@ -463,3 +463,5 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu
 ../src/views.h:
 
 ../src/globals.h:
+
+../src/spi_display.h:

@@ -149,7 +149,7 @@ src/spi_sseg.d src/spi_sseg.o: ../src/spi_sseg.c ../src/asf.h \
  ../src/asf.h ../src/timer_subsystem.h ../src/longboard.h \
  ../src/platform.h ../src/bike.h ../src/sim808_uart.h \
  ../src/response_actions.h ../src/globals.h ../src/gps_utils.h \
- ../src/gprs_transfer_packages.h
+ ../src/gprs_transfer_packages.h ../src/menus.h ../src/menu_link.h
 
 ../src/asf.h:
 
@@ -482,3 +482,7 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu
 ../src/gps_utils.h:
 
 ../src/gprs_transfer_packages.h:
+
+../src/menus.h:
+
+../src/menu_link.h:

@@ -12,6 +12,7 @@
 #include <asf.h>
 #include "button_lib.h"
 #include "sim808_uart.h"
+#include "menus.h"
 
 void dummy(void);
 
@@ -24,9 +25,12 @@ void sim808_fail_to_connect_platform(void);
 void main_platform(void);
 void init_platform(void);
 void background_service_platform(void);
+void run_every_second_platform(void);
 
 //DEBUG ONLY:
 uint8_t gps_counter;
+
+button_lib_t down_btn;
 
 
 #endif /* BIKE_H_ */

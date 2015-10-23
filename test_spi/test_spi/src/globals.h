@@ -29,7 +29,7 @@ typedef struct {
 typedef struct {
 	char date_time[12];		//Används ej
 	uint32_t device;
-	log_entry entries[255];
+	log_entry entries[300];
 } data_log;
 
 /*----------------------*/
@@ -42,6 +42,7 @@ typedef struct {
 
 typedef struct {
 	uint8_t speed;
+	uint8_t cadence;
 	uint8_t lat;
 	uint8_t lng;
 	uint8_t height;

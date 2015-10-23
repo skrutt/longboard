@@ -20,6 +20,8 @@ src\ASF\common2\services\gfx_mono\gfx_mono_text.c
 
 src\ASF\common2\services\gfx_mono\sysfont.c
 
+src\cadence_sensor.c
+
 src\views.c
 
 src\ASF\sam0\drivers\rtc\rtc_calendar.c

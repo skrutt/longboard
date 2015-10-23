@@ -117,7 +117,7 @@ void SIM808_response_gps_data(volatile uint8_t success, volatile char *cmd) {
 			gps_data.ew_indicator = field[0];
 			break;
 			case 7:
-			gps_data.ground_speed = atof(field);
+			gps_data.ground_speed = atof(field)*1.852;
 			break;
 			case 8:
 			gps_data.ground_course = atof(field);
@@ -141,7 +141,7 @@ void SIM808_response_gps_data(volatile uint8_t success, volatile char *cmd) {
 		comma = strchr (position, ',');
 	}
 	
-	//Commented for debug only
+	//COMMENTED ONLY FOR DEBUG
 	//if(gps_data.status == 'A') {
 		gps_utils_raw_data_to_send_buffer(&gprs_log_buf);
 		gps_counter++;

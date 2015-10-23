@@ -764,6 +764,12 @@
     <None Include="src\config\conf_menu.h">
       <SubType>compile</SubType>
     </None>
+    <Compile Include="src\cadence_sensor.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\cadence_sensor.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\views.c">
       <SubType>compile</SubType>
     </Compile>

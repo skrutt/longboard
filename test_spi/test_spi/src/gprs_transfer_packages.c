@@ -11,13 +11,13 @@ void SIM808_handle_data_transfer() {
 	
 	// Continue sending remaining packages if any.
 	if(!gps_logging_enabled && gprs_log_buf.ready) {
-		gprs_send_data_log();
+		//gprs_send_data_log();	//COMMENTED AWAY only for DEBUG
 	}
 	
 	// TODO: Should be taken care of by an alarm:
-	if(gps_counter >= 5) {
+	if(gps_counter >= 4) {
 		gps_counter = 0;
-		gprs_send_data_log();
+		//gprs_send_data_log();
 	}
 }
 
@@ -140,7 +140,7 @@ void gprs_send_data_log() {
 }
 
 void gprs_send_buf_init(gprs_send_buffer *buf) {
-	buf->len = 256;
+	buf->len = 299;
 	buf->temp_tail = 0;
 	buf->tail = 0;
 	buf->head = 0;

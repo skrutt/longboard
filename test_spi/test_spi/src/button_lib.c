@@ -20,6 +20,8 @@ void button_init(button_lib_t * make_me_normal, uint8_t pin)
 	make_me_normal->gpio_pin = pin;
 	system_pinmux_pin_set_config(make_me_normal->gpio_pin, &config);	//Todo, set this to read from struct
 
+	make_me_normal->pressed = false;
+	make_me_normal->read = false;
 	make_me_normal->active_high = false;
 	make_me_normal->button_debounce = false;
 	
@@ -52,7 +54,7 @@ inline void button_handler(button_lib_t * btn_to_read)
 	if (port_pin_get_input_level(btn_to_read->gpio_pin) == btn_to_read->active_high)
 	{
 		btn_to_read->button_debounce++;
-		if (btn_to_read->button_debounce >= 100 && !btn_to_read->pressed)
+		if (btn_to_read->button_debounce >= 35 && !btn_to_read->pressed)
 		{
 			btn_to_read->pressed = true;
 			btn_to_read->read = false;

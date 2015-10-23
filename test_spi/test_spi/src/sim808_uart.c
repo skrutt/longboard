@@ -33,7 +33,7 @@ void sim808_init() {
 		//Enable the module if turned off:
 		delay_ms(400);
 		port_pin_set_output_level(SIM808_RESET_PIN, false);
-		delay_ms(6000);
+		delay_ms(10000);
 		port_pin_set_output_level(SIM808_RESET_PIN, true);		
 	}
 
