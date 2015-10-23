@@ -112,6 +112,9 @@ src/gps_utils.d src/gps_utils.o: ../src/gps_utils.c ../src/gps_utils.h \
  ../src/config/conf_board.h ../src/ASF/common2/services/delay/delay.h \
  ../src/ASF/common2/services/delay/sam0/systick_counter.h \
  ../src/ASF/sam0/services/eeprom/emulator/eeprom.h \
+ ../src/ASF/sam0/drivers/extint/extint.h ../src/config/conf_extint.h \
+ ../src/ASF/sam0/drivers/extint/extint_callback.h \
+ ../src/ASF/sam0/drivers/extint/extint_callback.h \
  ../src/ASF/common2/services/gfx_mono/gfx_mono_menu.h \
  ../src/config/conf_menu.h \
  ../src/ASF/common2/services/gfx_mono/gfx_mono.h \
@@ -387,6 +390,14 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu
 ../src/ASF/common2/services/delay/sam0/systick_counter.h:
 
 ../src/ASF/sam0/services/eeprom/emulator/eeprom.h:
+
+../src/ASF/sam0/drivers/extint/extint.h:
+
+../src/config/conf_extint.h:
+
+../src/ASF/sam0/drivers/extint/extint_callback.h:
+
+../src/ASF/sam0/drivers/extint/extint_callback.h:
 
 ../src/ASF/common2/services/gfx_mono/gfx_mono_menu.h:
 

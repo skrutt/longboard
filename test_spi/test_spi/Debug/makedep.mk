@@ -20,6 +20,10 @@ src\ASF\common2\services\gfx_mono\gfx_mono_text.c
 
 src\ASF\common2\services\gfx_mono\sysfont.c
 
+src\ASF\sam0\drivers\extint\extint.c
+
+src\ASF\sam0\drivers\extint\extint_callback.c
+
 src\cadence_sensor.c
 
 src\views.c
