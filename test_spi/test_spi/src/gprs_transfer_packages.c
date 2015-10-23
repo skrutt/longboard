@@ -6,6 +6,22 @@
  */ 
 #include "gprs_transfer_packages.h"
 
+// Called in main loop to handle data transfer.
+void SIM808_handle_data_transfer() {
+	
+	// Continue sending remaining packages if any.
+	if(!gps_logging_enabled && gprs_log_buf.ready) {
+		gprs_send_data_log();
+	}
+	
+	// TODO: Should be taken care of by an alarm:
+	if(gps_counter >= 5) {
+		gps_counter = 0;
+		gprs_send_data_log();
+	}
+}
+
+// Add json variable to string.
 void json_add_variable(char *target, uint16_t *target_pos, const char *variable, char *value, uint8_t first) {
 	
 	if(first != 1) {
@@ -40,6 +56,7 @@ static inline void json_close_object(char *target, uint16_t *target_pos) {
 void gprs_send_data_log() {
 	
 	gps_logging_enabled = 0;	//Disable gps request commands, enabled again in post request callback.
+	gprs_log_buf.ready = 0;
 	
 	char send_string[HTTP_PACKAGE_STRING_LENGTH];
 	uint16_t pos = 0;
@@ -118,7 +135,7 @@ void gprs_send_data_log() {
 		last_command.expected_response = "OK";
 		last_command.callback_enabled = 1;
 		last_command.response_cb = SIM808_response_gprs_send_post_request;
-		sim808_parse_response_wait(SIM808_RECEIVE_DELAY_NORMAL);
+		//sim808_parse_response_wait(SIM808_RECEIVE_DELAY_NORMAL);
 	}
 }
 
@@ -127,6 +144,7 @@ void gprs_send_buf_init(gprs_send_buffer *buf) {
 	buf->temp_tail = 0;
 	buf->tail = 0;
 	buf->head = 0;
+	buf->ready = 1;
 }
 
 void gprs_buf_push(log_entry entry, gprs_send_buffer *buf) {

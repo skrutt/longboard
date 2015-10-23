@@ -20,13 +20,11 @@ void sim808_fail_to_connect_platform() {
 void main_platform() {
 	
 	if(SIM808_buf.available == 1) {
-		sim808_parse_response();	
+		sim808_parse_response();
 	}
 	
-	if(gps_counter >= 45) {
-		gps_counter = 0;
-		gprs_send_data_log();	
-	}
+	SIM808_handle_data_transfer();
+	
 }
 
 void init_platform() {

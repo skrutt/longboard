@@ -40,6 +40,7 @@ typedef struct {
 	uint16_t head;
 	uint16_t temp_tail;
 	uint16_t tail;
+	uint8_t	ready;		// Shows if the buffer is free to use.
 } gprs_send_buffer;
 
 volatile gprs_send_buffer gprs_log_buf;

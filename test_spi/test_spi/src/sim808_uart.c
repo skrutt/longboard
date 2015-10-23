@@ -55,8 +55,6 @@ void sim808_init() {
 		sim808_init_http();
 		connection = sim808_connect();	
 	} while(connection == 0);
-
-
 }
 
 void sim808_reset() {
