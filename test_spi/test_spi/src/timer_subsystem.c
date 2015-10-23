@@ -7,24 +7,22 @@
 #include <asf.h>
 #include "timer_subsystem.h"
 
-//Set up timer for 1 sek interval
-static void configure_tc_logger(void )
+//Set up timer for cadence sensor
+void configure_tc_cadence(void )
 {
 	struct tc_config config_tc;
 	tc_get_config_defaults(&config_tc);
 	
 	//Set clocksource 
-	config_tc.clock_source	= GCLK_GENERATOR_1;
-	config_tc.counter_size = TC_COUNTER_SIZE_8BIT;
-	config_tc.clock_prescaler = TC_CLOCK_PRESCALER_DIV64;
+	config_tc.clock_source	= GCLK_GENERATOR_2;
+	config_tc.counter_size = TC_COUNTER_SIZE_16BIT;
+	config_tc.clock_prescaler = TC_CLOCK_PRESCALER_DIV1;
 	
-	//config_tc.counter_8_bit.compare_capture_channel[0] = period;
-	//config_tc.counter_8_bit.period = period;
-	config_tc.counter_8_bit.value = 0x00;
+	config_tc.counter_16_bit.value = 0x00;
 	
-	config_tc.pwm_channel[0].enabled = false;
-	tc_init(&display_timer_instance, TC3, &config_tc);
-	tc_enable(&display_timer_instance);
+
+	tc_init(&cadence_timer_instance, TC4, &config_tc);
+	tc_enable(&cadence_timer_instance);
 }
 
 //Set up timer, for fast periods

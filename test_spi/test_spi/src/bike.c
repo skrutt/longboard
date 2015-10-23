@@ -65,6 +65,9 @@ void init_platform() {
 	
 	gfx_mono_init();
 	ssd1306_init();
+	configure_tc_cadence();
+	cadence_sensor_init();
+	
 	
 	// The page address to write to
 	uint8_t page_address = 0;

@@ -151,9 +151,10 @@ src/accelerometer_lib.d src/accelerometer_lib.o: \
  ../src/ASF/thirdparty/CMSIS/Include/core_cm0plus.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu-toolchain\arm-none-eabi\include\math.h \
  ../src/spi_sseg.h ../src/ADC_subsystem.h ../src/asf.h ../src/platform.h \
- ../src/bike.h ../src/sim808_uart.h ../src/response_actions.h \
- ../src/globals.h ../src/gps_utils.h ../src/gprs_transfer_packages.h \
- ../src/menus.h ../src/menu_link.h
+ ../src/cadence_sensor.h ../src/timer_subsystem.h ../src/bike.h \
+ ../src/sim808_uart.h ../src/response_actions.h ../src/globals.h \
+ ../src/gps_utils.h ../src/gprs_transfer_packages.h ../src/menus.h \
+ ../src/menu_link.h
 
 ../src/accelerometer_lib.h:
 
@@ -480,6 +481,10 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu
 ../src/asf.h:
 
 ../src/platform.h:
+
+../src/cadence_sensor.h:
+
+../src/timer_subsystem.h:
 
 ../src/bike.h:
 

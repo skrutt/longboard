@@ -147,7 +147,8 @@ src/rtc_lib.d src/rtc_lib.o: ../src/rtc_lib.c ../src/rtc_lib.h \
  ../src/ASF/sam0/drivers/tc/tc.h \
  ../src/ASF/sam0/drivers/tc/tc_interrupt.h \
  ../src/ASF/sam0/drivers/tc/tc.h ../src/longboard.h ../src/platform.h \
- ../src/button_lib.h ../src/asf.h ../src/bike.h ../src/sim808_uart.h \
+ ../src/button_lib.h ../src/asf.h ../src/cadence_sensor.h \
+ ../src/timer_subsystem.h ../src/bike.h ../src/sim808_uart.h \
  ../src/response_actions.h ../src/globals.h ../src/gps_utils.h \
  ../src/gprs_transfer_packages.h ../src/menus.h ../src/menu_link.h
 
@@ -468,6 +469,10 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu
 ../src/button_lib.h:
 
 ../src/asf.h:
+
+../src/cadence_sensor.h:
+
+../src/timer_subsystem.h:
 
 ../src/bike.h:
 

@@ -11,6 +11,7 @@
 #define PLATFORM_H_
 
 #include "button_lib.h"
+#include "cadence_sensor.h"
 
 
 //#define LONGBOARD
