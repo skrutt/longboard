@@ -62,10 +62,13 @@ int main (void)
 	void (*adc_callbacks[6])(uint16_t) = {update_adxl_gforce_z, update_adxl_gforce_y, update_adxl_gforce_x};
 	configure_adc(3, adc_callbacks);
 	
-	sim808_init();
-	
+
 	//setup for platform
  	init_platform();
+
+	sim808_init();
+	
+	
 	
 	//Wait some for button read and then calibrate adxl
 	//init_adxl_calibration(adxl_calibrate_button_platform);
