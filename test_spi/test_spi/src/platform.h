@@ -15,6 +15,7 @@
 
 
 //#define LONGBOARD
+#define DEVICE_ID	132
 
 #ifdef LONGBOARD
 	#include "longboard.h"

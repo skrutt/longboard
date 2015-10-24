@@ -103,6 +103,10 @@ void sim808_init_http() {
 		cmd.cmd = "AT+HTTPPARA=\"UA\",\"FONA\"";					//User agent
 		sim808_send_command(cmd);
 		if(!sim808_parse_response_wait(SIM808_RECEIVE_DELAY_LONG)) result = 0;
+		
+		cmd.cmd = "AT+HTTPPARA=\"CONTENT\",\"application/json\"";	//Content type
+		sim808_send_command(cmd);
+		if(!sim808_parse_response_wait(SIM808_RECEIVE_DELAY_LONG)) result = 0;
 	
 		cmd.cmd = "AT+HTTPPARA=\"URL\",\"http://tripcomputer.azurewebsites.net/api/datalog\"";
 		sim808_send_command(cmd);

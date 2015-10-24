@@ -5,19 +5,20 @@
  *  Author: jiut0001
  */ 
 #include "gprs_transfer_packages.h"
+#include "platform.h"
 
 // Called in main loop to handle data transfer.
 void SIM808_handle_data_transfer() {
 	
 	// Continue sending remaining packages if any.
 	if(!gps_logging_enabled && gprs_log_buf.ready) {
-		//gprs_send_data_log();	//COMMENTED AWAY only for DEBUG
+		gprs_send_data_log();	
 	}
 	
 	// TODO: Should be taken care of by an alarm:
-	if(gps_counter >= 4) {
+	if(gps_counter >= 40) {
 		gps_counter = 0;
-		//gprs_send_data_log();
+		gprs_send_data_log();
 	}
 }
 
@@ -151,6 +152,7 @@ void gprs_send_buf_init(gprs_send_buffer *buf) {
 	buf->tail = 0;
 	buf->head = 0;
 	buf->ready = 1;
+	buf->data.device = DEVICE_ID;
 }
 
 void gprs_buf_push(log_entry entry, gprs_send_buffer *buf) {
