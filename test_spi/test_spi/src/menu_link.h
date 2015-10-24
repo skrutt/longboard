@@ -14,7 +14,7 @@
 
 typedef enum {
 	SPEED_VIEW,
-	TRIP_VIEW_0,
+	CADENCE_VIEW,
 	TRIP_VIEW_1,
 	HEIGHT_VIEW,
 	NO_GPS_VIEW,

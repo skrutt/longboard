@@ -7,12 +7,21 @@
 
 #include "menus.h"
 #include "views.h"
+#include "cadence_sensor.h"
 
 void display_view(menu_link view) {
 	gfx_mono_prev_menu = gfx_mono_active_menu;
 	gfx_mono_active_menu = view;
 	
 	ssd1306_clear_display();
+	
+	//Draw rectangle to make a difference from the speed view:
+	if(view == CADENCE_VIEW) {
+		ssd1306_clear_buffer();
+		gfx_mono_draw_rect(0,0, GFX_MONO_LCD_WIDTH, GFX_MONO_LCD_HEIGHT, GFX_PIXEL_SET);
+		gfx_mono_draw_rect(1,1, GFX_MONO_LCD_WIDTH-2, GFX_MONO_LCD_HEIGHT-2, GFX_PIXEL_SET);
+		ssd1306_write_display();
+	}
 }
 
 //Redraws view and updates data
@@ -29,6 +38,10 @@ void refresh_view() {
 			else {
 				draw_no_gps_view();
 			}
+			break;
+			
+		case CADENCE_VIEW:
+			draw_cadence_view();
 			break;
 	}
 }
@@ -47,5 +60,12 @@ void draw_speed_view() {
 	if(gps_data.ground_speed != device.speed) {
 		device.speed = gps_data.ground_speed;
 		ssd1306_draw_huge_number(15,1,(uint8_t)(device.speed + 0.5));
+	}
+}
+
+void draw_cadence_view() {
+	if(device.cadence != cadence_sensor.cadence) {
+		device.cadence = cadence_sensor.cadence;
+		ssd1306_draw_huge_number(15,1,device.cadence + 0.5);	
 	}
 }

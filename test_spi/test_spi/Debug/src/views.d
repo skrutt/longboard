@@ -149,7 +149,8 @@ src/views.d src/views.o: ../src/views.c ../src/menus.h ../src/asf.h \
  ../src/ASF/sam0/drivers/tc/tc.h \
  ../src/ASF/sam0/drivers/tc/tc_interrupt.h \
  ../src/ASF/sam0/drivers/tc/tc.h ../src/menu_link.h ../src/views.h \
- ../src/globals.h ../src/spi_display.h
+ ../src/globals.h ../src/spi_display.h ../src/cadence_sensor.h \
+ ../src/timer_subsystem.h
 
 ../src/menus.h:
 
@@ -476,3 +477,7 @@ a:\program\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu-toolchain\arm
 ../src/globals.h:
 
 ../src/spi_display.h:
+
+../src/cadence_sensor.h:
+
+../src/timer_subsystem.h:

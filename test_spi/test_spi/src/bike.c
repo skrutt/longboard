@@ -79,7 +79,7 @@ void init_platform() {
 	gfx_mono_draw_string("GPRS",44, 32, &sysfont);
 	ssd1306_write_display();
 	
-	gfx_mono_active_menu = SPEED_VIEW;
+	gfx_mono_active_menu = CADENCE_VIEW;
 	
 }
 

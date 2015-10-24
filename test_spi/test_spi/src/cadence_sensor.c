@@ -10,7 +10,7 @@
 void cadence_sensor_init() {
 	cadence_sensor.cadence = 0;
 	cadence_sensor.lastTime = tc_get_count_value(&cadence_timer_instance);
-	cadence_sensor.debounce = 100;
+	cadence_sensor.debounce = 300;
 	
 	//TODO: initiate external interrupt on cadence pin
 	cadence_sensor_extint_setup();
@@ -41,8 +41,9 @@ void cadence_interrupt_callback(void)
 }
 
 void cadence_sensor_update() {
-	volatile uint16_t timerVal = tc_get_count_value(&cadence_timer_instance);
-	if(timerVal-cadence_sensor.lastTime > cadence_sensor.debounce) {
+	uint16_t timerVal = tc_get_count_value(&cadence_timer_instance);
+	uint16_t dt = timerVal - cadence_sensor.lastTime;
+	if(dt > cadence_sensor.debounce) {
 		if(cadence_sensor.cadence == 0) {
 			cadence_sensor.cadence = cadence_sensor_calculate_rpm(timerVal);
 		}

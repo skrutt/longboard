@@ -16,7 +16,7 @@
 
 typedef struct {
 	uint8_t cadence;  //RPM
-	uint8_t debounce; //In milliseconds
+	uint16_t debounce; //In milliseconds
 	uint16_t lastTime;
 } cadence_module;
 
