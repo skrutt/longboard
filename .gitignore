@@ -52,4 +52,7 @@ Temporary Items
 test_spi/test_spi/Debug/test_spi.lss
 *.map
 *.lss
+*.srec
+*.bin
+
 
