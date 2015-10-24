@@ -9,7 +9,7 @@
 #ifndef GPRS_TRANSFER_PACKAGES_H_
 #define GPRS_TRANSFER_PACKAGES_H_
 
-#define	HTTP_PACKAGE_STRING_LENGTH		3000 //Rymmer 40 paket
+#define	HTTP_PACKAGE_STRING_LENGTH		3320 //Rymmer 40 paket
 #define HTTP_PACKAGE_MAX_LOG_ENTRIES	40
 
 #include "globals.h"

@@ -98,11 +98,17 @@ void gprs_send_data_log() {
 		sprintf(tempVar, "%.1f", entry.speed);
 		json_add_variable(send_string, &pos, "s", tempVar, 0);
 		
+		sprintf(tempVar, "%d", entry.cadence);
+		json_add_variable(send_string, &pos, "c", tempVar, 0);
+		
 		sprintf(tempVar, "%d", entry.inclination);
 		json_add_variable(send_string, &pos, "i", tempVar, 0);
 		
 		sprintf(tempVar, "%.1f", entry.g_force);
 		json_add_variable(send_string, &pos, "g", tempVar, 0);
+		
+		sprintf(tempVar, "%d", entry.upload_interval);
+		json_add_variable(send_string, &pos, "f", tempVar, 0);
 		
 		json_close_object(send_string, &pos);
 		

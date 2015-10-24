@@ -15,6 +15,11 @@ void gps_utils_raw_data_to_send_buffer(data_log *send_buf) {
 	entry.inclination = 14;
 	entry.g_force = 2.21;
 	
+	//TODO: add actual value
+	entry.upload_interval = 500;				//Upload interval in seconds
+	
+	entry.cadence = device.cadence;
+	
 	gprs_buf_push(entry, &gprs_log_buf);
 }
 

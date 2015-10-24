@@ -22,8 +22,10 @@ typedef struct {
 	float lat;
 	float lng;
 	float speed;
+	uint8_t cadence;
 	uint8_t inclination;
 	float g_force;
+	uint16_t upload_interval;
 } log_entry;
 
 typedef struct {
