@@ -19,6 +19,7 @@ typedef struct {
 } current_view;
 
 void display_view(menu_link);
+void display_next_view(void);
 
 //Redraws current view and updates data
 void refresh_view(void);

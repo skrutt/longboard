@@ -22,8 +22,14 @@ void sim808_fail_to_connect_platform() {
 void main_platform() {
 	
 	if(button_read_button(&down_btn)) {
-		gfx_mono_menu_process_key(&menu_list[gfx_mono_active_menu-(VIEW_MAX_INDEX+1)], GFX_MONO_MENU_KEYCODE_DOWN);
-		ssd1306_write_display();
+		if(is_view(gfx_mono_active_menu)) {
+			display_next_view();
+		}
+		else {
+			gfx_mono_menu_process_key(&menu_list[gfx_mono_active_menu-(VIEW_MAX_INDEX+1)], GFX_MONO_MENU_KEYCODE_DOWN);
+			ssd1306_write_display();	
+		}
+
 	}
 
 	if(button_read_button(&select_btn)) {
@@ -79,7 +85,7 @@ void init_platform() {
 	gfx_mono_draw_string("GPRS",44, 32, &sysfont);
 	ssd1306_write_display();
 	
-	gfx_mono_active_menu = CADENCE_VIEW;
+	gfx_mono_active_menu = SPEED_VIEW;
 	
 }
 

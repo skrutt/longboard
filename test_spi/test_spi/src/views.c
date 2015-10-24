@@ -24,6 +24,20 @@ void display_view(menu_link view) {
 	}
 }
 
+void display_next_view() {
+	menu_link next_view;
+	if(is_view(gfx_mono_active_menu) && gfx_mono_active_menu != NO_GPS_VIEW) {
+		if(gfx_mono_active_menu == VIEW_MAX_INDEX) {
+			next_view = 0;
+		}
+		else {
+			next_view = gfx_mono_active_menu + 1;
+		}
+	}
+	
+	display_view(next_view);
+}
+
 //Redraws view and updates data
 void refresh_view() {
 	switch(gfx_mono_active_menu) {
@@ -54,9 +68,10 @@ void draw_no_gps_view() {
 }
 
 void draw_speed_view() {
-	if(gps_data.status != 'A') {
-		display_view(NO_GPS_VIEW);
-	}
+	//Debug only
+	//if(gps_data.status != 'A') {
+	//	display_view(NO_GPS_VIEW);
+	//}
 	if(gps_data.ground_speed != device.speed) {
 		device.speed = gps_data.ground_speed;
 		ssd1306_draw_huge_number(15,1,(uint8_t)(device.speed + 0.5));

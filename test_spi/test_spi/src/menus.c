@@ -10,6 +10,7 @@
 
 extern struct gfx_mono_menu menu_list[];
 
+//TODO: Flytta?
 void display_menu(menu_link menu) {
 	gfx_mono_prev_menu = gfx_mono_active_menu;
 	gfx_mono_active_menu = menu;
@@ -17,6 +18,7 @@ void display_menu(menu_link menu) {
 	ssd1306_write_display();
 }
 
+//TODO: Flytta till views?
 uint8_t is_view(menu_link l) {
 	if(l <= VIEW_MAX_INDEX) return 1;
 	return 0;
