@@ -39,6 +39,8 @@ void main_platform(void);
 
 //Run in high speed timer
 void background_service_platform(void);
+void run_every_second_platform(void);
+
 
 //Ui for calibration
 #define		wait_for_x_msg_platform()	set_disp_led_color(LED_GREEN);

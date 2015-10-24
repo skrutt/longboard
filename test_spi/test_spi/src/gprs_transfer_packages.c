@@ -16,10 +16,10 @@ void SIM808_handle_data_transfer() {
 	}
 	
 	// TODO: Should be taken care of by an alarm:
-	if(gps_counter >= 40) {
-		gps_counter = 0;
-		gprs_send_data_log();
-	}
+// 	if(gps_counter >= 40) {
+// 		gps_counter = 0;
+// 		gprs_send_data_log();
+// 	}
 }
 
 // Add json variable to string.

@@ -14,7 +14,7 @@
 #include "cadence_sensor.h"
 
 
-//#define LONGBOARD
+#define LONGBOARD
 #define DEVICE_ID	132
 
 #ifdef LONGBOARD

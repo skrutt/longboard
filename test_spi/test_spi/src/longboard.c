@@ -15,7 +15,10 @@ void sim808_fail_to_connect_platform() {
 	//TODO: Write message to display
 	volatile uint8_t result = 0;
 }
-
+void run_every_second_platform(void)
+{
+	
+}
 
 //Init all longboard specifics
 void init_platform(void)
