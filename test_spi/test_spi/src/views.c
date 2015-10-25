@@ -68,10 +68,10 @@ void draw_no_gps_view() {
 }
 
 void draw_speed_view() {
-	//Debug only
-	//if(gps_data.status != 'A') {
-	//	display_view(NO_GPS_VIEW);
-	//}
+
+	if(gps_data.status != 'A') {
+		display_view(NO_GPS_VIEW);
+	}
 	if(gps_data.ground_speed != device.speed) {
 		device.speed = gps_data.ground_speed;
 		ssd1306_draw_huge_number(15,1,(uint8_t)(device.speed + 0.5));

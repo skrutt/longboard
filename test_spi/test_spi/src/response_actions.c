@@ -36,8 +36,7 @@ void SIM808_response_gprs_post(volatile uint8_t success, volatile char *cmd) {
 			// Bättre att jämföra strängvärdet prestandamässigt?
 			uint16_t errorCode = atoi(errorCodeString);	
 			
-			//TODO: SKA VARA 200
-			if(errorCode == 400) {
+			if(errorCode == 200) {
 				//Success
 				gprs_log_buf.tail = gprs_log_buf.temp_tail;
 				
@@ -140,10 +139,9 @@ void SIM808_response_gps_data(volatile uint8_t success, volatile char *cmd) {
 		j++;
 		comma = strchr (position, ',');
 	}
-	
-	//COMMENTED ONLY FOR DEBUG
-	//if(gps_data.status == 'A') {
+
+	if(gps_data.status == 'A') {
 		gps_utils_raw_data_to_send_buffer(&gprs_log_buf);
-		//gps_counter++;
-	//}
+		gps_counter++;
+	}
 }

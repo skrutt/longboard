@@ -74,12 +74,7 @@ int main (void)
 	//init_adxl_calibration(adxl_calibrate_button_platform);
 	
 	//Start rtc for logging interval
-	rtc_lib_configure_soft_alarms();
-		
-	//Data logging
-	rtc_lib_set_soft_alarm_simple(1, tc_callback_logger_service);
-	//And uploading
-	rtc_lib_set_soft_alarm_simple(5*60,	gprs_send_data_log);
+	rtc_simple_configuration(1, tc_callback_logger_service);
 	
 	while (true) 
 	{

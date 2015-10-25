@@ -16,10 +16,10 @@ void SIM808_handle_data_transfer() {
 	}
 	
 	// TODO: Should be taken care of by an alarm:
-// 	if(gps_counter >= 40) {
-// 		gps_counter = 0;
-// 		gprs_send_data_log();
-// 	}
+	if(gps_counter >= 40) {
+		gps_counter = 0;
+		gprs_send_data_log();
+	}
 }
 
 // Add json variable to string.
@@ -64,11 +64,6 @@ void gprs_send_data_log() {
 	log_entry entry;
 	char tempVar[15];
 	uint8_t i = 0;
-
-/*
-	sprintf(tempVar, "\"%s\"", gprs_log_buf.data.date_time);
-	json_add_variable(&send_string, &pos, "DateTime", tempVar, 1);
-	*/
 
 	memset(send_string, '\0', HTTP_PACKAGE_STRING_LENGTH);	//Clear buffer
 		
