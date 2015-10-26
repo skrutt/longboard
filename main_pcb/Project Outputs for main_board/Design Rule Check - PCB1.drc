@@ -1,0 +1,117 @@
+Protel Design System Design Rule Check
+PCB File : C:\longboard\main_pcb\PCB1.PcbDoc
+Date     : 2015-10-23
+Time     : 14:09:31
+
+Processing Rule : Short-Circuit Constraint (Allowed=No) (All),(All)
+Rule Violations :0
+
+Processing Rule : Un-Routed Net Constraint ( (All) )
+   Violation between Un-Routed Net Constraint: Net VCC Between Track on layer Bottom Layer (35.179,29.718mm) And Track on layer Bottom Layer (41.148,35.814mm)
+   Violation between Un-Routed Net Constraint: Net VCC Between Pad A1-6 (30.353,53.086mm) And Track on layer Bottom Layer (42.415,52.965mm)
+   Violation between Un-Routed Net Constraint: Net VCC Between Track on layer Bottom Layer (42.291,62.611mm) And Track on layer Bottom Layer (53.721,61.849mm)
+   Violation between Un-Routed Net Constraint: Net GND Between Pad A1-5 (30.353,50.546mm) And Track on layer Bottom Layer (30.353,58.801mm)
+   Violation between Un-Routed Net Constraint: Net GND Between Pad U1-10 (45.244,50.936mm) And Pad U1-28 (47.644,42.536mm)
+   Violation between Un-Routed Net Constraint: Net GND Between Pad C5-1 (36.134,42.418mm) And Pad U1-28 (47.644,42.536mm)
+   Violation between Un-Routed Net Constraint: Net GND Between Pad G1-3 (32.639,27.305mm) And Pad C5-1 (36.134,42.418mm)
+   Violation between Un-Routed Net Constraint: Net GND Between Pad A1-5 (30.353,50.546mm) And Pad C6-1 (36.134,44.577mm)
+Rule Violations :8
+
+Processing Rule : Clearance Constraint (Gap=0.25mm) (All),(All)
+Rule Violations :0
+
+Processing Rule : Power Plane Connect Rule(Relief Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (All)
+Rule Violations :0
+
+Processing Rule : Width Constraint (Min=0.4mm) (Max=1mm) (Preferred=0.4mm) (All)
+   Violation between Width Constraint: Track (48.771mm,38.481mm)(48.771mm,39.37mm)  Bottom Layer
+Rule Violations :1
+
+Processing Rule : Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (All)
+Rule Violations :0
+
+Processing Rule : Hole Size Constraint (Min=0.025mm) (Max=2.54mm) (All)
+Rule Violations :0
+
+Processing Rule : Hole To Hole Clearance (Gap=0.254mm) (All),(All)
+Rule Violations :0
+
+Processing Rule : Minimum Solder Mask Sliver (Gap=0.01mm) (All),(All)
+Rule Violations :0
+
+Processing Rule : Silkscreen Over Component Pads (Clearance=0.254mm) (All),(All)
+   Violation between Text "S3" (33.782mm,65.588mm)  Bottom Overlay and 
+                     Pad S1-2(33.401mm,68.453mm)  Multi-Layer
+   Violation between Track (29.083mm,58.674mm)(29.083mm,63.754mm)  Top Overlay and 
+                     Pad P1-1(30.353mm,59.944mm)  Multi-Layer
+   Violation between Track (31.623mm,58.674mm)(31.623mm,63.754mm)  Top Overlay and 
+                     Pad P1-1(30.353mm,59.944mm)  Multi-Layer
+   Violation between Track (29.083mm,58.674mm)(31.623mm,58.674mm)  Top Overlay and 
+                     Pad P1-1(30.353mm,59.944mm)  Multi-Layer
+   Violation between Track (29.083mm,58.674mm)(29.083mm,63.754mm)  Top Overlay and 
+                     Pad P1-2(30.353mm,62.484mm)  Multi-Layer
+   Violation between Track (31.623mm,58.674mm)(31.623mm,63.754mm)  Top Overlay and 
+                     Pad P1-2(30.353mm,62.484mm)  Multi-Layer
+   Violation between Track (29.083mm,63.754mm)(31.623mm,63.754mm)  Top Overlay and 
+                     Pad P1-2(30.353mm,62.484mm)  Multi-Layer
+   Violation between Track (47.071mm,38.47mm)(47.671mm,38.47mm)  Bottom Overlay and 
+                     Pad C2-1(45.971mm,39.37mm)  Bottom Layer
+   Violation between Track (47.071mm,40.27mm)(47.671mm,40.27mm)  Bottom Overlay and 
+                     Pad C2-1(45.971mm,39.37mm)  Bottom Layer
+   Violation between Text "C3" (47.523mm,38.43mm)  Bottom Overlay and 
+                     Pad C2-1(45.971mm,39.37mm)  Bottom Layer
+   Violation between Track (47.071mm,38.47mm)(47.671mm,38.47mm)  Bottom Overlay and 
+                     Pad C2-2(48.771mm,39.37mm)  Bottom Layer
+   Violation between Track (47.071mm,40.27mm)(47.671mm,40.27mm)  Bottom Overlay and 
+                     Pad C2-2(48.771mm,39.37mm)  Bottom Layer
+   Violation between Track (43.515mm,53.329mm)(44.115mm,53.329mm)  Bottom Overlay and 
+                     Pad C1-1(45.215mm,54.229mm)  Bottom Layer
+   Violation between Track (43.515mm,55.129mm)(44.115mm,55.129mm)  Bottom Overlay and 
+                     Pad C1-1(45.215mm,54.229mm)  Bottom Layer
+   Violation between Track (43.515mm,53.329mm)(44.115mm,53.329mm)  Bottom Overlay and 
+                     Pad C1-2(42.415mm,54.229mm)  Bottom Layer
+   Violation between Track (43.515mm,55.129mm)(44.115mm,55.129mm)  Bottom Overlay and 
+                     Pad C1-2(42.415mm,54.229mm)  Bottom Layer
+   Violation between Text "R1" (37.008mm,55.499mm)  Bottom Overlay and 
+                     Pad R2-2(34.61mm,56.007mm)  Bottom Layer
+   Violation between Text "R1" (37.008mm,55.499mm)  Bottom Overlay and 
+                     Pad R2-1(36.51mm,56.007mm)  Bottom Layer
+   Violation between Text "C5" (38.532mm,44.069mm)  Bottom Overlay and 
+                     Pad C6-2(38.034mm,44.577mm)  Bottom Layer
+   Violation between Text "C5" (38.532mm,44.069mm)  Bottom Overlay and 
+                     Pad C6-1(36.134mm,44.577mm)  Bottom Layer
+   Violation between Track (45.166mm,35.676mm)(45.766mm,35.676mm)  Bottom Overlay and 
+                     Pad C3-1(46.866mm,36.576mm)  Bottom Layer
+   Violation between Track (45.166mm,37.476mm)(45.766mm,37.476mm)  Bottom Overlay and 
+                     Pad C3-1(46.866mm,36.576mm)  Bottom Layer
+   Violation between Track (45.166mm,35.676mm)(45.766mm,35.676mm)  Bottom Overlay and 
+                     Pad C3-2(44.066mm,36.576mm)  Bottom Layer
+   Violation between Track (45.166mm,37.476mm)(45.766mm,37.476mm)  Bottom Overlay and 
+                     Pad C3-2(44.066mm,36.576mm)  Bottom Layer
+   Violation between Text "C2" (49.428mm,41.224mm)  Bottom Overlay and 
+                     Pad U1-25(50.044mm,42.536mm)  Bottom Layer
+   Violation between Text "C2" (49.428mm,41.224mm)  Bottom Overlay and 
+                     Pad U1-26(49.244mm,42.536mm)  Bottom Layer
+   Violation between Text "C2" (49.428mm,41.224mm)  Bottom Overlay and 
+                     Pad U1-27(48.444mm,42.536mm)  Bottom Layer
+   Violation between Text "C2" (49.428mm,41.224mm)  Bottom Overlay and 
+                     Pad U1-28(47.644mm,42.536mm)  Bottom Layer
+   Violation between Text "C2" (49.428mm,41.224mm)  Bottom Overlay and 
+                     Pad U1-29(46.844mm,42.536mm)  Bottom Layer
+Rule Violations :29
+
+Processing Rule : Silk to Silk (Clearance=0.254mm) (All),(All)
+   Violation between Text "C3" (47.523mm,38.43mm)  Bottom Overlay and 
+                     Track (47.071mm,38.47mm)(47.671mm,38.47mm)  Bottom Overlay
+   Violation between Text "C3" (47.523mm,38.43mm)  Bottom Overlay and 
+                     Track (47.071mm,40.27mm)(47.671mm,40.27mm)  Bottom Overlay
+   Violation between Text "O1" (40.767mm,45.898mm)  Bottom Overlay and 
+                     Text "C6" (38.532mm,46.228mm)  Bottom Overlay
+Rule Violations :3
+
+Processing Rule : Net Antennae (Tolerance=0mm) (All)
+Rule Violations :0
+
+
+Violations Detected : 41
+Time Elapsed        : 00:00:00
