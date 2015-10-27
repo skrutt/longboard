@@ -12,27 +12,26 @@
 #define	HTTP_PACKAGE_STRING_LENGTH		3320 //Rymmer 40 paket
 #define HTTP_PACKAGE_MAX_LOG_ENTRIES	40
 
+#include <asf.h>
 #include "globals.h"
-#include "sim808_uart.h"
-#include "response_actions.h"
 
-//Temporärt flyttat till globals.h då kompilatorn j**las...
-/*
 typedef struct {
 	uint32_t time;
 	float lat;
 	float lng;
 	float speed;
+	uint8_t cadence;
 	uint8_t inclination;
 	float g_force;
+	uint16_t upload_interval;
 } log_entry;
 
 typedef struct {
 	char date_time[12];		//Används ej
 	uint32_t device;
-	log_entry entries[255];
+	log_entry entries[300];
 } data_log;
-*/
+
 
 typedef struct {
 	data_log data;

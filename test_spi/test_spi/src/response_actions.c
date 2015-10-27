@@ -37,18 +37,18 @@ void SIM808_response_gprs_post(volatile uint8_t success, volatile char *cmd) {
 			uint16_t errorCode = atoi(errorCodeString);	
 			
 			if(errorCode == 200) {
-				//Success
+				// Success
 				gprs_log_buf.tail = gprs_log_buf.temp_tail;
 				
 			}
 			else {
-				//Fail
+				// Failure, retry transfer next time.
 				gprs_log_buf.temp_tail = gprs_log_buf.tail;
 			}
 		}
 	}
 	else {
-		// TODO: Wrong command received, handle error.
+		// TODO: Wrong command received, handle error (if any error handling is wanted here)
 	}
 }
 

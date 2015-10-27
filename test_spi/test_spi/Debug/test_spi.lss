@@ -15,23 +15,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   5 .comment      0000005b  00000000  00000000  000181d4  2**0
                   CONTENTS, READONLY
-  6 .debug_info   00067daa  00000000  00000000  0001822f  2**0
+  6 .debug_info   00065a56  00000000  00000000  0001822f  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 000083ad  00000000  00000000  0007ffd9  2**0
+  7 .debug_abbrev 000083a0  00000000  00000000  0007dc85  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_loc    0000e37f  00000000  00000000  00088386  2**0
+  8 .debug_loc    0000e37f  00000000  00000000  00086025  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_aranges 00000c60  00000000  00000000  00096705  2**0
+  9 .debug_aranges 00000c60  00000000  00000000  000943a4  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_ranges 00001058  00000000  00000000  00097365  2**0
+ 10 .debug_ranges 00001058  00000000  00000000  00095004  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_macro  0002445b  00000000  00000000  000983bd  2**0
+ 11 .debug_macro  000243d0  00000000  00000000  0009605c  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_line   0002589f  00000000  00000000  000bc818  2**0
+ 12 .debug_line   0002620c  00000000  00000000  000ba42c  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_str    0008e213  00000000  00000000  000e20b7  2**0
+ 13 .debug_str    0008e1de  00000000  00000000  000e0638  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_frame  00003060  00000000  00000000  001702cc  2**2
+ 14 .debug_frame  00003060  00000000  00000000  0016e818  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -3010,12 +3010,6 @@ void _system_extint_init(void)
 	for (uint8_t j = 0; j < EIC_NUMBER_OF_INTERRUPTS; j++) {
      da2:	428b      	cmp	r3, r1
      da4:	d1fc      	bne.n	da0 <_system_extint_init+0x3c>
- * \param[in] vector Interrupt vector to enable
- */
-static inline void system_interrupt_enable(
-		const enum system_interrupt_vector vector)
-{
-	NVIC->ISER[0] = (uint32_t)(1 << ((uint32_t)vector & 0x0000001f));
      da6:	2210      	movs	r2, #16
      da8:	4b07      	ldr	r3, [pc, #28]	; (dc8 <_system_extint_init+0x64>)
      daa:	601a      	str	r2, [r3, #0]
@@ -4377,12 +4371,6 @@ void rtc_calendar_init(
 	/* Initialize device instance */
 	module->hw = hw;
     135c:	6001      	str	r1, [r0, #0]
-		const enum system_clock_apb_bus bus,
-		const uint32_t mask)
-{
-	switch (bus) {
-		case SYSTEM_CLOCK_APB_APBA:
-			PM->APBAMASK.reg |= mask;
     135e:	4b1c      	ldr	r3, [pc, #112]	; (13d0 <rtc_calendar_init+0x7c>)
     1360:	6999      	ldr	r1, [r3, #24]
     1362:	2220      	movs	r2, #32
@@ -5295,10 +5283,10 @@ void json_add_variable(char *target, uint16_t *target_pos, const char *variable,
     1784:	0000508d 	.word	0x0000508d
 
 00001788 <gprs_send_buf_init>:
-		//sim808_parse_response_wait(SIM808_RECEIVE_DELAY_NORMAL);
 	}
 }
 
+// Initiate gprs_buffer with default values.
 void gprs_send_buf_init(gprs_send_buffer *buf) {
 	buf->len = 299;
     1788:	222c      	movs	r2, #44	; 0x2c
@@ -5333,6 +5321,7 @@ void gprs_send_buf_init(gprs_send_buffer *buf) {
 
 000017c0 <gprs_buf_push>:
 
+// Add log entry to gprs buffer
 void gprs_buf_push(log_entry entry, gprs_send_buffer *buf) {
     17c0:	b084      	sub	sp, #16
     17c2:	b5f0      	push	{r4, r5, r6, r7, lr}
@@ -5379,6 +5368,8 @@ void gprs_buf_push(log_entry entry, gprs_send_buffer *buf) {
 
 00001810 <gprs_buf_temp_pull>:
 
+// Pull log entry but only increment temp_tail. Makes it possible to 
+// regret the pull if the transfer does not succeed later on. 
 log_entry gprs_buf_temp_pull(gprs_send_buffer *buf) {
     1810:	b5f0      	push	{r4, r5, r6, r7, lr}
 	log_entry entry2 = buf->data.entries[buf->temp_tail];
@@ -5942,9 +5933,9 @@ static inline void json_close_object(char *target, uint16_t *target_pos) {
     1b64:	00000d6c 	.word	0x00000d6c
 
 00001b68 <SIM808_handle_data_transfer>:
- */ 
-#include "gprs_transfer_packages.h"
-#include "platform.h"
+
+#include "sim808_uart.h"
+#include "response_actions.h"
 
 // Called in main loop to handle data transfer.
 void SIM808_handle_data_transfer() {
@@ -6302,7 +6293,7 @@ void SIM808_response_gprs_post(volatile uint8_t success, volatile char *cmd) {
     1d6c:	b280      	uxth	r0, r0
     1d6e:	28c8      	cmp	r0, #200	; 0xc8
     1d70:	d106      	bne.n	1d80 <SIM808_response_gprs_post+0x70>
-				//Success
+				// Success
 				gprs_log_buf.tail = gprs_log_buf.temp_tail;
     1d72:	4b0b      	ldr	r3, [pc, #44]	; (1da0 <SIM808_response_gprs_post+0x90>)
     1d74:	4a0c      	ldr	r2, [pc, #48]	; (1da8 <SIM808_response_gprs_post+0x98>)
@@ -6314,7 +6305,7 @@ void SIM808_response_gprs_post(volatile uint8_t success, volatile char *cmd) {
 				
 			}
 			else {
-				//Fail
+				// Failure, retry transfer next time.
 				gprs_log_buf.temp_tail = gprs_log_buf.tail;
     1d80:	4b07      	ldr	r3, [pc, #28]	; (1da0 <SIM808_response_gprs_post+0x90>)
     1d82:	4a0e      	ldr	r2, [pc, #56]	; (1dbc <SIM808_response_gprs_post+0xac>)
@@ -6325,7 +6316,7 @@ void SIM808_response_gprs_post(volatile uint8_t success, volatile char *cmd) {
 		}
 	}
 	else {
-		// TODO: Wrong command received, handle error.
+		// TODO: Wrong command received, handle error (if any error handling is wanted here)
 	}
 }
     1d8c:	b004      	add	sp, #16
@@ -6655,17 +6646,17 @@ void SIM808_response_gps_data(volatile uint8_t success, volatile char *cmd) {
     1f36:	46c0      	nop			; (mov r8, r8)
 
 00001f38 <rtc_match_callback>:
-	rtc_calendar_get_config_defaults(&config_rtc_calendar2);
-	
 	rtc_calendar_init(&rtc_instance, RTC, &config_rtc_calendar2);
 	rtc_calendar_enable(&rtc_instance);
-	
-	//Set time to something more recent
+}
+//Callback function:
+ void rtc_match_callback(void)
+{
     1f38:	b538      	push	{r3, r4, r5, lr}
-	struct rtc_calendar_time time;
-	rtc_calendar_get_time_defaults(&time);
-	time.year = 2015;
-	time.month = 10;
+	
+	/* Set new alarm in alarm_interval_sec seconds */
+	static struct rtc_calendar_alarm_time alarm;
+	rtc_calendar_get_alarm(&rtc_instance, &alarm, RTC_CALENDAR_ALARM_0);
     1f3a:	4d0d      	ldr	r5, [pc, #52]	; (1f70 <rtc_match_callback+0x38>)
     1f3c:	4c0d      	ldr	r4, [pc, #52]	; (1f74 <rtc_match_callback+0x3c>)
     1f3e:	1c28      	adds	r0, r5, #0
@@ -6673,40 +6664,40 @@ void SIM808_response_gps_data(volatile uint8_t success, volatile char *cmd) {
     1f42:	2200      	movs	r2, #0
     1f44:	4b0c      	ldr	r3, [pc, #48]	; (1f78 <rtc_match_callback+0x40>)
     1f46:	4798      	blx	r3
-	time.day = 1;
-	time.hour = 0;
+	//Disable updating mask
+	alarm.mask = RTC_LIB_SKIP_MASK_MASK;
     1f48:	2307      	movs	r3, #7
     1f4a:	7223      	strb	r3, [r4, #8]
-	time.minute = 0;
+	alarm.time.second += alarm_interval_sec;
     1f4c:	7820      	ldrb	r0, [r4, #0]
     1f4e:	3001      	adds	r0, #1
-	time.second = 0;
+	alarm.time.second = alarm.time.second % 60;
     1f50:	b2c0      	uxtb	r0, r0
     1f52:	213c      	movs	r1, #60	; 0x3c
     1f54:	4b09      	ldr	r3, [pc, #36]	; (1f7c <rtc_match_callback+0x44>)
     1f56:	4798      	blx	r3
     1f58:	7021      	strb	r1, [r4, #0]
-	/* Set current time. */
+	rtc_calendar_set_alarm(&rtc_instance, &alarm, RTC_CALENDAR_ALARM_0);
     1f5a:	1c28      	adds	r0, r5, #0
     1f5c:	1c21      	adds	r1, r4, #0
     1f5e:	2200      	movs	r2, #0
     1f60:	4b07      	ldr	r3, [pc, #28]	; (1f80 <rtc_match_callback+0x48>)
     1f62:	4798      	blx	r3
-	rtc_calendar_set_time(&rtc_instance, &time);
-
+	
+	if (*external_callback_func)
     1f64:	4b07      	ldr	r3, [pc, #28]	; (1f84 <rtc_match_callback+0x4c>)
     1f66:	681b      	ldr	r3, [r3, #0]
     1f68:	2b00      	cmp	r3, #0
     1f6a:	d000      	beq.n	1f6e <rtc_match_callback+0x36>
-}
-
+	{
+		external_callback_func();
     1f6c:	4798      	blx	r3
-static void rtc_lib_update_alarm_time(struct rtc_calendar_time* time, alarm_t active_alarm )
-{
-		//Update and normalize alarm time
-		time->second += active_alarm.alarm_interval_sec;
-		time->second %= 60;
-		time->minute += active_alarm.alarm_interval_min;
+	
+	//get and print time
+// 	struct rtc_calendar_time test;
+// 	rtc_calendar_get_time(&rtc_instance, &test);
+//	printf("\talarm!\r\n\r\nklockan är %02d:%02d:%02d %04d-%02d-%02d \n\r", test.hour, test.minute, test.second, test.year, test.month, test.day);
+}
     1f6e:	bd38      	pop	{r3, r4, r5, pc}
     1f70:	20002e60 	.word	0x20002e60
     1f74:	200001d4 	.word	0x200001d4
@@ -6717,11 +6708,11 @@ static void rtc_lib_update_alarm_time(struct rtc_calendar_time* time, alarm_t ac
 
 00001f88 <configure_rtc_calendar>:
 
-alarm_t alarm_conf[NO_RTC_ALARMS];
-soft_alarm_t soft_alarm_conf[NO_SOFT_RTC_ALARMS];
+//container for callback to application
+void(*external_callback_func)(void);
 
-uint8_t no_active_alarms;
-
+ void configure_rtc_calendar(void)
+{
     1f88:	b510      	push	{r4, lr}
     1f8a:	b086      	sub	sp, #24
 	/* Initialize and set time structure to default. */
@@ -6765,11 +6756,11 @@ uint8_t no_active_alarms;
 		config->alarm[i].mask = RTC_CALENDAR_ALARM_MASK_YEAR;
     1fc0:	2306      	movs	r3, #6
     1fc2:	7413      	strb	r3, [r2, #16]
- void rtc_lib_configure_calendar(void)
-{
 	/* Initialize RTC in calendar mode. */
 	struct rtc_calendar_config config_rtc_calendar2;
 	rtc_calendar_get_config_defaults(&config_rtc_calendar2);
+	
+	rtc_calendar_init(&rtc_instance, RTC, &config_rtc_calendar2);
     1fc4:	4c09      	ldr	r4, [pc, #36]	; (1fec <configure_rtc_calendar+0x64>)
     1fc6:	1c20      	adds	r0, r4, #0
     1fc8:	4909      	ldr	r1, [pc, #36]	; (1ff0 <configure_rtc_calendar+0x68>)
@@ -6819,8 +6810,8 @@ static inline void system_interrupt_enable(
     1fe2:	2302      	movs	r3, #2
     1fe4:	4313      	orrs	r3, r2
     1fe6:	800b      	strh	r3, [r1, #0]
-	
-	rtc_calendar_init(&rtc_instance, RTC, &config_rtc_calendar2);
+	rtc_calendar_enable(&rtc_instance);
+}
     1fe8:	b006      	add	sp, #24
     1fea:	bd10      	pop	{r4, pc}
     1fec:	20002e60 	.word	0x20002e60
@@ -6829,29 +6820,29 @@ static inline void system_interrupt_enable(
     1ff8:	e000e100 	.word	0xe000e100
 
 00001ffc <configure_rtc_callbacks>:
-		time->second += active_alarm.alarm_interval_sec;
-		time->second %= 60;
-		time->minute += active_alarm.alarm_interval_min;
-		time->minute %= 60;
-		time->hour += active_alarm.alarm_interval_hour;
-		time->hour %= 24;
-    1ffc:	b510      	push	{r4, lr}
+// 	rtc_calendar_get_time(&rtc_instance, &test);
+//	printf("\talarm!\r\n\r\nklockan är %02d:%02d:%02d %04d-%02d-%02d \n\r", test.hour, test.minute, test.second, test.year, test.month, test.day);
 }
+
+ void configure_rtc_callbacks( void(*callback_func)(void))
+{
+    1ffc:	b510      	push	{r4, lr}
+	external_callback_func = callback_func;
     1ffe:	4b06      	ldr	r3, [pc, #24]	; (2018 <STACK_SIZE+0x18>)
     2000:	6018      	str	r0, [r3, #0]
-static inline bool rtc_lib_compare_time(struct rtc_calendar_time* time1, struct rtc_calendar_time* time2)
+	rtc_calendar_register_callback(	&rtc_instance, rtc_match_callback, RTC_CALENDAR_CALLBACK_ALARM_0);
     2002:	4c06      	ldr	r4, [pc, #24]	; (201c <STACK_SIZE+0x1c>)
     2004:	1c20      	adds	r0, r4, #0
     2006:	4906      	ldr	r1, [pc, #24]	; (2020 <STACK_SIZE+0x20>)
     2008:	2200      	movs	r2, #0
     200a:	4b06      	ldr	r3, [pc, #24]	; (2024 <STACK_SIZE+0x24>)
     200c:	4798      	blx	r3
-{
+	rtc_calendar_enable_callback(&rtc_instance, RTC_CALENDAR_CALLBACK_ALARM_0);
     200e:	1c20      	adds	r0, r4, #0
     2010:	2100      	movs	r1, #0
     2012:	4b05      	ldr	r3, [pc, #20]	; (2028 <STACK_SIZE+0x28>)
     2014:	4798      	blx	r3
-	if ((time1->second == time2->second) &&
+}
     2016:	bd10      	pop	{r4, pc}
     2018:	20002e74 	.word	0x20002e74
     201c:	20002e60 	.word	0x20002e60
@@ -6860,10 +6851,10 @@ static inline bool rtc_lib_compare_time(struct rtc_calendar_time* time1, struct 
     2028:	00001431 	.word	0x00001431
 
 0000202c <rtc_simple_configuration>:
-		(time1->hour == time2->hour) &&
-		(time1->minute == time2->minute))
-	{
-		return true;
+
+//Set RTC from arguments and do cleanup relevant to this project
+void rtc_simple_configuration(uint8_t interval, void(*callback_func)(void))
+{
     202c:	b570      	push	{r4, r5, r6, lr}
     202e:	b086      	sub	sp, #24
     2030:	1c0d      	adds	r5, r1, #0
@@ -6885,51 +6876,50 @@ static inline void rtc_calendar_get_time_defaults(
 	time->day 	 = 1;
     203e:	2601      	movs	r6, #1
     2040:	7126      	strb	r6, [r4, #4]
-	}
-	return false;
-}
-//handle soft alarms! This should be registered as alarm 0
+	//Set up RTC
+	struct rtc_calendar_time time;
+	rtc_calendar_get_time_defaults(&time);
+	time.year = 2015;
     2042:	4b0c      	ldr	r3, [pc, #48]	; (2074 <rtc_simple_configuration+0x48>)
     2044:	80e3      	strh	r3, [r4, #6]
-//This could also be added as an invisible extension to the normal alarms
+	time.month = 10;
     2046:	230a      	movs	r3, #10
     2048:	7163      	strb	r3, [r4, #5]
-static void rtc_lib_soft_alarm_handler(void)
-{
-	soft_alarm_t * curr_alarm = soft_alarm_conf;
-	//Get current time
-	struct rtc_calendar_time now;
-	rtc_calendar_get_time(&rtc_instance, &now);
+	time.day = 1;
+	time.hour = 0;
+	time.minute = 0;
+	time.second = 0;
+	/* Configure and enable RTC */
+	configure_rtc_calendar();
     204a:	4b0b      	ldr	r3, [pc, #44]	; (2078 <rtc_simple_configuration+0x4c>)
     204c:	4798      	blx	r3
-	//Loop through soft alarms
-	while(curr_alarm->alarm_settings.active)
+	/* Configure and enable callback */
+	configure_rtc_callbacks(callback_func);
     204e:	1c28      	adds	r0, r5, #0
     2050:	4b0a      	ldr	r3, [pc, #40]	; (207c <rtc_simple_configuration+0x50>)
     2052:	4798      	blx	r3
-	{
-		if (rtc_lib_compare_time(&now, &curr_alarm->next_alarm))
+	/* Set current time. */
+	rtc_calendar_set_time(&rtc_instance, &time);
     2054:	4d0a      	ldr	r5, [pc, #40]	; (2080 <rtc_simple_configuration+0x54>)
     2056:	1c28      	adds	r0, r5, #0
     2058:	1c21      	adds	r1, r4, #0
     205a:	4b0a      	ldr	r3, [pc, #40]	; (2084 <rtc_simple_configuration+0x58>)
     205c:	4798      	blx	r3
-		{
-			//Alarm has gone off, handle!
-			rtc_lib_update_alarm_time(&curr_alarm->next_alarm, curr_alarm->alarm_settings);
+	struct rtc_calendar_alarm_time alarm;
+	
+	alarm.time = time;
     205e:	a901      	add	r1, sp, #4
     2060:	1c0b      	adds	r3, r1, #0
     2062:	cc05      	ldmia	r4!, {r0, r2}
     2064:	c305      	stmia	r3!, {r0, r2}
-			curr_alarm->alarm_settings.external_callback_func();
+	alarm.mask = RTC_CALENDAR_ALARM_MASK_SEC;	//Match only on seconds
     2066:	720e      	strb	r6, [r1, #8]
-		}
-		//Move on to the next one
+	
+	rtc_calendar_set_alarm(&rtc_instance, &alarm, RTC_CALENDAR_ALARM_0);	
     2068:	1c28      	adds	r0, r5, #0
     206a:	2200      	movs	r2, #0
     206c:	4b06      	ldr	r3, [pc, #24]	; (2088 <rtc_simple_configuration+0x5c>)
     206e:	4798      	blx	r3
-		curr_alarm++;
     2070:	b006      	add	sp, #24
     2072:	bd70      	pop	{r4, r5, r6, pc}
     2074:	000007df 	.word	0x000007df
@@ -6940,55 +6930,55 @@ static void rtc_lib_soft_alarm_handler(void)
     2088:	00001321 	.word	0x00001321
 
 0000208c <usart_write_callback>:
-	usart_read_buffer_job(&SIM808_usart, (uint8_t *)incoming_byte, MAX_RX_BUFFER_LENGTH);
 }
 
 void usart_write_callback(struct usart_module *const usart_module)
 {
 	//Write callback
+}
     208c:	4770      	bx	lr
     208e:	46c0      	nop			; (mov r8, r8)
 
 00002090 <usart_read_callback>:
-	memset(SIM808_buf.command, 0, sizeof(unsigned char)*COMMAND_BUFFER_SIZE);
 	
 	return result;
 }
 
 void usart_read_callback(struct usart_module *const usart_module)
-    2090:	b508      	push	{r3, lr}
 {
+    2090:	b508      	push	{r3, lr}
+	if(incoming_byte[0] == '\n') {
     2092:	4b15      	ldr	r3, [pc, #84]	; (20e8 <usart_read_callback+0x58>)
     2094:	781b      	ldrb	r3, [r3, #0]
     2096:	2b0a      	cmp	r3, #10
     2098:	d10f      	bne.n	20ba <usart_read_callback+0x2a>
-	if(incoming_byte[0] == '\n') {
+		if(SIM808_buf.position > 1) {
     209a:	2380      	movs	r3, #128	; 0x80
     209c:	4a13      	ldr	r2, [pc, #76]	; (20ec <usart_read_callback+0x5c>)
     209e:	5cd3      	ldrb	r3, [r2, r3]
     20a0:	b2db      	uxtb	r3, r3
     20a2:	2b01      	cmp	r3, #1
     20a4:	d919      	bls.n	20da <usart_read_callback+0x4a>
-		if(SIM808_buf.position > 1) {
+			SIM808_buf.command[SIM808_buf.position] = '\0';
     20a6:	1c13      	adds	r3, r2, #0
     20a8:	2280      	movs	r2, #128	; 0x80
     20aa:	5c9a      	ldrb	r2, [r3, r2]
     20ac:	b2d2      	uxtb	r2, r2
     20ae:	2100      	movs	r1, #0
     20b0:	5499      	strb	r1, [r3, r2]
-			SIM808_buf.command[SIM808_buf.position] = '\0';
+			SIM808_buf.available = 1;
     20b2:	2101      	movs	r1, #1
     20b4:	2281      	movs	r2, #129	; 0x81
     20b6:	5499      	strb	r1, [r3, r2]
     20b8:	e00f      	b.n	20da <usart_read_callback+0x4a>
-			SIM808_buf.available = 1;
 		}
 	}
+	else if(incoming_byte[0] != '\r'){
     20ba:	4b0b      	ldr	r3, [pc, #44]	; (20e8 <usart_read_callback+0x58>)
     20bc:	781b      	ldrb	r3, [r3, #0]
     20be:	2b0d      	cmp	r3, #13
     20c0:	d00b      	beq.n	20da <usart_read_callback+0x4a>
-	else if(incoming_byte[0] != '\r'){
+		SIM808_buf.command[SIM808_buf.position] = incoming_byte[0];
     20c2:	4b0a      	ldr	r3, [pc, #40]	; (20ec <usart_read_callback+0x5c>)
     20c4:	2280      	movs	r2, #128	; 0x80
     20c6:	5c99      	ldrb	r1, [r3, r2]
@@ -6997,20 +6987,20 @@ void usart_read_callback(struct usart_module *const usart_module)
     20cc:	7800      	ldrb	r0, [r0, #0]
     20ce:	b2c0      	uxtb	r0, r0
     20d0:	5458      	strb	r0, [r3, r1]
-		SIM808_buf.command[SIM808_buf.position] = incoming_byte[0];
+		SIM808_buf.position++;
     20d2:	5c99      	ldrb	r1, [r3, r2]
     20d4:	3101      	adds	r1, #1
     20d6:	b2c9      	uxtb	r1, r1
     20d8:	5499      	strb	r1, [r3, r2]
-		SIM808_buf.position++;
 	}
 	
+	usart_read_buffer_job(&SIM808_usart, (uint8_t *)incoming_byte, MAX_RX_BUFFER_LENGTH);
     20da:	4805      	ldr	r0, [pc, #20]	; (20f0 <usart_read_callback+0x60>)
     20dc:	4902      	ldr	r1, [pc, #8]	; (20e8 <usart_read_callback+0x58>)
     20de:	2201      	movs	r2, #1
     20e0:	4b04      	ldr	r3, [pc, #16]	; (20f4 <usart_read_callback+0x64>)
     20e2:	4798      	blx	r3
-	usart_read_buffer_job(&SIM808_usart, (uint8_t *)incoming_byte, MAX_RX_BUFFER_LENGTH);
+}
     20e4:	bd08      	pop	{r3, pc}
     20e6:	46c0      	nop			; (mov r8, r8)
     20e8:	20000264 	.word	0x20000264
@@ -7077,32 +7067,32 @@ static inline enum status_code usart_serial_putchar(
     2138:	00003e29 	.word	0x00003e29
 
 0000213c <sim808_send_command>:
-	if(!sim808_parse_response_wait(SIM808_RECEIVE_DELAY_MEGALONG)) res = 0;
 	delay_ms(500);		
 
 	return res;
 }
 
+void sim808_send_command(command cmd) {
     213c:	b570      	push	{r4, r5, r6, lr}
     213e:	b084      	sub	sp, #16
     2140:	466c      	mov	r4, sp
     2142:	9000      	str	r0, [sp, #0]
     2144:	9101      	str	r1, [sp, #4]
     2146:	9202      	str	r2, [sp, #8]
-void sim808_send_command(command cmd) {
 	//uint8_t send_string_len = strlen(cmd.cmd)+2;
 	//char send_string[50];
+	last_command = cmd;
     2148:	4a05      	ldr	r2, [pc, #20]	; (2160 <sim808_send_command+0x24>)
     214a:	1c11      	adds	r1, r2, #0
     214c:	cc61      	ldmia	r4!, {r0, r5, r6}
     214e:	c161      	stmia	r1!, {r0, r5, r6}
     2150:	600b      	str	r3, [r1, #0]
-	last_command = cmd;
+	printf("%s\r\n", cmd.cmd);
     2152:	4804      	ldr	r0, [pc, #16]	; (2164 <sim808_send_command+0x28>)
     2154:	9900      	ldr	r1, [sp, #0]
     2156:	4b04      	ldr	r3, [pc, #16]	; (2168 <sim808_send_command+0x2c>)
     2158:	4798      	blx	r3
-	printf("%s\r\n", cmd.cmd);
+}
     215a:	b004      	add	sp, #16
     215c:	bd70      	pop	{r4, r5, r6, pc}
     215e:	46c0      	nop			; (mov r8, r8)
@@ -7111,26 +7101,26 @@ void sim808_send_command(command cmd) {
     2168:	00004ec9 	.word	0x00004ec9
 
 0000216c <sim808_parse_response>:
-	}
 	
 	return 0;
 	
 }
 
+uint8_t sim808_parse_response() {
     216c:	b570      	push	{r4, r5, r6, lr}
     216e:	b082      	sub	sp, #8
-uint8_t sim808_parse_response() {
+	volatile uint8_t result = 0;
     2170:	2200      	movs	r2, #0
     2172:	466b      	mov	r3, sp
     2174:	71da      	strb	r2, [r3, #7]
-	volatile uint8_t result = 0;
+	volatile uint8_t cmp_cmd_len = SIM808_buf.position;
     2176:	4e25      	ldr	r6, [pc, #148]	; (220c <sim808_parse_response+0xa0>)
     2178:	2380      	movs	r3, #128	; 0x80
     217a:	5cf3      	ldrb	r3, [r6, r3]
     217c:	b2db      	uxtb	r3, r3
     217e:	466c      	mov	r4, sp
     2180:	71a3      	strb	r3, [r4, #6]
-	volatile uint8_t cmp_cmd_len = SIM808_buf.position;
+	volatile uint8_t resp_len = strlen(last_command.expected_response);
     2182:	4b23      	ldr	r3, [pc, #140]	; (2210 <sim808_parse_response+0xa4>)
     2184:	685d      	ldr	r5, [r3, #4]
     2186:	1c28      	adds	r0, r5, #0
@@ -7139,52 +7129,52 @@ uint8_t sim808_parse_response() {
     218c:	b2c0      	uxtb	r0, r0
     218e:	466b      	mov	r3, sp
     2190:	7160      	strb	r0, [r4, #5]
-	volatile uint8_t resp_len = strlen(last_command.expected_response);
 	
+	volatile char originalChar = SIM808_buf.command[resp_len];
     2192:	7962      	ldrb	r2, [r4, #5]
-	
 }
 
 uint8_t sim808_parse_response() {
 	volatile uint8_t result = 0;
 	volatile uint8_t cmp_cmd_len = SIM808_buf.position;
-    2194:	3305      	adds	r3, #5
 	volatile uint8_t resp_len = strlen(last_command.expected_response);
+    2194:	3305      	adds	r3, #5
 	
+	volatile char originalChar = SIM808_buf.command[resp_len];
     2196:	b2d2      	uxtb	r2, r2
     2198:	5cb1      	ldrb	r1, [r6, r2]
     219a:	b2c9      	uxtb	r1, r1
     219c:	aa01      	add	r2, sp, #4
     219e:	7011      	strb	r1, [r2, #0]
-	volatile char originalChar = SIM808_buf.command[resp_len];
+	if(cmp_cmd_len > resp_len) {
     21a0:	79a2      	ldrb	r2, [r4, #6]
     21a2:	781b      	ldrb	r3, [r3, #0]
     21a4:	b2d2      	uxtb	r2, r2
     21a6:	429a      	cmp	r2, r3
     21a8:	d905      	bls.n	21b6 <sim808_parse_response+0x4a>
-	if(cmp_cmd_len > resp_len) {
+		SIM808_buf.command[resp_len] = '\0';
     21aa:	466b      	mov	r3, sp
     21ac:	3305      	adds	r3, #5
     21ae:	781b      	ldrb	r3, [r3, #0]
     21b0:	b2db      	uxtb	r3, r3
     21b2:	2100      	movs	r1, #0
     21b4:	54f1      	strb	r1, [r6, r3]
-		SIM808_buf.command[resp_len] = '\0';
 	}
 	
+	if(strcmp(SIM808_buf.command, last_command.expected_response) == 0) {
     21b6:	4815      	ldr	r0, [pc, #84]	; (220c <sim808_parse_response+0xa0>)
     21b8:	1c29      	adds	r1, r5, #0
     21ba:	4b17      	ldr	r3, [pc, #92]	; (2218 <sim808_parse_response+0xac>)
     21bc:	4798      	blx	r3
     21be:	2800      	cmp	r0, #0
     21c0:	d102      	bne.n	21c8 <sim808_parse_response+0x5c>
-	if(strcmp(SIM808_buf.command, last_command.expected_response) == 0) {
+		result = 1;
     21c2:	2201      	movs	r2, #1
     21c4:	466b      	mov	r3, sp
     21c6:	71da      	strb	r2, [r3, #7]
-		result = 1;
 	}
 	
+	SIM808_buf.command[resp_len] = originalChar;	//Reset to original state after comparison
     21c8:	466b      	mov	r3, sp
     21ca:	3305      	adds	r3, #5
     21cc:	781b      	ldrb	r3, [r3, #0]
@@ -7194,13 +7184,13 @@ uint8_t sim808_parse_response() {
     21d4:	b2c9      	uxtb	r1, r1
     21d6:	4a0d      	ldr	r2, [pc, #52]	; (220c <sim808_parse_response+0xa0>)
     21d8:	54d1      	strb	r1, [r2, r3]
-	SIM808_buf.command[resp_len] = originalChar;	//Reset to original state after comparison
 	
+	if(last_command.callback_enabled) {
     21da:	4b0d      	ldr	r3, [pc, #52]	; (2210 <sim808_parse_response+0xa4>)
     21dc:	7a1b      	ldrb	r3, [r3, #8]
     21de:	2b00      	cmp	r3, #0
     21e0:	d006      	beq.n	21f0 <sim808_parse_response+0x84>
-	if(last_command.callback_enabled) {
+		(*last_command.response_cb)(result, SIM808_buf.command);	
     21e2:	466b      	mov	r3, sp
     21e4:	79d8      	ldrb	r0, [r3, #7]
     21e6:	b2c0      	uxtb	r0, r0
@@ -7208,26 +7198,26 @@ uint8_t sim808_parse_response() {
     21ea:	68db      	ldr	r3, [r3, #12]
     21ec:	1c11      	adds	r1, r2, #0
     21ee:	4798      	blx	r3
-		(*last_command.response_cb)(result, SIM808_buf.command);	
 	}
 	
+	SIM808_buf.available = 0;
     21f0:	4806      	ldr	r0, [pc, #24]	; (220c <sim808_parse_response+0xa0>)
     21f2:	2300      	movs	r3, #0
     21f4:	2281      	movs	r2, #129	; 0x81
     21f6:	5483      	strb	r3, [r0, r2]
-	SIM808_buf.available = 0;
+	SIM808_buf.position = 0;
     21f8:	2280      	movs	r2, #128	; 0x80
     21fa:	5483      	strb	r3, [r0, r2]
-	SIM808_buf.position = 0;
+	memset(SIM808_buf.command, 0, sizeof(unsigned char)*COMMAND_BUFFER_SIZE);
     21fc:	2100      	movs	r1, #0
     21fe:	4b07      	ldr	r3, [pc, #28]	; (221c <sim808_parse_response+0xb0>)
     2200:	4798      	blx	r3
-	memset(SIM808_buf.command, 0, sizeof(unsigned char)*COMMAND_BUFFER_SIZE);
 	
+	return result;
     2202:	466b      	mov	r3, sp
     2204:	79d8      	ldrb	r0, [r3, #7]
     2206:	b2c0      	uxtb	r0, r0
-	return result;
+}
     2208:	b002      	add	sp, #8
     220a:	bd70      	pop	{r4, r5, r6, pc}
     220c:	20000b4c 	.word	0x20000b4c
@@ -7237,27 +7227,27 @@ uint8_t sim808_parse_response() {
     221c:	00004eb7 	.word	0x00004eb7
 
 00002220 <sim808_parse_response_wait>:
-	//uint8_t send_string_len = strlen(cmd.cmd)+2;
 	//char send_string[50];
 	last_command = cmd;
 	printf("%s\r\n", cmd.cmd);
 }
 
+uint8_t sim808_parse_response_wait(uint16_t timeout) {
     2220:	b5f0      	push	{r4, r5, r6, r7, lr}
     2222:	b083      	sub	sp, #12
     2224:	1c05      	adds	r5, r0, #0
-uint8_t sim808_parse_response_wait(uint16_t timeout) {
+	volatile uint16_t i = 0;
     2226:	466b      	mov	r3, sp
     2228:	2200      	movs	r2, #0
     222a:	80da      	strh	r2, [r3, #6]
     222c:	3306      	adds	r3, #6
-	volatile uint16_t i = 0;
 	
+	while(i < timeout) {
     222e:	881b      	ldrh	r3, [r3, #0]
     2230:	b29b      	uxth	r3, r3
     2232:	4298      	cmp	r0, r3
     2234:	d91c      	bls.n	2270 <sim808_parse_response_wait+0x50>
-	while(i < timeout) {
+		if(SIM808_buf.available == 1) {
     2236:	2381      	movs	r3, #129	; 0x81
     2238:	4a0f      	ldr	r2, [pc, #60]	; (2278 <sim808_parse_response_wait+0x58>)
     223a:	5cd3      	ldrb	r3, [r2, r3]
@@ -7268,54 +7258,54 @@ uint8_t sim808_parse_response_wait(uint16_t timeout) {
     2244:	5cfb      	ldrb	r3, [r7, r3]
     2246:	2b01      	cmp	r3, #1
     2248:	d106      	bne.n	2258 <sim808_parse_response_wait+0x38>
-		if(SIM808_buf.available == 1) {
+			return sim808_parse_response();
     224a:	4b0c      	ldr	r3, [pc, #48]	; (227c <sim808_parse_response_wait+0x5c>)
     224c:	4798      	blx	r3
     224e:	e010      	b.n	2272 <sim808_parse_response_wait+0x52>
-			return sim808_parse_response();
 		}
-    2250:	4e0b      	ldr	r6, [pc, #44]	; (2280 <sim808_parse_response_wait+0x60>)
 		delay_ms(1);
+    2250:	4e0b      	ldr	r6, [pc, #44]	; (2280 <sim808_parse_response_wait+0x60>)
+		i++;
     2252:	466c      	mov	r4, sp
     2254:	3406      	adds	r4, #6
+
+uint8_t sim808_parse_response_wait(uint16_t timeout) {
+	volatile uint16_t i = 0;
+	
+	while(i < timeout) {
+		if(SIM808_buf.available == 1) {
+    2256:	4f08      	ldr	r7, [pc, #32]	; (2278 <sim808_parse_response_wait+0x58>)
+			return sim808_parse_response();
+		}
+		delay_ms(1);
+    2258:	2001      	movs	r0, #1
+    225a:	47b0      	blx	r6
+		i++;
+    225c:	8823      	ldrh	r3, [r4, #0]
+    225e:	3301      	adds	r3, #1
+    2260:	b29b      	uxth	r3, r3
+    2262:	8023      	strh	r3, [r4, #0]
 }
 
 uint8_t sim808_parse_response_wait(uint16_t timeout) {
 	volatile uint16_t i = 0;
 	
 	while(i < timeout) {
-    2256:	4f08      	ldr	r7, [pc, #32]	; (2278 <sim808_parse_response_wait+0x58>)
-		if(SIM808_buf.available == 1) {
-			return sim808_parse_response();
-		}
-    2258:	2001      	movs	r0, #1
-    225a:	47b0      	blx	r6
-		delay_ms(1);
-    225c:	8823      	ldrh	r3, [r4, #0]
-    225e:	3301      	adds	r3, #1
-    2260:	b29b      	uxth	r3, r3
-    2262:	8023      	strh	r3, [r4, #0]
-	printf("%s\r\n", cmd.cmd);
-}
-
-uint8_t sim808_parse_response_wait(uint16_t timeout) {
-	volatile uint16_t i = 0;
-	
     2264:	8823      	ldrh	r3, [r4, #0]
     2266:	b29b      	uxth	r3, r3
     2268:	42ab      	cmp	r3, r5
     226a:	d3ea      	bcc.n	2242 <sim808_parse_response_wait+0x22>
-			return sim808_parse_response();
 		}
 		delay_ms(1);
 		i++;
 	}
 	
+	return 0;
     226c:	2000      	movs	r0, #0
     226e:	e000      	b.n	2272 <sim808_parse_response_wait+0x52>
     2270:	2000      	movs	r0, #0
-	return 0;
 	
+}
     2272:	b003      	add	sp, #12
     2274:	bdf0      	pop	{r4, r5, r6, r7, pc}
     2276:	46c0      	nop			; (mov r8, r8)
@@ -7582,7 +7572,7 @@ void sim808_init_http() {
     23c4:	9b04      	ldr	r3, [sp, #16]
     23c6:	4d15      	ldr	r5, [pc, #84]	; (241c <sim808_init_http+0x144>)
     23c8:	47a8      	blx	r5
-		sim808_parse_response_wait(SIM808_RECEIVE_DELAY_LONG);
+		if(!sim808_parse_response_wait(SIM808_RECEIVE_DELAY_LONG)) result = 0;
     23ca:	20fa      	movs	r0, #250	; 0xfa
     23cc:	00c0      	lsls	r0, r0, #3
     23ce:	4b15      	ldr	r3, [pc, #84]	; (2424 <sim808_init_http+0x14c>)
@@ -7591,36 +7581,36 @@ void sim808_init_http() {
     23d4:	d101      	bne.n	23da <sim808_init_http+0x102>
     23d6:	2300      	movs	r3, #0
     23d8:	7023      	strb	r3, [r4, #0]
-		// if(!sim808_parse_response_wait(SIM808_RECEIVE_DELAY_LONG)) result = 0; //Replace the line above with this when for production code... debug only
 		
+		if(result == 0) {
     23da:	7823      	ldrb	r3, [r4, #0]
     23dc:	2b00      	cmp	r3, #0
     23de:	d10c      	bne.n	23fa <sim808_init_http+0x122>
-		if(result == 0) {
+			if(fail_counter >= 3) {		//Could not connect to the network.
     23e0:	4653      	mov	r3, sl
     23e2:	2b02      	cmp	r3, #2
     23e4:	d903      	bls.n	23ee <sim808_init_http+0x116>
-			if(fail_counter >= 3) {		//Could not connect to the network.
+				sim808_fail_to_connect_platform();
     23e6:	4b18      	ldr	r3, [pc, #96]	; (2448 <sim808_init_http+0x170>)
     23e8:	4798      	blx	r3
-				sim808_fail_to_connect_platform();
+				fail_counter = 0;
     23ea:	2300      	movs	r3, #0
     23ec:	469a      	mov	sl, r3
-				fail_counter = 0;
 			}		
+			fail_counter++;
     23ee:	4653      	mov	r3, sl
     23f0:	3301      	adds	r3, #1
     23f2:	b2db      	uxtb	r3, r3
     23f4:	469a      	mov	sl, r3
-			fail_counter++;
+			sim808_reset();			
     23f6:	4b15      	ldr	r3, [pc, #84]	; (244c <sim808_init_http+0x174>)
     23f8:	4798      	blx	r3
-			sim808_reset();			
 		}
+	} while(result == 0);
     23fa:	7823      	ldrb	r3, [r4, #0]
     23fc:	2b00      	cmp	r3, #0
     23fe:	d083      	beq.n	2308 <sim808_init_http+0x30>
-	} while(result == 0);
+}
     2400:	b007      	add	sp, #28
     2402:	bc3c      	pop	{r2, r3, r4, r5}
     2404:	4690      	mov	r8, r2
@@ -7647,50 +7637,50 @@ void sim808_init_http() {
     244c:	00002285 	.word	0x00002285
 
 00002450 <sim808_connect>:
-}
 
+uint8_t sim808_connect() {
     2450:	b5f0      	push	{r4, r5, r6, r7, lr}
     2452:	b087      	sub	sp, #28
-uint8_t sim808_connect() {
+	volatile uint8_t res = 1;
     2454:	2201      	movs	r2, #1
     2456:	466b      	mov	r3, sp
     2458:	75da      	strb	r2, [r3, #23]
-	volatile uint8_t res = 1;
 	command cmd;
+	cmd.expected_response = "OK";
     245a:	ac01      	add	r4, sp, #4
     245c:	4913      	ldr	r1, [pc, #76]	; (24ac <sim808_connect+0x5c>)
     245e:	9102      	str	r1, [sp, #8]
-	cmd.expected_response = "OK";
+	cmd.callback_enabled = 0;
     2460:	2300      	movs	r3, #0
     2462:	7223      	strb	r3, [r4, #8]
-	cmd.callback_enabled = 0;
 		
 	cmd.cmd = "AT+SAPBR=0,1";									//Disconnect if connected
+	sim808_send_command(cmd);
     2464:	4812      	ldr	r0, [pc, #72]	; (24b0 <sim808_connect+0x60>)
     2466:	9a03      	ldr	r2, [sp, #12]
     2468:	9b04      	ldr	r3, [sp, #16]
     246a:	4f12      	ldr	r7, [pc, #72]	; (24b4 <sim808_connect+0x64>)
     246c:	47b8      	blx	r7
-	sim808_send_command(cmd);
+	sim808_parse_response_wait(SIM808_RECEIVE_DELAY_MEGALONG);
     246e:	4e12      	ldr	r6, [pc, #72]	; (24b8 <sim808_connect+0x68>)
     2470:	1c30      	adds	r0, r6, #0
     2472:	4d12      	ldr	r5, [pc, #72]	; (24bc <sim808_connect+0x6c>)
     2474:	47a8      	blx	r5
-	sim808_parse_response_wait(SIM808_RECEIVE_DELAY_MEGALONG);
+	delay_ms(2000);
     2476:	20fa      	movs	r0, #250	; 0xfa
     2478:	00c0      	lsls	r0, r0, #3
     247a:	4b11      	ldr	r3, [pc, #68]	; (24c0 <sim808_connect+0x70>)
     247c:	4798      	blx	r3
-	delay_ms(2000);
 	
+	cmd.cmd = "AT+SAPBR=1,1";									//Connect to network
     247e:	4811      	ldr	r0, [pc, #68]	; (24c4 <sim808_connect+0x74>)
     2480:	9001      	str	r0, [sp, #4]
-	cmd.cmd = "AT+SAPBR=1,1";									//Connect to network
+	sim808_send_command(cmd);
     2482:	6861      	ldr	r1, [r4, #4]
     2484:	68a2      	ldr	r2, [r4, #8]
     2486:	68e3      	ldr	r3, [r4, #12]
     2488:	47b8      	blx	r7
-	sim808_send_command(cmd);
+	if(!sim808_parse_response_wait(SIM808_RECEIVE_DELAY_MEGALONG)) res = 0;
     248a:	1c30      	adds	r0, r6, #0
     248c:	47a8      	blx	r5
     248e:	2800      	cmp	r0, #0
@@ -7698,17 +7688,17 @@ uint8_t sim808_connect() {
     2492:	2200      	movs	r2, #0
     2494:	466b      	mov	r3, sp
     2496:	75da      	strb	r2, [r3, #23]
-	if(!sim808_parse_response_wait(SIM808_RECEIVE_DELAY_MEGALONG)) res = 0;
+	delay_ms(500);		
     2498:	20fa      	movs	r0, #250	; 0xfa
     249a:	0040      	lsls	r0, r0, #1
     249c:	4b08      	ldr	r3, [pc, #32]	; (24c0 <sim808_connect+0x70>)
     249e:	4798      	blx	r3
-	delay_ms(500);		
 
+	return res;
     24a0:	466b      	mov	r3, sp
     24a2:	7dd8      	ldrb	r0, [r3, #23]
     24a4:	b2c0      	uxtb	r0, r0
-	return res;
+}
     24a6:	b007      	add	sp, #28
     24a8:	bdf0      	pop	{r4, r5, r6, r7, pc}
     24aa:	46c0      	nop			; (mov r8, r8)
@@ -7721,12 +7711,12 @@ uint8_t sim808_connect() {
     24c4:	0000d128 	.word	0x0000d128
 
 000024c8 <init_SIM808_uart>:
-
 void usart_write_callback(struct usart_module *const usart_module)
 {
 	//Write callback
 }
 
+void init_SIM808_uart(void) {
     24c8:	b570      	push	{r4, r5, r6, lr}
     24ca:	b090      	sub	sp, #64	; 0x40
 {
@@ -7815,28 +7805,28 @@ void usart_write_callback(struct usart_module *const usart_module)
 #ifdef FEATURE_USART_COLLISION_DECTION
 	config->collision_detection_enable              = false;
     2516:	7762      	strb	r2, [r4, #29]
-	usart_get_config_defaults(&uart_settings);
 	
 	//Set clock to 8M
 	uart_settings.generator_source = GCLK_GENERATOR_0;
 	
 	uart_settings.mux_setting = USART_RX_1_TX_2_XCK_3;
+	uart_settings.pinmux_pad0 = PINMUX_PA10C_SERCOM0_PAD2; // Tx
     2518:	4b20      	ldr	r3, [pc, #128]	; (259c <init_SIM808_uart+0xd4>)
     251a:	930c      	str	r3, [sp, #48]	; 0x30
-	uart_settings.pinmux_pad0 = PINMUX_PA10C_SERCOM0_PAD2; // Tx
+	uart_settings.pinmux_pad1 = PINMUX_PA09C_SERCOM0_PAD1; // Rx
     251c:	4b20      	ldr	r3, [pc, #128]	; (25a0 <init_SIM808_uart+0xd8>)
     251e:	930d      	str	r3, [sp, #52]	; 0x34
-	uart_settings.pinmux_pad1 = PINMUX_PA09C_SERCOM0_PAD1; // Rx
+	uart_settings.pinmux_pad2 = PINMUX_UNUSED;
     2520:	2301      	movs	r3, #1
     2522:	425b      	negs	r3, r3
     2524:	930e      	str	r3, [sp, #56]	; 0x38
-	uart_settings.pinmux_pad2 = PINMUX_UNUSED;
-    2526:	930f      	str	r3, [sp, #60]	; 0x3c
 	uart_settings.pinmux_pad3 = PINMUX_UNUSED;
+    2526:	930f      	str	r3, [sp, #60]	; 0x3c
+	uart_settings.baudrate = 115200;
     2528:	23e1      	movs	r3, #225	; 0xe1
     252a:	025b      	lsls	r3, r3, #9
     252c:	9308      	str	r3, [sp, #32]
-	uart_settings.baudrate = 115200;
+	while (usart_init(&SIM808_usart, SERCOM0, &uart_settings) != STATUS_OK){}
     252e:	4e1d      	ldr	r6, [pc, #116]	; (25a4 <init_SIM808_uart+0xdc>)
     2530:	4d1d      	ldr	r5, [pc, #116]	; (25a8 <init_SIM808_uart+0xe0>)
     2532:	4c1e      	ldr	r4, [pc, #120]	; (25ac <init_SIM808_uart+0xe4>)
@@ -7940,10 +7930,10 @@ static inline bool usart_serial_init(
     2590:	2302      	movs	r3, #2
     2592:	4313      	orrs	r3, r2
     2594:	602b      	str	r3, [r5, #0]
-	while (usart_init(&SIM808_usart, SERCOM0, &uart_settings) != STATUS_OK){}
 	
 	stdio_serial_init(&SIM808_usart, SERCOM0, &uart_settings);
 	usart_enable(&SIM808_usart);
+}
     2596:	b010      	add	sp, #64	; 0x40
     2598:	bd70      	pop	{r4, r5, r6, pc}
     259a:	46c0      	nop			; (mov r8, r8)
@@ -7963,11 +7953,11 @@ static inline bool usart_serial_init(
     25d0:	e000e100 	.word	0xe000e100
 
 000025d4 <init_sim808_usart_callbacks>:
-}
 
 void init_sim808_usart_callbacks(void)
-    25d4:	b510      	push	{r4, lr}
 {
+    25d4:	b510      	push	{r4, lr}
+	usart_register_callback(&SIM808_usart, usart_write_callback, USART_CALLBACK_BUFFER_TRANSMITTED);
     25d6:	4c06      	ldr	r4, [pc, #24]	; (25f0 <init_sim808_usart_callbacks+0x1c>)
     25d8:	1c20      	adds	r0, r4, #0
     25da:	4906      	ldr	r1, [pc, #24]	; (25f4 <init_sim808_usart_callbacks+0x20>)
@@ -7985,10 +7975,10 @@ void init_sim808_usart_callbacks(void)
     25e6:	2203      	movs	r2, #3
     25e8:	430a      	orrs	r2, r1
     25ea:	54e2      	strb	r2, [r4, r3]
-	usart_register_callback(&SIM808_usart, usart_write_callback, USART_CALLBACK_BUFFER_TRANSMITTED);
 	//usart_register_callback(&SIM808_usart, usart_read_callback, USART_CALLBACK_BUFFER_RECEIVED);
 	usart_enable_callback(&SIM808_usart, USART_CALLBACK_BUFFER_TRANSMITTED);
 	usart_enable_callback(&SIM808_usart, USART_CALLBACK_BUFFER_RECEIVED);
+}
     25ec:	bd10      	pop	{r4, pc}
     25ee:	46c0      	nop			; (mov r8, r8)
     25f0:	20002d84 	.word	0x20002d84
@@ -7996,104 +7986,103 @@ void init_sim808_usart_callbacks(void)
     25f8:	00003f1d 	.word	0x00003f1d
 
 000025fc <sim808_init_commands>:
-}
 
-    25fc:	b510      	push	{r4, lr}
 void sim808_init_commands() {
+    25fc:	b510      	push	{r4, lr}
+	CMD_RESET.cmd = "ATZ0";
     25fe:	491c      	ldr	r1, [pc, #112]	; (2670 <sim808_init_commands+0x74>)
     2600:	4b1c      	ldr	r3, [pc, #112]	; (2674 <sim808_init_commands+0x78>)
     2602:	600b      	str	r3, [r1, #0]
-	CMD_RESET.cmd = "ATZ0";
+	CMD_RESET.expected_response = "OK";
     2604:	4b1c      	ldr	r3, [pc, #112]	; (2678 <sim808_init_commands+0x7c>)
     2606:	604b      	str	r3, [r1, #4]
-	CMD_RESET.expected_response = "OK";
+	CMD_RESET.callback_enabled = 0;
     2608:	2200      	movs	r2, #0
     260a:	720a      	strb	r2, [r1, #8]
-	CMD_RESET.callback_enabled = 0;
 	
+	CMD_NO_ECHO.cmd = "ATE0";
     260c:	491b      	ldr	r1, [pc, #108]	; (267c <sim808_init_commands+0x80>)
     260e:	481c      	ldr	r0, [pc, #112]	; (2680 <sim808_init_commands+0x84>)
     2610:	6008      	str	r0, [r1, #0]
-	CMD_NO_ECHO.cmd = "ATE0";
-    2612:	604b      	str	r3, [r1, #4]
 	CMD_NO_ECHO.expected_response = "OK";
-    2614:	720a      	strb	r2, [r1, #8]
+    2612:	604b      	str	r3, [r1, #4]
 	CMD_NO_ECHO.callback_enabled = 0;
+    2614:	720a      	strb	r2, [r1, #8]
 	
+	CMD_GPS_PWR_ON.cmd = "AT+CGPSPWR=1";
     2616:	491b      	ldr	r1, [pc, #108]	; (2684 <sim808_init_commands+0x88>)
     2618:	481b      	ldr	r0, [pc, #108]	; (2688 <sim808_init_commands+0x8c>)
     261a:	6008      	str	r0, [r1, #0]
-	CMD_GPS_PWR_ON.cmd = "AT+CGPSPWR=1";
-    261c:	604b      	str	r3, [r1, #4]
 	CMD_GPS_PWR_ON.expected_response = "OK";
-    261e:	720a      	strb	r2, [r1, #8]
+    261c:	604b      	str	r3, [r1, #4]
 	CMD_GPS_PWR_ON.callback_enabled = 0;
+    261e:	720a      	strb	r2, [r1, #8]
 	
+	CMD_GPS_PWR_OFF.cmd = "AT+CGPSPWR=0";
     2620:	491a      	ldr	r1, [pc, #104]	; (268c <sim808_init_commands+0x90>)
     2622:	481b      	ldr	r0, [pc, #108]	; (2690 <sim808_init_commands+0x94>)
     2624:	6008      	str	r0, [r1, #0]
-	CMD_GPS_PWR_OFF.cmd = "AT+CGPSPWR=0";
-    2626:	604b      	str	r3, [r1, #4]
 	CMD_GPS_PWR_OFF.expected_response = "OK";
-    2628:	720a      	strb	r2, [r1, #8]
+    2626:	604b      	str	r3, [r1, #4]
 	CMD_GPS_PWR_OFF.callback_enabled = 0;
+    2628:	720a      	strb	r2, [r1, #8]
 	
+	CMD_GET_GPS_DATA.cmd = "AT+CGPSINF=32";
     262a:	491a      	ldr	r1, [pc, #104]	; (2694 <sim808_init_commands+0x98>)
     262c:	481a      	ldr	r0, [pc, #104]	; (2698 <sim808_init_commands+0x9c>)
     262e:	6008      	str	r0, [r1, #0]
-	CMD_GET_GPS_DATA.cmd = "AT+CGPSINF=32";
+	CMD_GET_GPS_DATA.callback_enabled = 1;
     2630:	2001      	movs	r0, #1
     2632:	7208      	strb	r0, [r1, #8]
-	CMD_GET_GPS_DATA.callback_enabled = 1;
+	CMD_GET_GPS_DATA.expected_response = "+CGPSINF";
     2634:	4c19      	ldr	r4, [pc, #100]	; (269c <sim808_init_commands+0xa0>)
     2636:	604c      	str	r4, [r1, #4]
-	CMD_GET_GPS_DATA.expected_response = "+CGPSINF";
+	CMD_GET_GPS_DATA.response_cb = &SIM808_response_gps_data;
     2638:	4c19      	ldr	r4, [pc, #100]	; (26a0 <sim808_init_commands+0xa4>)
     263a:	60cc      	str	r4, [r1, #12]
-	CMD_GET_GPS_DATA.response_cb = &SIM808_response_gps_data;
 	
+	CMD_GET_GPS_FIX.cmd = "AT+CGPSSTATUS?";
     263c:	4919      	ldr	r1, [pc, #100]	; (26a4 <sim808_init_commands+0xa8>)
     263e:	4c1a      	ldr	r4, [pc, #104]	; (26a8 <sim808_init_commands+0xac>)
     2640:	600c      	str	r4, [r1, #0]
-	CMD_GET_GPS_FIX.cmd = "AT+CGPSSTATUS?";
-    2642:	720a      	strb	r2, [r1, #8]
 	CMD_GET_GPS_FIX.callback_enabled = 0;
+    2642:	720a      	strb	r2, [r1, #8]
+	CMD_GET_GPS_FIX.expected_response = "Location 3D";
     2644:	4c19      	ldr	r4, [pc, #100]	; (26ac <sim808_init_commands+0xb0>)
     2646:	604c      	str	r4, [r1, #4]
-	CMD_GET_GPS_FIX.expected_response = "Location 3D";
 	
+	CMD_GPRS_GET_REQ.cmd = "AT+HTTPACTION=0";
     2648:	4919      	ldr	r1, [pc, #100]	; (26b0 <sim808_init_commands+0xb4>)
     264a:	4c1a      	ldr	r4, [pc, #104]	; (26b4 <sim808_init_commands+0xb8>)
     264c:	600c      	str	r4, [r1, #0]
-	CMD_GPRS_GET_REQ.cmd = "AT+HTTPACTION=0";
-    264e:	7208      	strb	r0, [r1, #8]
 	CMD_GPRS_GET_REQ.callback_enabled = 1;
-    2650:	604b      	str	r3, [r1, #4]
+    264e:	7208      	strb	r0, [r1, #8]
 	CMD_GPRS_GET_REQ.expected_response = "OK";
+    2650:	604b      	str	r3, [r1, #4]
+	CMD_GPRS_GET_REQ.response_cb = &SIM808_response_gprs_get;
     2652:	4819      	ldr	r0, [pc, #100]	; (26b8 <sim808_init_commands+0xbc>)
     2654:	60c8      	str	r0, [r1, #12]
-	CMD_GPRS_GET_REQ.response_cb = &SIM808_response_gprs_get;
 	
+	CMD_GPRS_POST_REQ.cmd = "AT+HTTPACTION=1";
     2656:	4919      	ldr	r1, [pc, #100]	; (26bc <sim808_init_commands+0xc0>)
     2658:	4819      	ldr	r0, [pc, #100]	; (26c0 <sim808_init_commands+0xc4>)
     265a:	6008      	str	r0, [r1, #0]
-	CMD_GPRS_POST_REQ.cmd = "AT+HTTPACTION=1";
-    265c:	720a      	strb	r2, [r1, #8]
 	CMD_GPRS_POST_REQ.callback_enabled = 0;
-    265e:	604b      	str	r3, [r1, #4]
+    265c:	720a      	strb	r2, [r1, #8]
 	CMD_GPRS_POST_REQ.expected_response = "OK";
+    265e:	604b      	str	r3, [r1, #4]
+	CMD_GPRS_POST_REQ.response_cb = &SIM808_response_gprs_post;
     2660:	4818      	ldr	r0, [pc, #96]	; (26c4 <sim808_init_commands+0xc8>)
     2662:	60c8      	str	r0, [r1, #12]
-	CMD_GPRS_POST_REQ.response_cb = &SIM808_response_gprs_post;
 	
+	CMD_AT.cmd = "AT";
     2664:	4918      	ldr	r1, [pc, #96]	; (26c8 <sim808_init_commands+0xcc>)
     2666:	4819      	ldr	r0, [pc, #100]	; (26cc <sim808_init_commands+0xd0>)
     2668:	6008      	str	r0, [r1, #0]
-	CMD_AT.cmd = "AT";
-    266a:	720a      	strb	r2, [r1, #8]
 	CMD_AT.callback_enabled = 0;
-    266c:	604b      	str	r3, [r1, #4]
+    266a:	720a      	strb	r2, [r1, #8]
 	CMD_AT.expected_response = "OK";
+    266c:	604b      	str	r3, [r1, #4]
     266e:	bd10      	pop	{r4, pc}
     2670:	200006c0 	.word	0x200006c0
     2674:	0000d138 	.word	0x0000d138
