@@ -51,6 +51,10 @@ static void rtc_lib_update_alarm_time(struct rtc_calendar_time* time, alarm_t ac
 }
 static inline bool rtc_lib_compare_time(struct rtc_calendar_time* time1, struct rtc_calendar_time* time2)
 {
+	//Normalize am/pm
+	time1->hour %= 12;
+	time2->hour %= 12;	
+	
 	if ((time1->second == time2->second) &&
 		(time1->hour == time2->hour) &&
 		(time1->minute == time2->minute))
@@ -79,6 +83,7 @@ static void rtc_lib_soft_alarm_handler(void)
 		//Move on to the next one
 		curr_alarm++;
 	}
+	
 }
 //Callback function:
  static void rtc_match_callback(enum rtc_calendar_alarm alarm_number)
@@ -86,7 +91,12 @@ static void rtc_lib_soft_alarm_handler(void)
 	
 	/* Set new alarm in alarm_interval_sec seconds */
 	static struct rtc_calendar_alarm_time alarm;
-	rtc_calendar_get_alarm(&rtc_instance, &alarm, alarm_number);
+	
+	//Get current time to not mess with am/pm bull
+	struct rtc_calendar_time now;
+	rtc_calendar_get_time(&rtc_instance, &now);
+	
+	alarm.time = now;
 	
 	//Disable updating mask
 	alarm.mask = RTC_LIB_SKIP_MASK_MASK;
@@ -199,7 +209,7 @@ void rtc_lib_configure_soft_alarms(void)
 	{
 		soft_alarm_conf[i].alarm_settings.active = false;
 	}
-	rtc_lib_set_alarm_simple(1, rtc_lib_soft_alarm_handler);
+	rtc_lib_set_alarm_simple(0, rtc_lib_soft_alarm_handler);
 }
 //Simple way to set up a soft alarm
 void rtc_lib_set_soft_alarm_simple(uint16_t interval, void(*callback_func)(void))
@@ -222,7 +232,7 @@ void rtc_lib_set_soft_alarm_simple(uint16_t interval, void(*callback_func)(void)
 	rtc_calendar_get_time(&rtc_instance, &time);
 	
 	//Update alarm time to next time
-	rtc_lib_update_alarm_time(&time, alarm_conf[alarm_number]);
+	rtc_lib_update_alarm_time(&time, soft_alarm_conf[alarm_number].alarm_settings);
 	
 	//Set alarm time to that time
 	soft_alarm_conf[alarm_number].next_alarm = time;

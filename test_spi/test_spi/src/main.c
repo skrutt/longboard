@@ -48,6 +48,10 @@ static void tc_callback_logger_service(void)
 	/* Do something on RTC alarm match here */
 	//port_pin_toggle_output_level(LED_RTC);
 }
+void dummy_test()
+{
+	delay_ms(1);
+}
 
 
 int main (void)
@@ -68,7 +72,7 @@ int main (void)
  	init_platform();
 	 
 	//Setup SIM808 module
-	sim808_init();
+//	sim808_init();
 	
 	//Wait some for button read and then calibrate adxl
 	//init_adxl_calibration(adxl_calibrate_button_platform);
@@ -79,7 +83,7 @@ int main (void)
 	//Data logging
 	rtc_lib_set_soft_alarm_simple(1, tc_callback_logger_service);
 	//And uploading
-	rtc_lib_set_soft_alarm_simple(5*60,	gprs_send_data_log);
+	rtc_lib_set_soft_alarm_simple(5,	dummy_test);
 	
 	while (true) 
 	{
