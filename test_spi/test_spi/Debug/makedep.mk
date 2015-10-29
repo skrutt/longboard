@@ -46,8 +46,6 @@ src\longboard.c
 
 src\menus.c
 
-src\menu_buttons.c
-
 src\response_actions.c
 
 src\rtc_lib.c

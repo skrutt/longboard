@@ -16,6 +16,7 @@ void SIM808_response_gprs_send_post_request(volatile uint8_t success, volatile c
 	}
 }
 
+// Transfer downloaded string to web server from GSM-module.
 void SIM808_response_gprs_post(volatile uint8_t success, volatile char *cmd) {
 	if(success) {
 		if(strcmp(last_command.expected_response, "OK") == 0) {
@@ -32,8 +33,7 @@ void SIM808_response_gprs_post(volatile uint8_t success, volatile char *cmd) {
 			volatile uint8_t len = strlen(cmd);
 			char *errorCodeString = cmd+15;		// Beginning of error code
 			*(errorCodeString+3) = '\0';		// Close string after error code
-			
-			// Bättre att jämföra strängvärdet prestandamässigt?
+
 			uint16_t errorCode = atoi(errorCodeString);	
 			
 			if(errorCode == 200) {
@@ -82,8 +82,7 @@ void SIM808_response_gps_data(volatile uint8_t success, volatile char *cmd) {
 		}
 		
 		// Add a NULL to the end of the string
-		field[i] = '\0';
-		
+		field[i] = '\0';	
 		
 		//Bind the separated field to the gps_data struct object:
 		switch(j) {

@@ -877,12 +877,6 @@
     <Compile Include="src\menus.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\menu_buttons.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\menu_buttons.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="src\menu_link.h">
       <SubType>compile</SubType>
     </Compile>

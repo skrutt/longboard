@@ -55,7 +55,9 @@ void main_platform() {
 	
 	if(button_read_button(&down_btn)) {
 		if(is_view(gfx_mono_active_menu)) {
-			display_next_view();						
+			if(gfx_mono_active_menu != NO_GPS_VIEW) {
+				display_next_view();					
+			}					
 		}
 		
 		// If it's not a view then the down button should be used for menu navigation.
@@ -75,7 +77,7 @@ void main_platform() {
 			volatile uint8_t menuChoice = gfx_mono_menu_process_key(&menu_list[gfx_mono_active_menu-(VIEW_MAX_INDEX+1)], GFX_MONO_MENU_KEYCODE_ENTER);
 			menu_link menu = menu_list[gfx_mono_active_menu-(VIEW_MAX_INDEX+1)].element_links[menuChoice];
 		
-			// TODO: Skriv om snyggare
+			// TODO: Skriv om snyggare :)
 			if(menu == EXIT_MENU) {
 				menu_list[gfx_mono_active_menu-(VIEW_MAX_INDEX+1)].current_page = 0;
 				menu_list[gfx_mono_active_menu-(VIEW_MAX_INDEX+1)].current_selection = 0;
@@ -102,6 +104,7 @@ void init_platform() {
 	button_init(&select_btn, PIN_PA14);
 	button_init(&down_btn, PIN_PA15);
 	device.speed = 255;
+	device.inclination = 255;
 	
 	gfx_mono_init();
 	ssd1306_init();

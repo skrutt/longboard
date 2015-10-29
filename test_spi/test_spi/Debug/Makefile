@@ -151,7 +151,6 @@ C_SRCS +=  \
 ../src/json_converter.c \
 ../src/longboard.c \
 ../src/menus.c \
-../src/menu_buttons.c \
 ../src/response_actions.c \
 ../src/rtc_lib.c \
 ../src/sim808_uart.c \
@@ -216,7 +215,6 @@ src/gps_utils.o \
 src/json_converter.o \
 src/longboard.o \
 src/menus.o \
-src/menu_buttons.o \
 src/response_actions.o \
 src/rtc_lib.o \
 src/sim808_uart.o \
@@ -274,7 +272,6 @@ src/gps_utils.o \
 src/json_converter.o \
 src/longboard.o \
 src/menus.o \
-src/menu_buttons.o \
 src/response_actions.o \
 src/rtc_lib.o \
 src/sim808_uart.o \
@@ -332,7 +329,6 @@ src/gps_utils.d \
 src/json_converter.d \
 src/longboard.d \
 src/menus.d \
-src/menu_buttons.d \
 src/response_actions.d \
 src/rtc_lib.d \
 src/sim808_uart.d \
@@ -390,7 +386,6 @@ src/gps_utils.d \
 src/json_converter.d \
 src/longboard.d \
 src/menus.d \
-src/menu_buttons.d \
 src/response_actions.d \
 src/rtc_lib.d \
 src/sim808_uart.d \
@@ -440,8 +435,6 @@ LINKER_SCRIPT_DEP+=  \
 
 
 # AVR32/GNU C Compiler
-
-
 
 
 

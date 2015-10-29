@@ -70,22 +70,22 @@ void draw_no_gps_view(uint8_t refresh) {
 }
 
 void draw_speed_view(uint8_t refresh) {
-	//if(gps_data.status != 'A') {
-	//display_view(NO_GPS_VIEW);
-	//}
-	
-	// On first draw.
-	if(!refresh) {
-		device.speed = gps_data.ground_speed;
-		ssd1306_draw_huge_number(15,1,(uint8_t)(device.speed +0.5));	
+	if(gps_data.status != 'A') {
+		display_view(NO_GPS_VIEW);
 	}
 	else {
-		if(gps_data.ground_speed != device.speed) {
+		// On first draw.
+		if(!refresh) {
 			device.speed = gps_data.ground_speed;
-			ssd1306_draw_huge_number(15,1,(uint8_t)(device.speed + 0.5));
-		}	
+			ssd1306_draw_huge_number(15,1,(uint8_t)(device.speed +0.5));
+		}
+		else {
+			if(gps_data.ground_speed != device.speed) {
+				device.speed = gps_data.ground_speed;
+				ssd1306_draw_huge_number(15,1,(uint8_t)(device.speed + 0.5));
+			}
+		}
 	}
-
 }
 
 void draw_cadence_view(uint8_t refresh) {
@@ -117,10 +117,13 @@ void draw_inclination_view(uint8_t refresh) {
 		gfx_mono_draw_circle(112,8,6,GFX_PIXEL_SET, 0xFF);		//Degree sign
 		ssd1306_write_display();
 
-		ssd1306_draw_huge_number(15,1, (uint8_t)accelerometer.angle_x);
+		ssd1306_draw_huge_number(15,1, (uint8_t)(accelerometer.angle_x + 0.5));
 
 	}
 	else {
-		ssd1306_draw_huge_number(15,1, (uint8_t)accelerometer.angle_x);
+		if(device.inclination != (uint8_t)(accelerometer.angle_x + 0.5)) {
+			device.inclination = (uint8_t)(accelerometer.angle_x + 0.5);
+			ssd1306_draw_huge_number(15,1, device.inclination);			
+		}
 	}
 }

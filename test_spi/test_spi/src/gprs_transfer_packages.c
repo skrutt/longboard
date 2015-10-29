@@ -104,12 +104,6 @@ void gprs_send_data_log() {
 	
 		i = 0;
 	
-		// ONLY FOR DEBUG:
-		char *completeString;
-		volatile uint16_t len;
-		completeString = &send_string;
-		len = strlen(completeString);
-	
 		// TODO: Send post request to server:
 		command cmd;
 		char cmd_name[25];

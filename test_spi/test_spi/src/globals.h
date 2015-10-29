@@ -26,6 +26,7 @@ typedef struct {
 	uint8_t lat;
 	uint8_t lng;
 	uint8_t height;
+	uint8_t inclination;
 } position_info;
 
 typedef struct {
