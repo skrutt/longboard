@@ -43,17 +43,30 @@ static void rtc_lib_update_alarm_time(struct rtc_calendar_time* time, alarm_t ac
 {
 		//Update and normalize alarm time
 		time->second += active_alarm.alarm_interval_sec;
-		time->second %= 60;
+		if (time->second >= 60)
+		{
+			time->second %= 60;
+			time->minute++;
+		}
+		
 		time->minute += active_alarm.alarm_interval_min;
-		time->minute %= 60;
+		if (time->minute >= 60)
+		{
+			time->minute %= 60;
+			time->hour++;
+		}
 		time->hour += active_alarm.alarm_interval_hour;
-		time->hour %= 24;
+		time->hour %= 12;
 }
 static inline bool rtc_lib_compare_time(struct rtc_calendar_time* time1, struct rtc_calendar_time* time2)
 {
 	//Normalize am/pm
 	time1->hour %= 12;
 	time2->hour %= 12;	
+	if (time1->second == 58)
+	{
+		delay_ms(1);
+	}
 	
 	if ((time1->second == time2->second) &&
 		(time1->hour == time2->hour) &&
