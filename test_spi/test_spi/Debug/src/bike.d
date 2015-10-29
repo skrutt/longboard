@@ -150,12 +150,10 @@ src/bike.d src/bike.o: ../src/bike.c ../src/platform.h \
  ../src/ASF/sam0/drivers/tc/tc.h \
  ../src/ASF/sam0/drivers/tc/tc_interrupt.h \
  ../src/ASF/sam0/drivers/tc/tc.h ../src/cadence_sensor.h ../src/asf.h \
- ../src/timer_subsystem.h ../src/longboard.h ../src/spi_sseg.h \
- ../src/ADC_subsystem.h ../src/accelerometer_lib.h \
- ../src/ASF/thirdparty/CMSIS/Include/arm_math.h \
- ../src/ASF/thirdparty/CMSIS/Include/core_cm0plus.h \
- c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu-toolchain\arm-none-eabi\include\math.h \
- ../src/menu_list.h ../src/views.h ../src/globals.h ../src/spi_display.h
+ ../src/timer_subsystem.h ../src/bike.h ../src/sim808_uart.h \
+ ../src/response_actions.h ../src/globals.h ../src/gps_utils.h \
+ ../src/gprs_transfer_packages.h ../src/menus.h ../src/menu_link.h \
+ ../src/menu_list.h ../src/views.h ../src/spi_display.h
 
 ../src/platform.h:
 
@@ -483,24 +481,24 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu
 
 ../src/timer_subsystem.h:
 
-../src/longboard.h:
+../src/bike.h:
 
-../src/spi_sseg.h:
+../src/sim808_uart.h:
 
-../src/ADC_subsystem.h:
+../src/response_actions.h:
 
-../src/accelerometer_lib.h:
+../src/globals.h:
 
-../src/ASF/thirdparty/CMSIS/Include/arm_math.h:
+../src/gps_utils.h:
 
-../src/ASF/thirdparty/CMSIS/Include/core_cm0plus.h:
+../src/gprs_transfer_packages.h:
 
-c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu-toolchain\arm-none-eabi\include\math.h:
+../src/menus.h:
+
+../src/menu_link.h:
 
 ../src/menu_list.h:
 
 ../src/views.h:
-
-../src/globals.h:
 
 ../src/spi_display.h:

@@ -17,7 +17,7 @@ src/gps_utils.d src/gps_utils.o: ../src/gps_utils.c ../src/gps_utils.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu-toolchain\arm-none-eabi\include\stdlib.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu-toolchain\arm-none-eabi\include\machine\stdlib.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu-toolchain\arm-none-eabi\include\alloca.h \
- ../src/gprs_transfer_packages.h ../src/globals.h ../src/asf.h \
+ ../src/gprs_transfer_packages.h ../src/asf.h \
  ../src/ASF/sam0/drivers/adc/adc.h ../src/ASF/sam0/utils/compiler.h \
  ../src/ASF/common/utils/parts.h ../src/ASF/sam0/utils/status_codes.h \
  c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu-toolchain\lib\gcc\arm-none-eabi\4.8.4\include\stdint.h \
@@ -148,14 +148,7 @@ src/gps_utils.d src/gps_utils.o: ../src/gps_utils.c ../src/gps_utils.h \
  ../src/ASF/common/services/serial/sam0_usart/usart_serial.h \
  ../src/ASF/sam0/drivers/tc/tc.h \
  ../src/ASF/sam0/drivers/tc/tc_interrupt.h \
- ../src/ASF/sam0/drivers/tc/tc.h ../src/sim808_uart.h \
- ../src/response_actions.h ../src/platform.h ../src/button_lib.h \
- ../src/asf.h ../src/cadence_sensor.h ../src/timer_subsystem.h \
- ../src/longboard.h ../src/spi_sseg.h ../src/ADC_subsystem.h \
- ../src/accelerometer_lib.h \
- ../src/ASF/thirdparty/CMSIS/Include/arm_math.h \
- ../src/ASF/thirdparty/CMSIS/Include/core_cm0plus.h \
- c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu-toolchain\arm-none-eabi\include\math.h
+ ../src/ASF/sam0/drivers/tc/tc.h ../src/globals.h
 
 ../src/gps_utils.h:
 
@@ -196,8 +189,6 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu
 c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu-toolchain\arm-none-eabi\include\alloca.h:
 
 ../src/gprs_transfer_packages.h:
-
-../src/globals.h:
 
 ../src/asf.h:
 
@@ -479,30 +470,4 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu
 
 ../src/ASF/sam0/drivers/tc/tc.h:
 
-../src/sim808_uart.h:
-
-../src/response_actions.h:
-
-../src/platform.h:
-
-../src/button_lib.h:
-
-../src/asf.h:
-
-../src/cadence_sensor.h:
-
-../src/timer_subsystem.h:
-
-../src/longboard.h:
-
-../src/spi_sseg.h:
-
-../src/ADC_subsystem.h:
-
-../src/accelerometer_lib.h:
-
-../src/ASF/thirdparty/CMSIS/Include/arm_math.h:
-
-../src/ASF/thirdparty/CMSIS/Include/core_cm0plus.h:
-
-c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu-toolchain\arm-none-eabi\include\math.h:
+../src/globals.h:
