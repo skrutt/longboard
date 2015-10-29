@@ -12,8 +12,8 @@ void gps_utils_raw_data_to_send_buffer(data_log *send_buf) {
 	entry.lat = gps_data.lat;
 	entry.lng = gps_data.lng;
 	entry.speed = gps_data.ground_speed;
-	entry.inclination = 14;
-	entry.g_force = 2.21;
+	entry.inclination = device.inclination;
+	entry.g_force = 1.0;
 	
 	//TODO: add actual value
 	entry.upload_interval = 80;				//Upload interval in seconds

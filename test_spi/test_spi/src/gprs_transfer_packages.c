@@ -104,6 +104,12 @@ void gprs_send_data_log() {
 	
 		i = 0;
 	
+		// ONLY FOR DEBUG USE:
+		char *completeString;
+		volatile uint16_t len;
+		completeString = &send_string;
+		len = strlen(completeString);
+	
 		// TODO: Send post request to server:
 		command cmd;
 		char cmd_name[25];
@@ -114,13 +120,14 @@ void gprs_send_data_log() {
 		cmd.callback_enabled = 0;
 	
 		sim808_send_command(cmd);
-		if(sim808_parse_response_wait(SIM808_RECEIVE_DELAY_NORMAL)) {
+		delay_ms(200);
+		//if(sim808_parse_response_wait(SIM808_RECEIVE_DELAY_NORMAL)) {
 			printf(send_string);
 			last_command.expected_response = "OK";
 			last_command.callback_enabled = 1;
 			last_command.response_cb = SIM808_response_gprs_send_post_request;
 			//sim808_parse_response_wait(SIM808_RECEIVE_DELAY_NORMAL);
-		}		
+		//}		
 	}
 }
 
