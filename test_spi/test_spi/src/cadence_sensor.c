@@ -14,9 +14,6 @@ void cadence_sensor_init() {
 	
 	//TODO: initiate external interrupt on cadence pin
 	cadence_sensor_extint_setup();
-	
-	delay_ms(500);
-	cadence_sensor_update();
 }
 
 void cadence_sensor_extint_setup() {

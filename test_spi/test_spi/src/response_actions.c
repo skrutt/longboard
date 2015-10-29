@@ -133,7 +133,7 @@ void SIM808_response_gps_data(volatile uint8_t success, volatile char *cmd) {
 		comma = strchr (position, ',');
 	}
 
-	//if(gps_data.status == 'A') {
+	if(gps_data.status == 'A') {
 		gps_utils_raw_data_to_send_buffer(&gprs_log_buf);
-	//}
+	}
 }

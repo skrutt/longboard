@@ -70,10 +70,10 @@ void draw_no_gps_view(uint8_t refresh) {
 }
 
 void draw_speed_view(uint8_t refresh) {
-	//if(gps_data.status != 'A') {
-	//	display_view(NO_GPS_VIEW);
-	//}
-	//else {
+	if(gps_data.status != 'A') {
+		display_view(NO_GPS_VIEW);
+	}
+	else {
 		// On first draw.
 		if(!refresh) {
 			device.speed = gps_data.ground_speed;
@@ -85,7 +85,7 @@ void draw_speed_view(uint8_t refresh) {
 				ssd1306_draw_huge_number(15,1,(uint8_t)(device.speed + 0.5));
 			}
 		}
-	//}
+	}
 }
 
 void draw_cadence_view(uint8_t refresh) {
