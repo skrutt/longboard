@@ -6,6 +6,8 @@
  */ 
 #include "gprs_transfer_packages.h"
 #include "platform.h"
+#include "sim808_uart.h"
+#include "response_actions.h"
 
 // Called in main loop to handle data transfer.
 void SIM808_handle_data_transfer() {
@@ -16,10 +18,10 @@ void SIM808_handle_data_transfer() {
 	}
 	
 	// TODO: Should be taken care of by an alarm:
-// 	if(gps_counter >= 40) {
-// 		gps_counter = 0;
-// 		gprs_send_data_log();
-// 	}
+	if(gps_counter >= 40) {
+		gps_counter = 0;
+		gprs_send_data_log();
+	}
 }
 
 // Add json variable to string.
@@ -64,11 +66,6 @@ void gprs_send_data_log() {
 	log_entry entry;
 	char tempVar[15];
 	uint8_t i = 0;
-
-/*
-	sprintf(tempVar, "\"%s\"", gprs_log_buf.data.date_time);
-	json_add_variable(&send_string, &pos, "DateTime", tempVar, 1);
-	*/
 
 	memset(send_string, '\0', HTTP_PACKAGE_STRING_LENGTH);	//Clear buffer
 		
@@ -146,6 +143,7 @@ void gprs_send_data_log() {
 	}
 }
 
+// Initiate gprs_buffer with default values.
 void gprs_send_buf_init(gprs_send_buffer *buf) {
 	buf->len = 299;
 	buf->temp_tail = 0;
@@ -155,12 +153,15 @@ void gprs_send_buf_init(gprs_send_buffer *buf) {
 	buf->data.device = DEVICE_ID;
 }
 
+// Add log entry to gprs buffer
 void gprs_buf_push(log_entry entry, gprs_send_buffer *buf) {
 	buf->data.entries[buf->head] = entry;
 	buf->head++;
 	if(buf->head == buf->len) buf->head = 0;
 }
 
+// Pull log entry but only increment temp_tail. Makes it possible to 
+// regret the pull if the transfer does not succeed later on. 
 log_entry gprs_buf_temp_pull(gprs_send_buffer *buf) {
 	log_entry entry2 = buf->data.entries[buf->temp_tail];
 	buf->temp_tail++;
@@ -169,6 +170,7 @@ log_entry gprs_buf_temp_pull(gprs_send_buffer *buf) {
 	return entry2;
 }
 
+// Pull log entry from gprs buffer
 log_entry gprs_buf_pull(gprs_send_buffer *buf) {
 	log_entry entry2 = buf->data.entries[buf->tail];
 	buf->tail++;

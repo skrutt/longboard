@@ -24,9 +24,11 @@ void display_next_view(void);
 //Redraws current view and updates data
 void refresh_view(void);
 
-void draw_speed_view(void);
-void draw_cadence_view(void);
-void draw_no_gps_view(void);
+void draw_view(menu_link, uint8_t);
+
+void draw_speed_view(uint8_t);
+void draw_cadence_view(uint8_t);
+void draw_no_gps_view(uint8_t);
 
 current_view cur_view;
 

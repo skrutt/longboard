@@ -16,7 +16,7 @@ void gps_utils_raw_data_to_send_buffer(data_log *send_buf) {
 	entry.g_force = 2.21;
 	
 	//TODO: add actual value
-	entry.upload_interval = 500;				//Upload interval in seconds
+	entry.upload_interval = 80;				//Upload interval in seconds
 	
 	entry.cadence = device.cadence;
 	
