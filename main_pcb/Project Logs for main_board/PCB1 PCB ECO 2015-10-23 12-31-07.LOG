@@ -1,0 +1,117 @@
+Added Component: Designator=A1(ADXL)
+Added Component: Designator=C1(R3216-1206)
+Added Component: Designator=C2(R3216-1206)
+Added Component: Designator=C3(R3216-1206)
+Added Component: Designator=C4(RB5-10.5)
+Added Component: Designator=C5(R2012-0805)
+Added Component: Designator=C6(R2012-0805)
+Added Component: Designator=Conn1(9pin 2.54)
+Added Component: Designator=G1(FONA808)
+Added Component: Designator=O1(R2012-0805)
+Added Component: Designator=P1(HDR1X2)
+Added Component: Designator=R1(R2012-0805)
+Added Component: Designator=R2(R2012-0805)
+Added Component: Designator=S1(SW-SPDT2.54mm)
+Added Component: Designator=S2(SMD_BRIDGE)
+Added Component: Designator=S3(SMD_BRIDGE)
+Added Component: Designator=U1(TQFP32_N)
+Added Component: Designator=U2(221A-04)
+Added Pin To Net: NetName=ACC X Pin=A1-4
+Added Pin To Net: NetName=ACC X Pin=U1-6
+Added Net: Name=ACC X
+Added Pin To Net: NetName=ACC Y Pin=A1-3
+Added Pin To Net: NetName=ACC Y Pin=U1-5
+Added Net: Name=ACC Y
+Added Pin To Net: NetName=ACC Z Pin=A1-2
+Added Pin To Net: NetName=ACC Z Pin=U1-3
+Added Net: Name=ACC Z
+Added Pin To Net: NetName=EXT POW MEAS Pin=R1-2
+Added Pin To Net: NetName=EXT POW MEAS Pin=R2-1
+Added Pin To Net: NetName=EXT POW MEAS Pin=U1-7
+Added Net: Name=EXT POW MEAS
+Added Pin To Net: NetName=EXT POW Pin=R1-1
+Added Pin To Net: NetName=EXT POW Pin=S1-3
+Added Pin To Net: NetName=EXT POW Pin=S3-1
+Added Net: Name=EXT POW
+Added Pin To Net: NetName=FONA BAT Pin=G1-2
+Added Pin To Net: NetName=FONA BAT Pin=S1-1
+Added Pin To Net: NetName=FONA BAT Pin=S2-3
+Added Net: Name=FONA BAT
+Added Pin To Net: NetName=FONA RX Pin=G1-6
+Added Pin To Net: NetName=FONA RX Pin=U1-13
+Added Net: Name=FONA RX
+Added Pin To Net: NetName=FONA TX Pin=G1-7
+Added Pin To Net: NetName=FONA TX Pin=U1-12
+Added Net: Name=FONA TX
+Added Pin To Net: NetName=GND Pin=A1-5
+Added Pin To Net: NetName=GND Pin=C1-1
+Added Pin To Net: NetName=GND Pin=C2-2
+Added Pin To Net: NetName=GND Pin=C3-1
+Added Pin To Net: NetName=GND Pin=C4-2
+Added Pin To Net: NetName=GND Pin=C5-1
+Added Pin To Net: NetName=GND Pin=C6-1
+Added Pin To Net: NetName=GND Pin=Conn1-9
+Added Pin To Net: NetName=GND Pin=G1-3
+Added Pin To Net: NetName=GND Pin=P1-1
+Added Pin To Net: NetName=GND Pin=R2-2
+Added Pin To Net: NetName=GND Pin=U1-10
+Added Pin To Net: NetName=GND Pin=U1-28
+Added Pin To Net: NetName=GND Pin=U2-2
+Added Net: Name=GND
+Added Pin To Net: NetName=KADENS!! Pin=S3-3
+Added Net: Name=KADENS!!
+Added Pin To Net: NetName=KEY Pin=G1-9
+Added Net: Name=KEY
+Added Pin To Net: NetName=NetC2_1 Pin=C2-1
+Added Pin To Net: NetName=NetC2_1 Pin=U1-29
+Added Net: Name=NetC2_1
+Added Pin To Net: NetName=NetC5_2 Pin=C5-2
+Added Pin To Net: NetName=NetC5_2 Pin=O1-1
+Added Pin To Net: NetName=NetC5_2 Pin=U1-1
+Added Net: Name=NetC5_2
+Added Pin To Net: NetName=NetC6_2 Pin=C6-2
+Added Pin To Net: NetName=NetC6_2 Pin=O1-2
+Added Pin To Net: NetName=NetC6_2 Pin=U1-2
+Added Net: Name=NetC6_2
+Added Pin To Net: NetName=NetConn1_1 Pin=Conn1-1
+Added Pin To Net: NetName=NetConn1_1 Pin=S2-2
+Added Net: Name=NetConn1_1
+Added Pin To Net: NetName=NetConn1_2 Pin=Conn1-2
+Added Pin To Net: NetName=NetConn1_2 Pin=U1-23
+Added Net: Name=NetConn1_2
+Added Pin To Net: NetName=NetConn1_3 Pin=Conn1-3
+Added Pin To Net: NetName=NetConn1_3 Pin=U1-22
+Added Net: Name=NetConn1_3
+Added Pin To Net: NetName=NetConn1_4 Pin=Conn1-4
+Added Pin To Net: NetName=NetConn1_4 Pin=U1-21
+Added Net: Name=NetConn1_4
+Added Pin To Net: NetName=NetConn1_5 Pin=Conn1-5
+Added Pin To Net: NetName=NetConn1_5 Pin=U1-20
+Added Net: Name=NetConn1_5
+Added Pin To Net: NetName=NetConn1_6 Pin=Conn1-6
+Added Pin To Net: NetName=NetConn1_6 Pin=U1-19
+Added Net: Name=NetConn1_6
+Added Pin To Net: NetName=NetConn1_7 Pin=Conn1-7
+Added Pin To Net: NetName=NetConn1_7 Pin=U1-18
+Added Net: Name=NetConn1_7
+Added Pin To Net: NetName=NetConn1_8 Pin=Conn1-8
+Added Pin To Net: NetName=NetConn1_8 Pin=U1-17
+Added Net: Name=NetConn1_8
+Added Pin To Net: NetName=NetP1_2 Pin=P1-2
+Added Pin To Net: NetName=NetP1_2 Pin=S3-2
+Added Net: Name=NetP1_2
+Added Pin To Net: NetName=VCC Pin=A1-6
+Added Pin To Net: NetName=VCC Pin=C1-2
+Added Pin To Net: NetName=VCC Pin=C3-2
+Added Pin To Net: NetName=VCC Pin=C4-1
+Added Pin To Net: NetName=VCC Pin=G1-4
+Added Pin To Net: NetName=VCC Pin=S2-1
+Added Pin To Net: NetName=VCC Pin=U1-4
+Added Pin To Net: NetName=VCC Pin=U1-9
+Added Pin To Net: NetName=VCC Pin=U1-30
+Added Pin To Net: NetName=VCC Pin=U2-3
+Added Net: Name=VCC
+Added Pin To Net: NetName=VIN Pin=S1-2
+Added Pin To Net: NetName=VIN Pin=U2-1
+Added Net: Name=VIN
+Added Class: Name=rev1

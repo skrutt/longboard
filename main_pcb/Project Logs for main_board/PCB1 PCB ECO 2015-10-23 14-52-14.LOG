@@ -1,0 +1,13 @@
+Added Component: Designator=Pprog(HDR1X5)
+Added Pin To Net: NetName=GND Pin=Pprog-1
+Added Pin To Net: NetName=VCC Pin=Pprog-5
+Added Pin To Net: NetName=RESET Pin=Pprog-2
+Added Pin To Net: NetName=RESET Pin=U1-26
+Added Net: Name=RESET
+Added Pin To Net: NetName=SWCLK Pin=Pprog-3
+Added Pin To Net: NetName=SWCLK Pin=U1-31
+Added Net: Name=SWCLK
+Added Pin To Net: NetName=SWDIO Pin=Pprog-4
+Added Pin To Net: NetName=SWDIO Pin=U1-32
+Added Net: Name=SWDIO
+Added Member To Class: ClassName=rev1 Member=Component Pprog Header 5
