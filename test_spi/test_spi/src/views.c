@@ -70,10 +70,10 @@ void draw_no_gps_view(uint8_t refresh) {
 }
 
 void draw_speed_view(uint8_t refresh) {
-	if(gps_data.status != 'A') {
-		display_view(NO_GPS_VIEW);
-	}
-	else {
+	//if(gps_data.status != 'A') {
+	//	display_view(NO_GPS_VIEW);
+	//}
+	//else {
 		// On first draw.
 		if(!refresh) {
 			device.speed = gps_data.ground_speed;
@@ -85,7 +85,7 @@ void draw_speed_view(uint8_t refresh) {
 				ssd1306_draw_huge_number(15,1,(uint8_t)(device.speed + 0.5));
 			}
 		}
-	}
+	//}
 }
 
 void draw_cadence_view(uint8_t refresh) {
@@ -98,13 +98,13 @@ void draw_cadence_view(uint8_t refresh) {
 		gfx_mono_draw_rect(1,1, GFX_MONO_LCD_WIDTH-2, GFX_MONO_LCD_HEIGHT-2, GFX_PIXEL_SET);
 		ssd1306_write_display();
 		device.cadence = cadence_sensor.cadence;
-		ssd1306_draw_huge_number(15,1,device.cadence + 0.5);
+		ssd1306_draw_huge_number(15,1,device.cadence);
 
 	}
 	else {
 		if(device.cadence != cadence_sensor.cadence) {
 			device.cadence = cadence_sensor.cadence;
-			ssd1306_draw_huge_number(15,1,device.cadence + 0.5);
+			ssd1306_draw_huge_number(15,1,device.cadence);
 		}
 	}
 }

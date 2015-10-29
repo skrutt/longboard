@@ -9,6 +9,27 @@
 #include "sim808_uart.h"
 #include "response_actions.h"
 
+void gprs_handle_uploads() {
+	// Continue to upload data to server if there are still
+	// untransfered packages left.
+	if(gprs_log_buf.head != gprs_log_buf.temp_tail && gprs_log_buf.ready) {
+		gprs_send_data_log();
+	}
+			
+	// Temporary fix for failed parsing of upload response.
+	if(gprs_log_buf.ready == 0) {
+		http_reset_timer++;
+		if(http_reset_timer >= 15) {
+			gprs_log_buf.ready = 1;
+			gps_logging_enabled = 1;
+			http_reset_timer = 0;
+		}
+	}
+	else {
+		http_reset_timer = 0;
+	}
+}
+
 // Add json variable to string.
 void json_add_variable(char *target, uint16_t *target_pos, const char *variable, char *value, uint8_t first) {
 	
@@ -52,6 +73,11 @@ void gprs_send_data_log() {
 		log_entry entry;
 		char tempVar[15];
 		uint8_t i = 0;
+		
+		//Only for debug:
+		if(gprs_log_buf.head > 200) {
+			volatile uint8_t testVar = 1;
+		}
 
 		memset(send_string, '\0', HTTP_PACKAGE_STRING_LENGTH);	//Clear buffer
 	
@@ -133,7 +159,7 @@ void gprs_send_data_log() {
 
 // Initiate gprs_buffer with default values.
 void gprs_send_buf_init(gprs_send_buffer *buf) {
-	buf->len = 299;
+	buf->len = 150;
 	buf->temp_tail = 0;
 	buf->tail = 0;
 	buf->head = 0;

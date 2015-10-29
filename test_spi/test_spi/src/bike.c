@@ -127,6 +127,7 @@ void init_platform() {
 }
 
 void run_every_second_platform() {
+	secCounter++; //debug only
 	refresh_view();
 }
 

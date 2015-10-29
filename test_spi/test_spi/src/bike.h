@@ -32,7 +32,7 @@ void background_service_platform(void);
 void run_every_second_platform(void);
 
 //DEBUG ONLY:
-uint8_t gps_counter;
+uint16_t secCounter;
 
 button_lib_t down_btn;
 

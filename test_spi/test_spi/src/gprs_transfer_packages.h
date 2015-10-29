@@ -44,11 +44,13 @@ typedef struct {
 
 volatile gprs_send_buffer gprs_log_buf;
 
+
 void gprs_send_buf_init(gprs_send_buffer*);
 void gprs_buf_push(log_entry, gprs_send_buffer*);
 log_entry gprs_buf_temp_pull(gprs_send_buffer*);
 log_entry gprs_buf_pull(gprs_send_buffer*);
 void gprs_send_data_log(void);
+void gprs_handle_uploads(void);
 
 void json_add_variable(char[], uint16_t*, const char*, char*, uint8_t);
 

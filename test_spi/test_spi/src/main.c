@@ -12,7 +12,6 @@
  *
  */
 
-
 #include <asf.h>
 #include "spi_sseg.h"
 #include "ADC_subsystem.h"
@@ -45,12 +44,9 @@ static void tc_callback_logger_service(void)
 		sim808_send_command(CMD_GET_GPS_DATA);
 	}
 	else {
-		// Continue to upload data to server if there are still 
-		// untransfered packages left.
-		if(gprs_log_buf.head != gprs_log_buf.temp_tail) {
-			gprs_send_data_log();
-		}		
+		gprs_handle_uploads();
 	}
+	
 	
 	/* Do something on RTC alarm match here */
 	//port_pin_toggle_output_level(LED_RTC);
@@ -87,7 +83,7 @@ int main (void)
 	rtc_lib_set_soft_alarm_simple(1, tc_callback_logger_service);
 	
 	//And uploading
-	rtc_lib_set_soft_alarm_simple(35, gprs_send_data_log);
+	rtc_lib_set_soft_alarm_simple(38, gprs_send_data_log);
 	
 	before_main_loop_platform();
 	while (true) 

@@ -11,45 +11,39 @@ void SIM808_response_gprs_send_post_request(volatile uint8_t success, volatile c
 	if(success == 1) {
 		sim808_send_command(CMD_GPRS_POST_REQ);	
 		volatile uint8_t res = sim808_parse_response_wait(SIM808_RECEIVE_DELAY_NORMAL); // Perhaps make asynchronous.
+		delay_ms(100);
 		last_command.callback_enabled = 1;
 		last_command.expected_response = "+HTTPACTION";
+		last_command.response_cb = SIM808_response_gprs_post;
 	}
 }
 
 // Transfer downloaded string to web server from GSM-module.
 void SIM808_response_gprs_post(volatile uint8_t success, volatile char *cmd) {
-	if(success) {
-		if(strcmp(last_command.expected_response, "OK") == 0) {
-			last_command.expected_response = "+HTTPACTION";
-		}
-		else {	 
-			gprs_log_buf.ready = 1;		//The buffer is free to use again
-			
-			// Enable gps communication if transfer complete.
-			if(gprs_log_buf.temp_tail == gprs_log_buf.head) {	
-				gps_logging_enabled = 1;	
-			}
-			
-			volatile uint8_t len = strlen(cmd);
-			char *errorCodeString = cmd+15;		// Beginning of error code
-			*(errorCodeString+3) = '\0';		// Close string after error code
 
-			uint16_t errorCode = atoi(errorCodeString);	
+	gprs_log_buf.ready = 1;		//The buffer is free to use again
 			
-			if(errorCode == 200) {
-				// Success
-				gprs_log_buf.tail = gprs_log_buf.temp_tail;
+	// Enable gps communication if transfer complete.
+	if(gprs_log_buf.temp_tail == gprs_log_buf.head) {	
+		gps_logging_enabled = 1;	
+	}
+			
+	volatile uint8_t len = strlen(cmd);
+	char *errorCodeString = cmd+15;		// Beginning of error code
+	*(errorCodeString+3) = '\0';		// Close string after error code
+
+	uint16_t errorCode = atoi(errorCodeString);	
+			
+	if(errorCode == 200) {
+		// Success
+		gprs_log_buf.tail = gprs_log_buf.temp_tail;
 				
-			}
-			else {
-				// Failure, retry transfer next time.
-				gprs_log_buf.temp_tail = gprs_log_buf.tail;
-			}
-		}
 	}
 	else {
-		// TODO: Wrong command received, handle error (if any error handling is wanted here)
+		// Failure, retry transfer next time.
+		gprs_log_buf.temp_tail = gprs_log_buf.tail;
 	}
+		
 }
 
 void SIM808_response_gprs_get(volatile uint8_t success, volatile char *cmd) {
@@ -139,8 +133,7 @@ void SIM808_response_gps_data(volatile uint8_t success, volatile char *cmd) {
 		comma = strchr (position, ',');
 	}
 
-	if(gps_data.status == 'A') {
+	//if(gps_data.status == 'A') {
 		gps_utils_raw_data_to_send_buffer(&gprs_log_buf);
-		gps_counter++;
-	}
+	//}
 }

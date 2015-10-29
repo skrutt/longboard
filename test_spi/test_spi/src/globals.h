@@ -49,5 +49,7 @@ position_info device;
 GPS_GPRMC gps_data;
 uint8_t gps_logging_enabled;
 
+uint16_t http_reset_timer;
+
 
 #endif /* GLOBALS_H_ */
