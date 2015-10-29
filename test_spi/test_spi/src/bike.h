@@ -16,12 +16,16 @@
 
 void dummy(void);
 
-#define		wait_for_x_msg_platform()	dummy();
-#define 	wait_for_y_msg_platform()	dummy();
-#define 	wait_for_z_msg_platform()	dummy();
+void wait_for_x_msg_platform(void);
+void wait_for_y_msg_platform(void);
+void wait_for_z_msg_platform(void);
+void display_adc_calibration_msg(unsigned char);
+
+void before_sim_init_platform(void);
 
 void system_init(void);
 void sim808_fail_to_connect_platform(void);
+void before_main_loop_platform(void);
 void main_platform(void);
 void init_platform(void);
 void background_service_platform(void);

@@ -150,7 +150,10 @@ src/views.d src/views.o: ../src/views.c ../src/menus.h ../src/asf.h \
  ../src/ASF/sam0/drivers/tc/tc_interrupt.h \
  ../src/ASF/sam0/drivers/tc/tc.h ../src/menu_link.h ../src/views.h \
  ../src/globals.h ../src/spi_display.h ../src/cadence_sensor.h \
- ../src/timer_subsystem.h
+ ../src/timer_subsystem.h ../src/accelerometer_lib.h ../src/asf.h \
+ ../src/button_lib.h ../src/ASF/thirdparty/CMSIS/Include/arm_math.h \
+ ../src/ASF/thirdparty/CMSIS/Include/core_cm0plus.h \
+ c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu-toolchain\arm-none-eabi\include\math.h
 
 ../src/menus.h:
 
@@ -481,3 +484,15 @@ c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu
 ../src/cadence_sensor.h:
 
 ../src/timer_subsystem.h:
+
+../src/accelerometer_lib.h:
+
+../src/asf.h:
+
+../src/button_lib.h:
+
+../src/ASF/thirdparty/CMSIS/Include/arm_math.h:
+
+../src/ASF/thirdparty/CMSIS/Include/core_cm0plus.h:
+
+c:\program\ files\ (x86)\atmel\atmel\ toolchain\arm\ gcc\native\4.8.1443\arm-gnu-toolchain\arm-none-eabi\include\math.h:

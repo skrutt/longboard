@@ -187,7 +187,7 @@ void rtc_lib_set_alarm(uint16_t interval, void(*callback_func)(void), enum rtc_c
 	struct rtc_calendar_alarm_time alarm;
 	
 	alarm.time = time;
-	alarm.mask = RTC_CALENDAR_ALARM_MASK_HOUR;	//Match on HH:MM:SS
+	alarm.mask = RTC_CALENDAR_ALARM_MASK_SEC;	//Match on HH:MM:SS
 	
 	//Update alarm time to next time
 	rtc_lib_update_alarm_time(&time, alarm_conf[alarm_number]);

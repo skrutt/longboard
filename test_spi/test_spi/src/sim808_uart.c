@@ -9,6 +9,7 @@
 #include "platform.h"
 
 void sim808_init() {
+	before_sim_init_platform();
 	uint8_t success;
 	gps_logging_enabled = 1;
 	

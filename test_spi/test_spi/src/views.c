@@ -8,6 +8,7 @@
 #include "menus.h"
 #include "views.h"
 #include "cadence_sensor.h"
+#include "accelerometer_lib.h"
 
 // Called when changing from one menu/view to display a new one.
 void display_view(menu_link view) {
@@ -36,13 +37,17 @@ void draw_view(menu_link view, uint8_t refresh) {
 		case CADENCE_VIEW:
 			draw_cadence_view(refresh);
 			break;
+		
+		case INCLINATION_VIEW:
+			draw_inclination_view(refresh);
+			break;
 	}
 }
 
 void display_next_view() {
 	menu_link next_view;
 	if(is_view(gfx_mono_active_menu) && gfx_mono_active_menu != NO_GPS_VIEW) {
-		if(gfx_mono_active_menu == VIEW_MAX_INDEX) {
+		if(gfx_mono_active_menu == VIEW_MAX_INDEX-1) {
 			next_view = 0;
 		}
 		else {
@@ -52,8 +57,6 @@ void display_next_view() {
 	
 	display_view(next_view);
 }
-
-
 
 void draw_no_gps_view(uint8_t refresh) {
 	if(gps_data.status == 'A') {
@@ -103,5 +106,21 @@ void draw_cadence_view(uint8_t refresh) {
 			device.cadence = cadence_sensor.cadence;
 			ssd1306_draw_huge_number(15,1,device.cadence + 0.5);
 		}
+	}
+}
+
+void draw_inclination_view(uint8_t refresh) {
+	// On first draw.
+	if(!refresh) {
+				
+		ssd1306_clear_buffer();
+		gfx_mono_draw_circle(112,8,6,GFX_PIXEL_SET, 0xFF);		//Degree sign
+		ssd1306_write_display();
+
+		ssd1306_draw_huge_number(15,1, (uint8_t)accelerometer.angle_x);
+
+	}
+	else {
+		ssd1306_draw_huge_number(15,1, (uint8_t)accelerometer.angle_x);
 	}
 }

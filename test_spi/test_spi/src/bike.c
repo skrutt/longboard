@@ -14,6 +14,38 @@
 
 #include "bike.h"
 
+//Platform functions for ADC calibration
+void wait_for_x_msg_platform() {
+	display_adc_calibration_msg('X');
+}
+void wait_for_y_msg_platform() {
+	display_adc_calibration_msg('Y');	
+}
+void wait_for_z_msg_platform() {
+	display_adc_calibration_msg('Z');
+}
+
+void display_adc_calibration_msg(unsigned char axis) {
+	unsigned char axisText[6];
+	sprintf(axisText, "%c axis", axis);
+	ssd1306_clear_buffer();
+	gfx_mono_draw_string("Calibrate", 18, 11, &sysfont);
+	gfx_mono_draw_string(axisText ,37, 32, &sysfont);
+	ssd1306_write_display();
+}
+
+void before_sim_init_platform() {
+	ssd1306_clear_buffer();
+	gfx_mono_draw_string("Enabling",23, 18, &sysfont);
+	gfx_mono_draw_string("GPRS",44, 32, &sysfont);
+	ssd1306_write_display();
+}
+
+void before_main_loop_platform() {
+	display_view(SPEED_VIEW);
+}
+
+
 void sim808_fail_to_connect_platform() {
 	//TODO: Write message to display
 	volatile uint8_t result = 0;
@@ -23,8 +55,10 @@ void main_platform() {
 	
 	if(button_read_button(&down_btn)) {
 		if(is_view(gfx_mono_active_menu)) {
-			display_next_view();
+			display_next_view();						
 		}
+		
+		// If it's not a view then the down button should be used for menu navigation.
 		else {
 			gfx_mono_menu_process_key(&menu_list[gfx_mono_active_menu-(VIEW_MAX_INDEX+1)], GFX_MONO_MENU_KEYCODE_DOWN);
 			ssd1306_write_display();	
@@ -81,8 +115,8 @@ void init_platform() {
 	uint8_t column_address = 0;
 	
 	ssd1306_clear_buffer();
-	gfx_mono_draw_string("Enabling",23, 18, &sysfont);
-	gfx_mono_draw_string("GPRS",44, 32, &sysfont);
+	gfx_mono_draw_string("Accelerometer",1, 18, &sysfont);
+	gfx_mono_draw_string("Setup",37, 32, &sysfont);
 	ssd1306_write_display();
 	
 	gfx_mono_active_menu = SPEED_VIEW;

@@ -9,14 +9,13 @@
 #ifndef MENU_LINK_H_
 #define MENU_LINK_H_
 
-#define VIEW_MAX_INDEX 4
+#define VIEW_MAX_INDEX 3
 
 
 typedef enum {
 	SPEED_VIEW,
 	CADENCE_VIEW,
-	TRIP_VIEW_1,
-	HEIGHT_VIEW,
+	INCLINATION_VIEW,
 	NO_GPS_VIEW,
 	MAIN_MENU,
 	GSM_MENU,

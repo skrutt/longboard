@@ -67,26 +67,28 @@ int main (void)
 	//setup for platform
  	init_platform();
 	 
-	//Setup SIM808 module
-//	sim808_init();
-	
 	//Wait some for button read and then calibrate adxl
-	//init_adxl_calibration(adxl_calibrate_button_platform);
+	init_adxl_calibration(adxl_calibrate_button_platform);
+	 
+	//Setup SIM808 module
+	sim808_init();
 	
 	//Start rtc for logging interval
 	rtc_lib_configure_soft_alarms();
 		
 	//Data logging
 	rtc_lib_set_soft_alarm_simple(1, tc_callback_logger_service);
+	
 	//And uploading
 	rtc_lib_set_soft_alarm_simple(10, gprs_send_data_log);
 	
+	before_main_loop_platform();
 	while (true) 
 	{
 		/* Infinite loop */
 
 		//Update floats from accelerometer
-		//recalculate_accelerometer_values();
+		recalculate_accelerometer_values();
 			
 		if(SIM808_buf.available == 1) {
 			sim808_parse_response();
