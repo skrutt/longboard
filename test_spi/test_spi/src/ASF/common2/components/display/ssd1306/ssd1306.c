@@ -494,20 +494,23 @@ void ssd1306_draw_huge_number(unsigned char x, unsigned char y, uint8_t num)
 	if(num > 99) num = 99;
 	
 	digits[1] = num % 10;
-	digits[0] = (num-digits[1])/10;
-	if(num < 10) digits[0] = 0;
+	
+	if(num < 10) {
+		digits[0] = 0;
+	}
+	else {
+		digits[0] = (num-digits[1])/10;
+	}
 	
 	for(uint8_t digitIndex = 0; digitIndex < 2; digitIndex++) {
-		for(uint8_t i = 0; i < 7; i++) {	//För att skriva ut alla "rader" för bokstaven
+		for(uint8_t i = 0; i < 7; i++) {	//Print all rows of the font (56/8)
 			ssd1306_set_coordinate(x, y+i);
-			for(uint8_t j = 0; j < 39; j++) {
+			for(uint8_t j = 0; j < 39; j++) {	//Print all columns
 				ssd1306_write_data(lucidaSansUnicode_56ptBitmaps[(digits[digitIndex]*273) + j + (i*39)]); 
 			}
 		}
 		x += 52;
 	}
-	
-	
 }
 
 void ssd1306_set_coordinate(unsigned char x, unsigned char y)

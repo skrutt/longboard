@@ -15,9 +15,9 @@
 #include "timer_subsystem.h"
 
 typedef struct {
-	uint8_t cadence;  //RPM
+	uint8_t cadence;   //RPM
 	uint16_t debounce; //In milliseconds
-	uint16_t lastTime;
+	uint16_t lastTime; //Timer value for last interrupt
 } cadence_module;
 
 cadence_module cadence_sensor;
